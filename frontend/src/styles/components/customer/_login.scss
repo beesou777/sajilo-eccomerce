@@ -1,0 +1,14 @@
+.login-section{
+    background-color:$light-200;
+    .login-point{
+       max-width: 500px;
+       width: 100%;
+       margin: auto;
+       .brand{
+        width: 100%;
+        span{
+            color: $primary-color;
+        }
+       }
+    }
+}

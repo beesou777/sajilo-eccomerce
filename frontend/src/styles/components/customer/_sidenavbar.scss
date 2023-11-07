@@ -1,0 +1,30 @@
+.side-navbar{
+    .users{
+        padding: 1rem .6rem;
+        background: $light-200;
+        border-bottom: 1px solid $light-300;
+        img{
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+        .user-attribute{
+            line-height: 1.2rem;
+        }
+    }
+    .main-links{
+        padding: 10px;
+        ul{
+           padding: 0;
+           li{
+            background: $light-300;
+            margin: 8px 0;
+            padding: 6px 6px;
+            border-radius: 4px;
+            a{
+                color: black !important;
+            }
+           }
+        }
+    }
+}

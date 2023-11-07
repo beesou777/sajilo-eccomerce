@@ -1,0 +1,66 @@
+.dashboard-category-page{
+    .categories-section{
+        background: $white;
+        padding:0 1rem;
+        border-radius: 4px;
+        border: 1px solid $light-300;
+        .categories-data-heads{
+            padding: .7rem 0;
+            border-bottom: 1px solid $light-300;
+        }
+        .categories-data{
+            border-bottom: 1px solid $light-300;
+            padding: 0.7rem 0;
+            .image-wrapper{
+                img{
+                    height: 60px;
+                    width: 60px;
+                    object-fit: contain;
+                }
+            }
+            .button-wrapper{
+                button{
+                    background-color: $white;
+                    border: none;
+                    color: red;
+                    border-radius: 4px;
+                    &:hover{
+                        background-color: $light-300;
+                    }
+                }
+            }
+        }
+    }
+    
+    .edit-category{
+        background: $white;
+        height: 100vh;
+        top: -88px;
+        width: 45vw;
+        right: -40px;
+        padding: 1rem;
+        z-index: 9999;
+        .input-file{
+            opacity: 0;
+            top: 0;
+            height: 150px;
+            width: 150px !important;
+        }
+        .image-wrapper{
+            img{
+                height: 150px;
+                width: 150px;
+                object-fit: contain;
+            }
+        }
+    }
+
+}
+.overlay{
+    height: 100vh;
+    width: 150vw;
+    top: 0;
+    left: -30%;
+    z-index: 999;
+    background: hsl(0, 0%, 0%,.5);
+}

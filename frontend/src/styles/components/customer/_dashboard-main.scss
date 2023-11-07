@@ -1,0 +1,23 @@
+.dashboard-container{
+    background-color: rgb(248, 249, 250);
+    min-height: 100vh;
+    padding:16px 16px 16px 260px;
+    .side-navbar{
+        background-color: $white;
+        height: 100vh;
+        position: fixed;
+        width: 250px;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        border-right: 1px solid rgb(233, 236, 239);
+    }
+    .global-nav{
+        background: $white;
+        .img-wrapper{
+            img{
+                height: 55px;
+            }
+        }
+    }
+}

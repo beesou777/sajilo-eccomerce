@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import "./variable.scss" ;
+.head-1 {
+  font-family: "Quicksand";
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -1.3px;
+  @media (max-width: 767px) {
+    letter-spacing: -0.6px;
+    font-size: 28px;
+  }
+}
+
+.head-2 {
+  font-family: "Quicksand";
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  line-height: 2.4rem;
+  @media (max-width: 767px) {
+    letter-spacing: -0.3px;
+    font-size: 24px;
+  }
+}
+
+.head-3 {
+  font-family: "Quicksand";
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 2.4rem;
+  @media (max-width: 767px) {
+    letter-spacing: -0.6px;
+    font-size: 20px;
+  }
+}
+
+.head-4 {
+  font-family: "Quicksand";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 0.25rem !important;
+  @media (max-width: 767px) {
+    letter-spacing: -0.4px;
+    font-size: 18px;
+  }
+}
+
+.head-5 {
+  font-family: "Quicksand";
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  @media (max-width: 767px) {
+    letter-spacing: -0.4px;
+    font-size: 16px;
+  }
+}
+
+.head-6 {
+  font-family: "Quicksand";
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  @media (max-width: 767px) {
+    letter-spacing: -0.4px;
+    font-size: 16px;
+  }
+}
+
+.body-1 {
+  font-family: "Quicksand";
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+  @media (max-width: 767px) {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+  }
+}
+
+.body-sb {
+  font-family: "Quicksand";
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  @media (max-width: 767px) {
+    letter-spacing: -0.1px;
+    font-size: 16px;
+  }
+}
+
+.body-2 {
+  font-family: "Quicksand";
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+  @media (max-width: 767px) {
+    letter-spacing: -0.1px;
+    font-size: 14px;
+  }
+}
+
+.body-2-sb {
+  font-family: "Quicksand";
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  @media (max-width: 767px) {
+    font-size: 14px;
+    letter-spacing: -0.1px;
+  }
+}
+
+.small-b {
+  font-family: "Quicksand";
+  font-size: 14px;
+  font-weight: 600;
+  @media (max-width: 767px) {
+    font-size: 13px;
+  }
+}
+.small {
+  font-family: "Quicksand";
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+
+  @media (max-width: 767px) {
+    font-size: 13px;
+  }
+}
+
+.body-2-m {
+  font-family: "Quicksand";
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  @media (max-width: 767px) {
+    font-size: 14px;
+    letter-spacing: -0.1px;
+  }
+}
+
+
+.primary-btn {
+  border-radius: 4px;
+  color: $white;
+  border: none;
+  background-color: $primary-color;
+  padding: 0.5rem 1rem;
+  transition: .3s ease-in-out;
+  &:hover {
+    background-color: $secondary-color;
+    color: $white;
+  }
+}
+.input_feild {
+  input,select,option{
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #cfcfcf;
+    background-color: $white;
+    padding: 0.5rem 1rem;
+    outline:  1px solid #cfcfcf;
+    &:focus {
+      border:1px solid $primary-color;
+      outline:1px solid $primary-color;
+    }
+  }
+  textarea{
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #cfcfcf;
+    background-color: $white;
+    padding: 0.5rem 1rem;
+    min-height: 200px;
+    height: 200px;
+    outline:  1px solid #cfcfcf;
+    &:focus {
+      border:1px solid $primary-color;
+      outline:1px solid $primary-color;
+    }
+  }
+}
+
+li{
+  list-style: none;
+  a{
+    text-decoration: none;
+  }
+}
+
+body{
+  overflow-x: hidden;
+}
+
+.bg-white{
+  background: $white;
+}

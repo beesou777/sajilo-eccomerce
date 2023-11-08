@@ -42,10 +42,10 @@ const createProduct = async (req, res) => {
     });
 
     console.log(createProduct)
-    // await createProduct.save();
-    // res
-    //   .status(200)
-    //   .json({ success: true, message: "Product created successfully" });
+    await createProduct.save();
+    res
+      .status(200)
+      .json({ success: true, message: "Product created successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Internal server error." });

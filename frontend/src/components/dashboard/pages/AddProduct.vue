@@ -87,9 +87,7 @@
             id="product_image"
             name="product_image"
             accept="image/*"
-            ref="fileInputRef"
-            @change="onFileChange"
-            style="display: none"
+            @change="handleFIleUpload"
           />
         </div>
         <div class="text-center">
@@ -145,62 +143,34 @@ const quantity = ref()
 const product_sku = ref("")
 const status = ref("")
 const product_category = ref()
+const files = ref(null)
 
 onMounted(async()=>{
   await productStore.getCategories()
+  await productStore.getProduct()
 })
+
+const handleFIleUpload = (event)=>{
+  const file = event.target.files[0]
+  files.value = file
+}
 
 const product_ca =computed(()=>{
   return productStore.categories ? productStore.categories : ""
 })
 
-const createProduct = ()=>{
-    
-console.log(product_name.value,product_description.value,product_discount.value,actual_price.value,quantity.value,product_sku.value,status.value,product_category.value.category_name)
-
+const createProduct = async()=>{
+    const formdata = new FormData()
+    formdata.append("user",productStore.current_user_id)
+    formdata.append("product_name",product_name.value)
+    formdata.append("product_description",product_description.value)
+    formdata.append("selling_price",product_discount.value)
+    formdata.append("actual_price",actual_price.value)
+    formdata.append("quantity",quantity.value)
+    formdata.append("product_sku",product_sku.value)
+    formdata.append("status",status.value)
+    formdata.append("product_category",product_category.value.category_name)
+    formdata.append("product_images",files.value)
+    await productStore.createProduct(formdata);
 }
-
-// const isUnitSelected = ref(false);
-// const productStore = useProductStore();
-// const router = useRouter();
-
-// function handleTextChange(data) {
-//   description = content.value.getHTML();
-// }
-
-// const productDetails = JSON.parse(localStorage.getItem("product_details"))
-
-// const categoryData = ref([
-//   "Shirts",
-//   "Pants",
-//   "Skirts",
-//   "Jackets",
-//   "Sweater",
-//   "Shoes",
-//   "Bags/Purses",
-//   "Socks",
-//   "Belts",
-//   "Hats/Caps"
-// ]);
-
-// const props = defineProps({
-//   data: Object
-// });
-
-// watch(() => productStore.productID, (newValue) => {
-//   if (router.currentRoute.value.path.includes('product/edit')) {
-//     if(newValue){
-//       props.product_name = productStore.productID?.product_name;
-//       props.product_categorie = productStore.productID?.product_categorie;
-//       props.regular_price = productStore.productID?.regular_price;
-//       props.discounted_price = productStore.productID?.discounted_price;
-//       props.product_unit = productStore.productID?.product_unit;
-//       props.feature = productStore.productID?.feature;
-//     }
-// }
-// });
-
-// onMounted(async ()=>{
-//   await productStore.getAllProduct()
-// })
 </script>

@@ -35,7 +35,7 @@ const createProduct =new  mongoose.Schema({
         type:String,
     },
     product_category:{
-        type:[CreateCategory],
+        type:String,
     }
 })
 

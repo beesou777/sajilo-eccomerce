@@ -13,7 +13,7 @@
             <li><a href="/dashboard" class="body-2">Home</a></li>
             <li><a href="/dashboard" class="body-2">Store User</a></li>
             <li><a href="/dashboard/categories" class="body-2">Categories</a></li>
-            <li><a href="/dashboard/add_product" class="body-2">Products</a></li>
+            <li><a href="/dashboard/products" class="body-2">Products</a></li>
             <li><a href="/dashboard" class="body-2">Orders</a></li>
         </ul>
        </div>

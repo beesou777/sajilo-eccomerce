@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "../utility/axios";
-import { useAuthStore } from "./authentication";
 
 export const useProductStore = defineStore("product", {
   state: () => ({
@@ -9,32 +8,31 @@ export const useProductStore = defineStore("product", {
     category_id: null,
     access_token: JSON.parse(localStorage.getItem("access_token")) || null,
     products:null,
+    user_id: JSON.parse(localStorage.getItem("current_user_details")).user_details._id || "",
   }),
   actions: {
-    async getCategories() {
-      try {
-        const res = await axios.get(`/get-category`, {
-          headers: {
-            "user-id": this.current_user_id,
-          },
-        });
-        if (res.status == 200) {
-          this.categories = res.data.categories;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
 
     async createCategories(formdata) {
       try {
         const res = await axios.post(`/create-category`, formdata, {
           headers: {
             access_token: this.access_token,
+            user_id:this.user_id
           },
         });
         if (res.status == 200) {
           return res;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getCategories() {
+      try {
+        const res = await axios.get(`/get-category/${this.user_id}`);
+        if (res.status == 200) {
+          this.categories = res.data.categories;
         }
       } catch (error) {
         console.log(error);
@@ -75,7 +73,8 @@ export const useProductStore = defineStore("product", {
       try {
         const res = await axios.post("/create-product", formdata, {
           headers: {
-            "access-token": this.access_token,
+            "access_token": this.access_token,
+            "user_id":this.user_id
           },
         });
         console.log(res.data.message);
@@ -90,11 +89,10 @@ export const useProductStore = defineStore("product", {
       try {
         const res = await axios.get("get-product",{
           headers:{
-            "user-id":this.current_user_id
+            "user_id":this.user_id
           }
         });
         this.products = res.data.products
-        console.log(res);
       } catch (error) {
         console.log(error);
       }

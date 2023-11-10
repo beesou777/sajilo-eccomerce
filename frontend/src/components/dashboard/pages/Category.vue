@@ -93,10 +93,10 @@
         >
           <div class="col-7 d-flex gap-3 align-items-center">
             <div class="image-wrapper">
-              <img :src="data.category_images" :alt="data.category_name">
+              <img :src="data.image" :alt="data.category_name">
             </div>
             <p class="head-5 mb-0" @click="showEditCategory(index)">
-              {{ data.category_name }}
+              {{ data.name }}
             </p>
           </div>
           <div class="col-5">
@@ -194,11 +194,9 @@ const onFileChange = (event)=>{
 }
 
 const addCategories = async () => {
-  const user = productStore.current_user_id;
   const formdata = new FormData();
-  formdata.append("user", user);
-  formdata.append("category_name", category_name.value);
-  formdata.append("category_images", file.value);
+  formdata.append("name", category_name.value);
+  formdata.append("image", file.value);
 
   try {
     const res = await productStore.createCategories(formdata);
@@ -221,22 +219,22 @@ const showEditCategory = (index) => {
   const categoryId = categories.value[index];
   categoryIds = categoryId._id;
   productStore.category_id = categoryId._id
-  edit_category_name.value = categoryId.category_name;
-  edit_category_images.value = categoryId.category_images;
+  edit_category_name.value = categoryId.name;
+  edit_category_images.value = categoryId.image;
   isloading = false
 };
 
 const editCategory = async () => {
   if(file2.value !== null){
     const formdata = new FormData()
-    formdata.append("category_images",file2.value)
-    formdata.append("category_name",edit_category_name.value)
+    formdata.append("image",file2.value)
+    formdata.append("name",edit_category_name.value)
     await productStore.editCategories(formdata);
     isEditable.value = !isEditable.value
     console.log(formdata)
   }else{
     const formdata = new FormData()
-    formdata.append("category_name",edit_category_name.value)
+    formdata.append("name",edit_category_name.value)
     await productStore.editCategories(formdata)
     isEditable.value = !isEditable.value
   }

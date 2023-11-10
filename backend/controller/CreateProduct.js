@@ -1,4 +1,5 @@
-const User = require("../model/CreateProduct");
+const Product = require("../model/CreateProduct");
+
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -11,28 +12,27 @@ cloudinary.config({
 const createProduct = async (req, res) => {
   try {
     const {
-      user,
       product_name,
       product_description,
       selling_price,
       actual_price,
       quantity,
       product_sku,
-      status, 
+      status,
       product_category,
     } = req.body;
 
     const file1 = req.files.product_images;
     const result1 = await cloudinary.uploader.upload(file1.tempFilePath);
- 
+
     if (!product_name && !status && !actual_price) {
-      return res.status(400).json({ error: "those fields are required!!" });
+      return res.status(400).json({ error: "Please fill all forms" });
     }
-    const createProduct = new User({
-      user,
+    const createProduct = new Product({
+      user:req.headers.user_id,
       product_name,
       product_description,
-      product_images:result1.url,
+      product_images: result1.url,
       product_sku,
       selling_price,
       status,
@@ -40,7 +40,6 @@ const createProduct = async (req, res) => {
       actual_price,
       product_category,
     });
-
     console.log(createProduct)
     await createProduct.save();
     res
@@ -52,20 +51,29 @@ const createProduct = async (req, res) => {
   }
 };
 
-const getAllProducts = async (req, res, next) => {
+const getAllProducts = async (req, res) => {
   try {
-    const products = await User.find({});
-    res.status(200).json({ products });
+    const currentUser = req.headers.user_id;
+    const products = await Product.find({user:currentUser}).select("-user")
+      .populate({
+        path: "product_category",
+        select: "name image",
+      })
+      if(!products){
+        return res.status(404).json({success:true,message:"product not found"})
+      }
+      res.status(200).json({success:true,products})
   } catch (error) {
     console.log("Error fetching products", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
+
 const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await User.findById(id);
+    const product = await Product.findById(id);
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
@@ -89,7 +97,7 @@ const updateProduct = async (req, res) => {
     status,
   } = req.body;
   try {
-    const updatedProduct = await User.findByIdAndUpdate(
+    const updatedProduct = await Product.findByIdAndUpdate(
       id,
       {
         product_name,
@@ -114,7 +122,7 @@ const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
-    await User.findByIdAndDelete(id);
+    await Product.findByIdAndDelete(id);
     res.status(200).json({ msg: "Successfully deleted product" });
   } catch (error) {
     console.log("Error deleting product", error);

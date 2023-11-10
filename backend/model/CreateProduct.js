@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
-const {CreateCategory} = require("./CreateCategory")
 
 const createProduct =new  mongoose.Schema({
     user:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user_details",
         required:true
     },
     product_name:{
@@ -32,11 +32,13 @@ const createProduct =new  mongoose.Schema({
         required:true
     },
     product_images:{
-        type:String,
+        type:Array,
     },
     product_category:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"product_category"
     }
+},{
+    timestamps:true
 })
-
 module.exports = mongoose.model("products",createProduct)

@@ -49,6 +49,8 @@ const redir = async () => {
       profile_picture,
     });
   }
+  await authStore.getUserInfomation()
+  router.push("/dashboard")
 };
 
 watch(()=>{

@@ -50,9 +50,8 @@ export const useAuthStore = defineStore("auth", {
         console.log(error?.response?.data?.error?.status);
       }
     },
-
+    
     async registerUser({
-      user_id,
       store_name,
       email,
       full_name,
@@ -60,11 +59,14 @@ export const useAuthStore = defineStore("auth", {
     }) {
       try {
         const response = await axios.post("/createUser", {
-          user_id,
           store_name,
           email,
           full_name,
           profile_picture,
+        },{
+          headers:{
+            user_id:this.current_user_id
+          }
         });
         if (response.status == 200) {
           router.push("/dashboard");
@@ -87,7 +89,6 @@ export const useAuthStore = defineStore("auth", {
           if (res.status == 200) {
             this.current_user_details = res.data;
            localStorage.setItem("current_user_details",JSON.stringify(res.data))
-            router.push("/dashboard");
           }
         }
       } catch (error) {

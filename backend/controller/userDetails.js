@@ -1,24 +1,32 @@
 const User = require("../model/userDetails");
 
-
 const createUser = async (req, res) => {
   try {
-    const { user_id, store_name, email, full_name, profile_picture } = req.body;
+    const user = req.headers.user_id
+    const {store_name, email, full_name, profile_picture } = req.body;
 
-    if (!email && !store_name && !full_name && !profile_picture && user_id) {
+
+    if (!email && !store_name && !full_name && !profile_picture) {
       return res.status(400).json({ error: "all feild are required!!" });
     }
 
-    const checkUserExist = await User.findOne({ user_id });
+    const checkUserExist = await User.findOne({ user });
     if (checkUserExist) {
       return res.status(400).json({ message: "user already exist" });
     }
+    const storeName = full_name.split(" ")[0]
+
+    const randomInteger = Math.floor(Math.random() * 1000) + 1;
+
+    const newSubDomain = storeName + "-" + randomInteger
+
     const createUser = new User({
-      user_id,
+      user_id:user,
       store_name,
       email,
       full_name,
       profile_picture,
+      sub_domain:newSubDomain.toLowerCase()
     });
 
     await createUser.save();
@@ -31,25 +39,14 @@ const createUser = async (req, res) => {
   }
 };
 
-
 const getUser = async (req, res) => {
   try {
     const userId = req.params.id
-    const user_details = await User.find();
-
-    let userFound = false;
-
-    for(user of user_details){
-      if(user.user_id == userId){
-        userFound = true;
-        res.json(user);
-        break; 
-      }
+    const user_details = await User.findOne({user_id:userId});
+    if (!user_details) {
+      return res.status(400).json({ message: "User does not found" });
     }
-
-    if (!userFound) {
-      res.status(400).json({ message: "User does not found" });
-    }
+    res.status(200).json({success:true,user_details})
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

@@ -1,18 +1,31 @@
 const mongoose = require("mongoose")
 
 const createCategory =new mongoose.Schema({
-    user:{
+    owner:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"user_details"
+    },
+    name:{
         type:String,
         required:true
     },
-    category_name:{
+    image:{
         type:String,
         required:true
     },
-    category_images:{
-        type:String,
-        required:true
+    slug:{
+        type:String
     }
+},{
+    timestamps:true,
 })
 
 module.exports = mongoose.model("product_category",createCategory)
+
+
+// category name
+// slug
+// image
+// category id
+// owner

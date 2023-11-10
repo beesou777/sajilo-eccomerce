@@ -18,6 +18,10 @@ const userDetails = new mongoose.Schema({
     },
     email:{
         type:String
+    },
+    sub_domain:{
+        type:String,
+        unique:true
     }
 })
 

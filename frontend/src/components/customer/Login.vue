@@ -25,6 +25,7 @@
 import { useAuthStore } from "../../store/authentication";
 const authStore = useAuthStore();
 import { watch } from "vue";
+import router from "../../router/router";
 
 const Login = async () => {
   await authStore.login();
@@ -34,6 +35,10 @@ watch(async()=>{
   if(!authStore.currentId && authStore.access_token){
     await authStore.getUserData()
     await authStore.getUserInfomation(); 
+  }
+  
+  if(localStorage.getItem("current_user_details")){
+    router.push("/dashboard")
   }
 })
 </script>

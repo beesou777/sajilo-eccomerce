@@ -22,10 +22,16 @@ import SideNavbar from "./navbars/SideNavbar.vue";
 import Navbar from "./navbars/Navbar.vue";
 import { useAuthStore } from "../../store/authentication";
 import { useProductStore } from "../../store/products";
-import { watch } from "vue";
+import { watch,onMounted } from "vue";
 import router from "../../router/router";
 const authStore = useAuthStore();
 const productStore = useProductStore()
+
+
+onMounted(async()=>{
+  await authStore.getUserInfomation()
+})
+
 watch(() => {
   if (!authStore.current_user_id || !authStore.current_user_details) {
     authStore.getUserData();
@@ -39,6 +45,8 @@ watch(() => {
     router.push("/login");
   }
 });
+
+
 const Logout = ()=>{
     localStorage.removeItem("access_token")
     authStore.access_token = ""

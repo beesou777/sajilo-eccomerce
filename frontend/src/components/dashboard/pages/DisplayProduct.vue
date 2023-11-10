@@ -53,12 +53,17 @@
           </div>
           <div class="col-2 d-flex gap-3 align-items-center">
             <p class="head-5 mb-0" >
-              {{ data.selling_price = 120 }}
+              {{ data.selling_price  }}
             </p>
           </div>
           <div class="col-2 d-flex gap-3 align-items-center">
             <p class="head-5 mb-0">
               {{ data.status }}
+            </p>
+          </div>
+          <div class="col-2 d-flex gap-3 align-items-center">
+            <p class="head-5 mb-0">
+              {{ data.createdAt }}
             </p>
           </div>
         </div>
@@ -71,7 +76,6 @@
 import { computed, onMounted } from "vue";
 import { useProductStore } from "../../../store/products";
 import { ref } from "vue";
-import router from "../../../router/router";
 
 let count = ref(1)
 const productStore = useProductStore();
@@ -81,28 +85,6 @@ onMounted(async () => {
 });
 
 
-
-// const deleteCategory = async (index) => {
-//   const currentIndex = categories.value[index]._id;
-//   await productStore.deleteCategories(currentIndex);
-// };
-
-
-// const editCategory = async () => {
-//   if (file2.value !== null) {
-//     const formdata = new FormData();
-//     formdata.append("category_images", file2.value);
-//     formdata.append("category_name", edit_category_name.value);
-//     await productStore.editCategories(formdata);
-//     isEditable.value = !isEditable.value;
-//     console.log(formdata);
-//   } else {
-//     const formdata = new FormData();
-//     formdata.append("category_name", edit_category_name.value);
-//     await productStore.editCategories(formdata);
-//     isEditable.value = !isEditable.value;
-//   }
-// };
 
 const product = computed(() => {
   return productStore.products ? productStore.products : "";

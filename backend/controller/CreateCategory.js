@@ -1,4 +1,4 @@
-const User = require("../model/CreateCategory");
+const Category = require("../model/CreateCategory");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -9,18 +9,22 @@ cloudinary.config({
 });
 
 const createCategory = async (req, res) => {
-  const { user, category_name } = req.body;
-  try {
-    const file = req.files.category_images;
-    const result = await cloudinary.uploader.upload(file.tempFilePath);
+  const { name } = req.body;
 
-    const newCategory = new User({
-      user,
-      category_name,
-      category_images: result.url,
+  try {
+    const file = req.files.image;
+    const result = await cloudinary.uploader.upload(file.tempFilePath);
+    const slug = name.toLowerCase().replace(/\s/g, '-');
+
+    const userId = req.headers.user_id;
+    console.log(userId)
+    const newCategory = new Category({
+      owner: userId,
+      name,
+      image: result.url,
+      slug
     });
     await newCategory.save();
-
     res.status(200).json({ success: true, message: newCategory });
 
   } catch (error) {
@@ -29,15 +33,17 @@ const createCategory = async (req, res) => {
   }
 };
 
+
 const getCategories = async (req, res) => {
   try {
-    const userId = req.headers["user-id"]
-    const categories = await User.find({ user: userId });
+    const userId = req.params.id
+    const categories = await Category.find({owner:userId}).select("-owner")
+
     if (!categories) {
       return res.status(400).json({ message: "user id not found" });
     }
     res.status(200).json({ success: true, categories });
-  } catch (error) {
+  } catch (error) { 
     console.error(error);
     res.status(500).json({ msg: "Internal Server Error" });
   }
@@ -46,7 +52,7 @@ const getCategories = async (req, res) => {
 const deleteCategories = async (req, res) => {
   const { id } = req.params;
   try {
-    await User.findByIdAndDelete(id);
+    await Category.findByIdAndDelete(id);
     res.status(200).json({ msg: "Successfully deleted product" });
   } catch (error) {
     console.log("Error deleting product", error);
@@ -57,21 +63,20 @@ const deleteCategories = async (req, res) => {
 const editCategories = async (req, res) => {
   try {
     const { id } = req.params;
-    const file =req.files && req.files.category_images;
-    const { category_name } = req.body;
+    const file =req.files && req.files.image;
+    const { name } = req.body;
 
     if (!file) {
-      await User.findByIdAndUpdate(
+      await Category.findByIdAndUpdate(
         id,
-        { category_name },
+        { name },
         { new: true }
       );
     } else {
       const result = await cloudinary.uploader.upload(file.tempFilePath);
-
-      await User.findByIdAndUpdate(
+      await Category.findByIdAndUpdate(
         id,
-        { category_name, category_images: result.url },
+        { name, image: result.url },
         { new: true }
       );
     }
@@ -82,7 +87,6 @@ const editCategories = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 module.exports = {
   createCategory,

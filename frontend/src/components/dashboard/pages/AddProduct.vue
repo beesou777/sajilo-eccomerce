@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-12">
       <div class="bg-white my-3 p-3 rounded-2">
         <div class="input_feild">
           <label class="py-2 head-5">
@@ -70,7 +70,7 @@
       </div>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 col-12">
 
       <div class="bg-white p-3 my-3 rounded-2">
         <h5 class="pb-4 large t-primary">Product Image  <span class="text-danger">*</span></h5>
@@ -112,7 +112,7 @@
             :value="cat_data"
             class="t-primary"
           >
-            {{ cat_data.category_name }}
+            {{ cat_data.name }}
           </option>
         </select>
       </div>
@@ -161,7 +161,6 @@ const product_ca =computed(()=>{
 
 const createProduct = async()=>{
     const formdata = new FormData()
-    formdata.append("user",productStore.current_user_id)
     formdata.append("product_name",product_name.value)
     formdata.append("product_description",product_description.value)
     formdata.append("selling_price",product_discount.value)
@@ -169,7 +168,7 @@ const createProduct = async()=>{
     formdata.append("quantity",quantity.value)
     formdata.append("product_sku",product_sku.value)
     formdata.append("status",status.value)
-    formdata.append("product_category",product_category.value.category_name)
+    formdata.append("product_category",product_category.value._id)
     formdata.append("product_images",files.value)
     await productStore.createProduct(formdata);
 }

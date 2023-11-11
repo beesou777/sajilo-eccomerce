@@ -1,6 +1,6 @@
 @import "./base/utility.scss";
-@import "./components/customer/login";
-@import "./components/customer/sidenavbar";
-@import "./components//customer/dashboard-main";
-@import "./components/pages/categories" ;
-@import "./components//pages/products" ;
+@import "./components/dashboard/categories";
+@import "./components/dashboard/dashboard-main";
+@import "./components/dashboard/login";
+@import "./components/dashboard/products" ;
+@import "./components/theme1/home-page" ;

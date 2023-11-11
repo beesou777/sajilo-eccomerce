@@ -97,5 +97,11 @@ export const useProductStore = defineStore("product", {
         console.log(error);
       }
     },
+
+    async getSubDomainProduct(){
+      const sub_domain = window.location.pathname.replace("/","").split("/")[0]
+      const res = await axios.get(`owner-product/${sub_domain}`)
+      console.log(res)
+    }
   },
 });

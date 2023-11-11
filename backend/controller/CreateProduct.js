@@ -1,5 +1,5 @@
 const Product = require("../model/CreateProduct");
-
+const User = require("../model/userDetails")
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -130,10 +130,29 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getSubDomainProduct = async (req,res)=>{
+  try {
+    const getSubDomain = req.params.id
+    const getUser = await User.findOne({sub_domain:getSubDomain})
+    
+    if(!getUser){
+      return res.status(404).json({message:"page not found"})
+    }
+    const product = await Product.find({user:getUser})
+    if(!product){
+      return res.status(404).json({message:"product not found"})
+    }
+    return res.status(200).json({product})
+  } catch (error) {
+    res.status(500).json({message:"internal server error"})
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
   updateProduct,
   deleteProduct,
+  getSubDomainProduct
 };

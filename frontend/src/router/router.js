@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from "../components/customer/Login.vue"
 import Register from "../components/customer/Register.vue"
@@ -10,12 +9,11 @@ import DashboardCategory from "../components/dashboard/pages/Category.vue"
 import DashboardAddProduct from "../components/dashboard/pages/AddProduct.vue"
 import DashboardProduct from "../components/dashboard/pages/DisplayProduct.vue"
 
-
+import Homepage from "../theme"
 //eccomerce
 import Views from "../views/Views.vue"
-import MainPage from "../views/pages/Product.vue"
-
-const sub_domain = JSON.parse(localStorage.getItem("sub_domain"))
+// import MainPage from "../views/theme1/Homepage.vue"
+const sub_domain = window.location.pathname
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -26,7 +24,7 @@ const router = createRouter({
         },
         {
             path: "/register",
-            name: "refister",
+            name: "register",
             component: Register,
         },
         {
@@ -38,10 +36,6 @@ const router = createRouter({
             { path: "/dashboard/categories", name: "dashboard-category", component: DashboardCategory, },
             { path: "/dashboard/add_product", name: "dashboard-add-product", component: DashboardAddProduct, },
             { path: "/dashboard/products", name: "dashboard-products", component: DashboardProduct, },
-            // { path: "product/add", name: "product-add", component: AddProduct, },
-            // { path: "product/edit/:id", name: "product-edit", component: EditProduct, },
-            // { path: "product/details", name: "product-details", component: ProductDetails, },
-    
               
         ]},
         {
@@ -49,7 +43,7 @@ const router = createRouter({
             name: "views",
             component: Views,
             children: [
-            { path: `/${sub_domain}`, name: "home-page", component: MainPage, },
+            { path: `/${sub_domain}`, name: "home-page", component: Homepage, },
            
     
               

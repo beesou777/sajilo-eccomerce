@@ -22,6 +22,10 @@ const userDetails = new mongoose.Schema({
     sub_domain:{
         type:String,
         unique:true
+    },
+    theme:{
+        type:String,
+        default:"1"
     }
 })
 

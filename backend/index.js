@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8000;
 const userDetails = require('./routes/CreateUser')
 const createCategory = require("./routes/CreateCategory")
 const createProduct= require("./routes/CreateProduct")
+const homepage= require("./routes/HomepageSection")
 const cookieParser = require("cookie-parser")
 const fileUpload = require("express-fileupload")
 const compression = require("compression")
@@ -21,6 +22,7 @@ app.use(compression())
 app.use("",userDetails)
 app.use("",createCategory)
 app.use("",createProduct)
+app.use("",homepage)
 
 const start = async () => {
   try {

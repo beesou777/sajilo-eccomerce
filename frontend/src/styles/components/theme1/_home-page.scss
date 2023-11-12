@@ -1,75 +1,32 @@
 .home-page {
-    width: 100%;
-    min-height: 75vh;
-    height: 700px;
-    background-color: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.6)
-    );
-    user-select: none;
-
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
+  .header-page{
+    min-height: 85vh;
+    img{
+      max-height: 85vh;
+      width: 100vw;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.6) 20%,
-        rgba(0, 0, 0, 0) 60%
-      );
-      @media (max-width: 767px) {
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.6) 0%,
-          rgba(0, 0, 0, 0) 100%
-        );
-      }
+      object-fit: cover;
     }
-
-    @media (max-width: 1024px) {
-      min-height: 65vh;
-      height: 600px;
-    }
-
-    @media (max-width: 767px) {
-      min-height: 55vh;
-      height: 500px;
-    }
-
-    @media (max-width: 567px) {
-      min-height: 45vh;
-      height: 400px;
-    }
-
-    picture{
-      top: 0;
-      left: 0;
-      width: 100vw;
-      min-height: 75vh;
-      height: 700px;
-      @media (max-width: 1024px) {
-        min-height: 65vh;
-        height: 600px;
-        object-fit: cover;
-        background-position: center;
-      }
-  
-      @media (max-width: 767px) {
-        min-height: 55vh;
-        height: 500px;
-      }
-  
-      @media (max-width: 567px) {
-        min-height: 45vh;
-        height: 400px;
-      }
-      img{
-        height: 100%;
-        width: 100%;
+  }   
+  .top-category{
+    .products-container{
+      .products{
+        img{
+          width: 100%;
+        }
       }
     }
   }
+  .explore-other-style{
+    .category{
+      text-align: center;
+      .image-wrapper{
+        img{
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

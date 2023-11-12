@@ -11,7 +11,7 @@ import DashboardProduct from "../components/dashboard/pages/DisplayProduct.vue"
 
 import Homepage from "../theme"
 //eccomerce
-import Views from "../views/Views.vue"
+// import Views from "../views/Views.vue"
 // import MainPage from "../views/theme1/Homepage.vue"
 const sub_domain = window.location.pathname
 const router = createRouter({
@@ -38,16 +38,16 @@ const router = createRouter({
             { path: "/dashboard/products", name: "dashboard-products", component: DashboardProduct, },
               
         ]},
-        {
-            path: `/${sub_domain}`,
-            name: "views",
-            component: Views,
-            children: [
-            { path: `/${sub_domain}`, name: "home-page", component: Homepage, },
+        // {
+        //     path: `/${sub_domain}`,
+        //     name: "views",
+        //     component: Views,
+        //     children: [
+        //     { path: `/${sub_domain}`, name: "home-page", component: Homepage, },
            
     
               
-        ]}
+        // ]}
           ,]
 })
 

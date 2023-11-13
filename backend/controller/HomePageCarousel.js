@@ -1,4 +1,5 @@
 const Carousel = require("../model/HomepageCarousel");
+const Banner = require("../model/HomepageBanner");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -35,6 +36,7 @@ const editCarousel = async (req, res) => {
     const { id } = req.params;
     const file = req.files && req.files.image;
     const {heading,smallText,buttonLink,buttonText,status} = req.body
+    // const BannerStatus = await Banner.findOne({author:req.headers.user_id})
     if (!file) {
       await Carousel.findByIdAndUpdate(
         id,

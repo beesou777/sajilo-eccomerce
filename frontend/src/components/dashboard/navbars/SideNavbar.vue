@@ -14,7 +14,7 @@
             <li><a href="/dashboard" class="body-2">Store User</a></li>
             <li><a href="/dashboard/categories" class="body-2">Categories</a></li>
             <li><a href="/dashboard/products" class="body-2">Products</a></li>
-            <li><a href="/dashboard" class="body-2">Orders</a></li>
+            <li><a href="/dashboard/appearance" class="body-2">Appearance</a></li>
         </ul>
        </div>
     </div>

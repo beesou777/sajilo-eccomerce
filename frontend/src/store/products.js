@@ -8,7 +8,8 @@ export const useProductStore = defineStore("product", {
     category_id: null,
     access_token: JSON.parse(localStorage.getItem("access_token")) || null,
     products:null,
-    user_id: JSON.parse(localStorage.getItem("current_user_details")).user_details._id || "",
+    user_id: JSON.parse(localStorage.getItem("current_user_details")).user_details._id || null,
+    homepageBanner:null,
   }),
   actions: {
 
@@ -102,6 +103,39 @@ export const useProductStore = defineStore("product", {
       const sub_domain = window.location.pathname.replace("/","").split("/")[0]
       const res = await axios.get(`owner-product/${sub_domain}`)
       console.log(res)
+    },
+
+    async editHomepageBanner(formdata){
+      console.log(this.homepageBanner._id)
+      try {
+        const req = await axios.patch(`/homepage-banner/${this.homepageBanner._id}`, formdata, {
+          headers: {
+            access_token: this.access_token,
+          },
+        });
+        if(req.status == 200){
+          this.getHomepageBanner()
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.getCategories();
+      }
+    },
+    async getHomepageBanner(){
+      try {
+        const res = await axios.get(`/homepage-banner`, {
+          headers: {
+            access_token: this.access_token,
+            user_id:this.user_id
+          },
+        });
+        this.homepageBanner = res.data.findBanner
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.getCategories();
+      }
     }
   },
 });

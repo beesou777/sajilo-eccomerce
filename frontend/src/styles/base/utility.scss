@@ -146,17 +146,13 @@
 
 .primary-btn {
   border-radius: 4px;
-  color: $white;
+  color: #fff;
   border: none;
-  background-color: $primary-color;
+  background-color: #146EB4;
   padding: 0.5rem 1rem;
   transition: .3s ease-in-out;
-  &:hover {
-    background-color: $secondary-color;
-    color: $white;
-  }
 }
-.input_feild {
+.input_form {
   input,select,option{
     width: 100%;
     border-radius: 4px;

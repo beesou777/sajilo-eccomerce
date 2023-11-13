@@ -7,6 +7,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      z-index: -1;
+    }
+    .banner-content{
+      // text-align: end;
+      max-width: 700px;
+      margin: auto;
+      transform: translate(50%,70%);
     }
   }   
   .top-category{

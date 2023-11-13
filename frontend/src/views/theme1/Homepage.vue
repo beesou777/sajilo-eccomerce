@@ -1,11 +1,15 @@
 <template>
-  <div class="container-max home-page">
+  <div class="container-max home-page" v-if="homepageData">
     <div class="header-page position-relative">
       <img
-        src="https://dukaan.b-cdn.net/1440x1440/webp/upload_file_service/0e5b25f8-f83f-42c6-b65a-dee6ee7dbde2/image.png"
+        :src="homepageData.image"
         alt=""
         class="position-absolute"
       />
+      <div class="banner-content">
+        <p class="head-1">{{ homepageData.heading }}</p>
+        <p class="body-2">{{ homepageData.smallText }}</p>
+      </div>
     </div>
     <div class="top-category py-3 px-5">
       <p class="head-1">Tops</p>
@@ -222,13 +226,18 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useProductStore } from "../../store/products";
 const productStore = useProductStore();
 
 onMounted(async () => {
   await productStore.getSubDomainProduct();
+  await productStore.getHomepageBanner()
 });
+
+const homepageData = computed(()=>{
+  return productStore.homepageBanner ? productStore.homepageBanner : ""
+})
 </script>
 <style scoped src="../../styles/components/theme1/_home-page.scss">
 </style>

@@ -58,3 +58,7 @@ const Logout = ()=>{
     router.push("/login")
 }
 </script>
+
+<style scoped src="../../styles/components/dashboard/_dashboard-main.scss">
+
+</style>

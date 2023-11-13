@@ -8,12 +8,20 @@ import DashboardHome from "../components/dashboard/pages/Home.vue"
 import DashboardCategory from "../components/dashboard/pages/Category.vue"
 import DashboardAddProduct from "../components/dashboard/pages/AddProduct.vue"
 import DashboardProduct from "../components/dashboard/pages/DisplayProduct.vue"
+import DashboardAppearance from "../components/dashboard/pages/Appearance.vue"
+import DashboardHomepageBanner from "../components/dashboard/pages/HomapageBannerScetion.vue"
+import DashboardHomepageSection from "../components/dashboard/pages/HomepageSection.vue"
 
-import Homepage from "../theme"
+
+import Homepage from "../views/theme1/Homepage.vue"
 //eccomerce
 // import Views from "../views/Views.vue"
 // import MainPage from "../views/theme1/Homepage.vue"
-const sub_domain = window.location.pathname
+let sub_domain;
+const path = window.location.pathname.startsWith("/dashboard") || window.location.pathname.startsWith("/register") || window.location.pathname.startsWith("/login")
+if(!path){
+    sub_domain = window.location.pathname
+}
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -36,18 +44,19 @@ const router = createRouter({
             { path: "/dashboard/categories", name: "dashboard-category", component: DashboardCategory, },
             { path: "/dashboard/add_product", name: "dashboard-add-product", component: DashboardAddProduct, },
             { path: "/dashboard/products", name: "dashboard-products", component: DashboardProduct, },
+            { path: "/dashboard/appearance", name: "dashboard-appearance", component: DashboardAppearance, children:[
+                { path: "", name: "appearance-banner", component: DashboardHomepageBanner, },
+                { path: "section", name: "appearance-section", component: DashboardHomepageSection, },
+            ] },
               
         ]},
-        // {
-        //     path: `/${sub_domain}`,
-        //     name: "views",
-        //     component: Views,
-        //     children: [
-        //     { path: `/${sub_domain}`, name: "home-page", component: Homepage, },
-           
-    
-              
-        // ]}
+        {
+            path: `/${sub_domain}`,
+            name: "homepage",
+            component: Homepage,
+            children: [
+            // { path: `/${sub_domain}`, name: "home-page", component: Homepage, }, 
+        ]}
           ,]
 })
 

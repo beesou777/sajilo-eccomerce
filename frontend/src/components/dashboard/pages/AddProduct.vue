@@ -173,3 +173,7 @@ const createProduct = async()=>{
     await productStore.createProduct(formdata);
 }
 </script>
+
+<style scoped src="../../../styles/components/dashboard/_products.scss">
+
+</style>

@@ -1,26 +1,26 @@
 <template>
-    <div class="dashboard-homepage-banner-section p-3 me-3" v-if="homepageBannerData">
-        <div class="image-label">
-            <label for="image" class="head-5 mb-3">Upload Image:</label>
+    <div class="dashboard-homepage-banner-section p-3 me-3">
+        <p class="head-4 pb-2">Update your banner</p>
+        <div class="image_form">
             <input type="file" class="w-100" @change="handleFile">
         </div>
-        <div class="input_form pt-3">
-            <label for="banner-title" class="head-5 my-2">Banner Title</label>
+        <div class="input_form">
+            <label for="banner-title" class="small">Banner Title</label>
             <input type="text" class="w-100" v-model="heading">
         </div>
         <div class="input_form">
-            <label for="text" class="head-5 my-2">Banner Sub-title</label>
+            <label for="text" class="small">Banner Sub-title</label>
             <textarea v-model="smallText"></textarea>
         </div>
         <div class="input_form">
-            <label for="image" class="head-4 my-2">Button text</label>
+            <label for="image" class="small">Button text</label>
             <input type="text" class="w-100" v-model="buttonText">
         </div>
         <div class="input_form">
-            <label for="image" class="head-4 my-2">Button Link</label>
+            <label for="image" class="small">Button Link</label>
             <input type="text" class="w-100" v-model="buttonLink">
         </div>
-        <div class="input_form py-3">
+        <div class="input_form mb-0">
            <button class="primary-btn w-100" @click="editBanner">Save</button>
         </div>
     </div>

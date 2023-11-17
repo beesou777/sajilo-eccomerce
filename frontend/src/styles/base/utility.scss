@@ -4,6 +4,7 @@
   font-family: "Quicksand";
   font-size: 48px;
   font-weight: 700;
+  color: $dark;
   letter-spacing: -1.3px;
   @media (max-width: 767px) {
     letter-spacing: -0.6px;
@@ -16,6 +17,7 @@
   font-size: 30px;
   font-weight: 600;
   letter-spacing: -0.6px;
+  color: $dark;
   line-height: 2.4rem;
   @media (max-width: 767px) {
     letter-spacing: -0.3px;
@@ -29,6 +31,7 @@
   font-weight: 600;
   letter-spacing: -0.3px;
   line-height: 2.4rem;
+  color: $dark;
   @media (max-width: 767px) {
     letter-spacing: -0.6px;
     font-size: 20px;
@@ -38,7 +41,8 @@
 .head-4 {
   font-family: "Quicksand";
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
+  color: $dark;
   letter-spacing: -0.3px;
   margin-bottom: 0.25rem !important;
   @media (max-width: 767px) {
@@ -51,6 +55,7 @@
   font-family: "Quicksand";
   font-size: 18px;
   font-weight: 600;
+  color: $dark;
   letter-spacing: -0.3px;
   @media (max-width: 767px) {
     letter-spacing: -0.4px;
@@ -62,6 +67,7 @@
   font-family: "Quicksand";
   font-size: 16px;
   font-weight: 400;
+  color: $dark;
   letter-spacing: -0.3px;
   @media (max-width: 767px) {
     letter-spacing: -0.4px;
@@ -73,6 +79,7 @@
   font-family: "Quicksand";
   font-size: 16px;
   font-weight: 600;
+  color: $dark;
   letter-spacing: -0.1px;
   @media (max-width: 767px) {
     letter-spacing: -0.1px;
@@ -93,6 +100,7 @@
 .small-b {
   font-family: "Quicksand";
   font-size: 14px;
+  color: $dark;
   font-weight: 600;
   @media (max-width: 767px) {
     font-size: 13px;
@@ -116,7 +124,7 @@
   color: $white;
   border: none;
   background-color: $primary-color;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   transition: 0.3s ease-in-out;
 }
 
@@ -126,4 +134,76 @@ body {
 
 .bg-white {
   background: $white;
+}
+
+.input_form{
+  position: relative;
+  margin: 2rem 0;
+  input,textarea{
+    background-color: $light-200;
+    border: 0;
+    border-radius: 4px;
+    outline: none;
+    padding: 1.5rem 1rem .4rem 0.6rem;
+  }
+  label{
+    position: absolute;
+    top: 8px;
+    left: 10px;
+  }
+  textarea{
+    min-height: 135px;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+
+.input-form2{
+  margin: 1rem 0;
+  input,textarea{
+    background-color: $light-200;
+    border: 0;
+    border-radius: 4px;
+    outline: none;
+    padding:0.6rem;
+  }
+  label{
+    top: 8px;
+    left: 10px;
+    margin-bottom: .5rem;
+  }
+  textarea{
+    min-height: 135px;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+
+.image_form{
+  background: $light-200;
+  padding:10px;
+  input[type="file"]::file-selector-button {
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: $white;
+    border: 1px solid $light-400;
+    margin-right: 16px;
+  }
+}
+
+ul{
+  margin: 0;
+  li{
+    list-style: none;
+    a{
+      text-decoration: none;
+    }
+  }
+}
+
+.text-primary{
+  color: $primary-color !important;
 }

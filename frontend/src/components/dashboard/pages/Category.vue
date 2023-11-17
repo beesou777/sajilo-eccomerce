@@ -66,7 +66,7 @@
       </div>
 
       <div class="d-flex justify-content-between py-3">
-        <p class="head-4">Store Category</p>
+        <p class="head-4 text-primary fw-semibold">Store Category</p>
         <div class="btn-wrapper">
           <button
             class="primary-btn"

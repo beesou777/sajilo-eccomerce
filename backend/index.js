@@ -8,6 +8,7 @@ const userDetails = require('./routes/CreateUser')
 const createCategory = require("./routes/CreateCategory")
 const createProduct= require("./routes/CreateProduct")
 const homepage= require("./routes/HomepageSection")
+const ThemeSystem = require("./routes/themeRouter")
 const cookieParser = require("cookie-parser")
 const fileUpload = require("express-fileupload")
 const compression = require("compression")
@@ -23,6 +24,7 @@ app.use("",userDetails)
 app.use("",createCategory)
 app.use("",createProduct)
 app.use("",homepage)
+app.use("",ThemeSystem)
 
 const start = async () => {
   try {

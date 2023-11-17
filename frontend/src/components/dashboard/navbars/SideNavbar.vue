@@ -24,7 +24,7 @@
     </div>
     <div class="main-links d-none d-md-block py-4">
       <ul>
-        <li class="py-3">
+        <li>
           <a href="/dashboard" class="body-2 d-flex align-items-center gap-2"
             ><svg
               width="18"
@@ -43,7 +43,7 @@
             <span :class="{ currentRoute : isCurrentRoute('dashboard-home')}">Home</span></a
           >
         </li>
-        <li class="py-3">
+        <li>
           <a href="/dashboard/order" class="body-2 d-flex gap-2 align-items-center"
             ><svg
               width="17"
@@ -80,7 +80,7 @@
             <span :class="{ currentRoute : isCurrentRoute('dashboard-order')}">Orders</span></a
           >
         </li>
-        <li class="py-3">
+        <li>
           <a
             href="/dashboard/products"
             class="body-2 d-flex gap-2 align-items-center"
@@ -99,7 +99,7 @@
             <span :class="{ currentRoute : isCurrentRoute('dashboard-products')}">Products</span></a
           >
         </li>
-        <li class="py-3">
+        <li>
           <a
             href="/dashboard/categories"
             class="body-2 d-flex gap-2 align-items-center"
@@ -133,7 +133,7 @@
             <span :class="{ currentRoute : isCurrentRoute('dashboard-category')}">Category</span></a
           >
         </li>
-        <li class="py-3">
+        <li>
           <a
             href="/dashboard/appearance"
             class="body-2 d-flex gap-2 align-items-center"
@@ -160,7 +160,7 @@
             <span :class="{ currentRoute : isCurrentRoute('appearance-banner')}"> Appearance</span></a
           >
         </li>
-        <li class="py-3">
+        <li>
           <a
             href="/dashboard/discount"
             class="body-2 d-flex gap-2 align-items-center"
@@ -194,7 +194,7 @@
             <span :class="{ currentRoute :isCurrentRoute('dashboard-discount')}"> Discount</span></a
           >
         </li>
-        <li class="py-3">
+        <li>
           <a
             href="/dashboard/blogs"
             class="body-2 d-flex gap-2 align-items-center"
@@ -215,7 +215,7 @@
             <span :class="{ currentRoute : isCurrentRoute('dashboard-blogs')}"> Blogs</span></a
           >
         </li>
-        <li class="py-3">
+        <li>
           <a
             href="/dashboard/profile"
             class="body-2 d-flex gap-2 align-items-center"

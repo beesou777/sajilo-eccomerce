@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col-md-3 col-sm-12">
                 <div class="appearance-headings">
-                    <p class="head-3">Impulses</p>
+                    <p class="head-4">Impulses</p>
                     <ul>
-                        <li class="active-banner"><a href="#">Banner</a></li>
-                        <li><a href="/dashboard/appearance/section">Sections</a></li>
-                        <li><a href="#">Fonts And Colors</a></li>
-                        <li><a href="#">Homepage</a></li>
-                        <li><a href="#">Headers & Favicon</a></li>
+                        <li><a href="/dashboard/appearance" class="body-1">Banner</a></li>
+                        <li><a href="/dashboard/appearance/section" class="body-1">Sections</a></li>
+                        <li><a href="#" class="body-1">Fonts And Colors</a></li>
+                        <li><a href="#" class="body-1">Homepage</a></li>
+                        <li><a href="#" class="body-1">Headers & Favicon</a></li>
                     </ul>
                 </div>
             </div>

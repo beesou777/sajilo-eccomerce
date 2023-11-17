@@ -1,25 +1,29 @@
 .appearance-container {
   padding-top: 30px;
+  padding-left: 30px;
   .appearance-headings {
     background-color: white;
     padding: 15px;
     ul {
       padding: 0;
       li {
-        padding: 10px;
-        margin: 10px 0;
         border-radius: 4px;
+        list-style: none;
+        padding: 8px 0;
         a {
-              color: #999;
-              font-size: 18px;
-            }
+          font-size: 18px;
         }
-        .active-banner {
-        background-color: hsl(187, 68%, 67%, 0.3);
       }
     }
   }
-  .dashboard-homepage-banner-section{
-    background: #fff;
+  .dashboard-homepage-banner-section {
+    max-width: 770px;
+    background: $white;
+  }
+  .dashboard-homepage-section {
+    max-width: 770px;
+    .section-container{
+      background: $white;
+    }
   }
 }

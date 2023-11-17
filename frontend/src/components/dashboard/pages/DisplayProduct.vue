@@ -2,7 +2,7 @@
   <div>
     <div class="dashboard-product-page px-2 position-relative">
       <div class="py-3">
-        <p class="head-4">Store Products</p>
+        <p class="head-4 text-primary fw-semibold">Store Products</p>
       </div>
       <div class="product-section">
         <div class="product-data-heads row">

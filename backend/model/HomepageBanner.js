@@ -1,32 +1,28 @@
 const mongoose = require("mongoose")
 
-const homepageBanner =new mongoose.Schema({
-    author:{
-        type:mongoose.Schema.ObjectId,
-        required:true,
-        unique:true
+const bannerSchema = new mongoose.Schema({
+    image: {
+      type: String,
+      required: [true, "image is required"],
     },
-    image:{
-        type:String,
-        required:[true,"image is required"]
+    heading: {
+      type: String,
+      required: [true, "heading text is required"],
     },
-    heading:{
-        type:String,
-        required:[true,"heading text is required"]
+    sub_title: {
+      type: String,
     },
-    smallText:{
-        type:String,
+    button_text: {
+      type: String,
     },
-    buttonText:{
-        type:String,
+    button_link: {
+      type: String,
     },
-    buttonLink:{
-        type:String
-    },
-    status:{
-        type:Boolean,
-        default:true
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user_details",
     }
-})
-
-module.exports = mongoose.model("homepage_banner",homepageBanner)
+  });
+  
+  module.exports = mongoose.model("banners", bannerSchema);
+  

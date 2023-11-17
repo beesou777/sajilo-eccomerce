@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-homepage-section me-3" v-if="homepageBannerData">
+  <div class="dashboard-homepage-section me-3" >
     <!-- section one -->
     <div class="section-container py-2 px-3 mb-3">
       <p class="head-4">Section 1</p>

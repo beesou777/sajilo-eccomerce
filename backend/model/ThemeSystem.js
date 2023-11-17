@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-const createThemeSchema = new mongoose.Schema({
+const themeSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user_details",
@@ -10,40 +10,15 @@ const createThemeSchema = new mongoose.Schema({
     required: [true, "sub domain is required"],
   },
   banner: {
-    image: {
-      type: String,
-      // required: [true, "image is required"],
-    },
-    heading: {
-      type: String,
-      required: [true, "heading text is required"],
-    },
-    sub_title: {
-      type: String,
-    },
-    button_text: {
-      type: String,
-    },
-    button_link: {
-      type: String,
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "banners",
   },
   section_details: [
     {
-      name: {
-        type: String,
-        required: [true, "name is required"],
-      },
-      products: {
-        type: [
-          {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "products",
-          },
-        ],
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "section_details",
     },
   ],
 });
 
-module.exports = mongoose.model("themes_data", createThemeSchema);
+module.exports = mongoose.model("themes_data", themeSchema);

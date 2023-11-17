@@ -25,7 +25,6 @@ const getThemeSystem = async (req, res) => {
 
 const createTheme = async (req, res) => {
   try {
-    const { banner, section_details } = req.body;
     const bannerData = {};
     for (const key in req.body) {
       if (key.startsWith('banner[')) {
@@ -33,7 +32,18 @@ const createTheme = async (req, res) => {
         bannerData[bannerField] = req.body[key];
       }
     }
-    const file = req.files.image;
+    const sectionData = {};
+    for(const key in req.body){
+      if(key.startsWith('section_details[')){
+        const sectionIndex = key.split('[')[1].split(']')[0];
+        const sectionField = key.split('[')[2].split(']')[0];
+        if (!sectionData[sectionIndex]) {
+          sectionData[sectionIndex] = {};
+        }
+        sectionData[sectionIndex][sectionField] = req.body[key];
+      }
+    }
+    const file = req.files.image; 
     const result = await cloudinary.uploader.upload(file.tempFilePath);
     const newTheme = new ThemeSystem({
       owner: req.headers.user_id,
@@ -45,22 +55,93 @@ const createTheme = async (req, res) => {
         button_text:bannerData.button_text,
         button_link:bannerData.button_link
       },
-      section_details,
+      section_details: Object.values(sectionData).map(section => ({
+        name: section.name,
+        products: section.products,
+      })),
     });
-    console.log(newTheme);
-    // await newTheme.save();
+    await newTheme.save();
 
-    // res.status(201).json({
-    //   message: 'Theme created successfully',
-    //   theme: newTheme,
-    // });
+    res.status(201).json({
+      message: 'Theme created successfully',
+      theme: newTheme,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error creating theme' });
   }
 };
 
+const updateTheme = async (req, res) => {
+  try {
+    const themeId = req.headers.user_id;
+    const themeToUpdate = await ThemeSystem.findOne({owner:themeId});
+
+    if (!themeToUpdate) {
+      res.status(404).json({ message: 'Theme not found' });
+      return;
+    }
+
+    const bannerData = {};
+    for (const key in req.body) {
+      if (key.startsWith('banner[')) {
+        const bannerField = key.split('[')[1].split(']')[0];
+        bannerData[bannerField] = req.body[key];
+      }
+    }
+
+    const sectionData = {};
+    for (const key in req.body) {
+      if (key.startsWith('section_details[')) {
+        const sectionIndex = key.split('[')[1].split(']')[0];
+        const sectionField = key.split('[')[2].split(']')[0];
+
+        if (!sectionData[sectionIndex]) {
+          sectionData[sectionIndex] = {};
+        }
+
+        sectionData[sectionIndex][sectionField] = req.body[key];
+      }
+    }
+
+    if (req.files.image) {
+      const file = req.files.image;
+      const result = await cloudinary.uploader.upload(file.tempFilePath);
+      themeToUpdate.banner.image = result.url;
+    }
+
+    themeToUpdate.banner.heading = bannerData.heading || themeToUpdate.banner.heading;
+    themeToUpdate.banner.sub_title = bannerData.sub_title || themeToUpdate.banner.sub_title;
+    themeToUpdate.banner.button_text = bannerData.button_text || themeToUpdate.banner.button_text;
+    themeToUpdate.banner.button_link = bannerData.button_link || themeToUpdate.banner.button_link;
+
+    themeToUpdate.section_details = Object.values(sectionData).map((section) => {
+      const existingSection = themeToUpdate.section_details.find((s) => s.name === section.name);
+      return existingSection
+        ? {
+            ...existingSection,
+            products: section.products || existingSection.products,
+          }
+        : {
+            name: section.name,
+            products: section.products,
+          };
+    });
+
+    await themeToUpdate.save();
+
+    res.status(200).json({
+      message: 'Theme updated successfully',
+      theme: themeToUpdate,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error updating theme' });
+  }
+};
+
 module.exports = {
   getThemeSystem,
   createTheme,
+  updateTheme
 };

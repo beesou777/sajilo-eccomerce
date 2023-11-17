@@ -14,7 +14,7 @@ const createBanner = async (req, res) => {
     const result = await cloudinary.uploader.upload(file.tempFilePath);
     const { heading, smallText, buttonText, buttonLink, status } = req.body;
     const categorySection = new Banner({
-      author: req.headers.user_id,
+      createdBy: req.headers.user_id,
       image: result.url,
       heading,
       smallText,
@@ -33,7 +33,7 @@ const createBanner = async (req, res) => {
 const getBanner = async (req, res) => {
   try {
     const id = req.headers.user_id
-    const findBanner = await Banner.findOne({author:id}).select("-author")
+    const findBanner = await Banner.findOne({createdBy:id}).select("-author")
     if(!findBanner){
       return res.status(404).json({message:"banner not found"})
     }

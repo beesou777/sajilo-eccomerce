@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
-@import "./variable.scss" ;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+@import "./variable.scss";
 .head-1 {
   font-family: "Quicksand";
   font-size: 48px;
@@ -58,58 +58,35 @@
   }
 }
 
-.head-6 {
+.body-1 {
   font-family: "Quicksand";
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: -0.3px;
   @media (max-width: 767px) {
     letter-spacing: -0.4px;
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
-.body-1 {
-  font-family: "Quicksand";
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: -0.1px;
-  @media (max-width: 767px) {
-    font-size: 16px;
-    letter-spacing: -0.1px;
-  }
-}
-
-.body-sb {
-  font-family: "Quicksand";
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.1px;
-  @media (max-width: 767px) {
-    letter-spacing: -0.1px;
-    font-size: 16px;
-  }
-}
-
-.body-2 {
+.body-b {
   font-family: "Quicksand";
   font-size: 16px;
-  font-weight: 400;
-  letter-spacing: -0.1px;
-  @media (max-width: 767px) {
-    letter-spacing: -0.1px;
-    font-size: 14px;
-  }
-}
-
-.body-2-sb {
-  font-family: "Quicksand";
-  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.1px;
   @media (max-width: 767px) {
-    font-size: 14px;
     letter-spacing: -0.1px;
+    font-size: 16px;
+  }
+}
+
+.head-title {
+  color: #000;
+  font-family: "Quicksand";
+  font-size: 20px;
+  font-weight: 400;
+  @media (max-width: 767px) {
+    font-size: 16px;
   }
 }
 
@@ -121,8 +98,10 @@
     font-size: 13px;
   }
 }
+
 .small {
   font-family: "Quicksand";
+  color: rgba(0, 0, 0, 0.45);
   font-size: 14px;
   font-weight: 400;
   letter-spacing: -0.1px;
@@ -132,66 +111,19 @@
   }
 }
 
-.body-2-m {
-  font-family: "Quicksand";
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.1px;
-  @media (max-width: 767px) {
-    font-size: 14px;
-    letter-spacing: -0.1px;
-  }
-}
-
-
 .primary-btn {
   border-radius: 4px;
-  color: #fff;
+  color: $white;
   border: none;
-  background-color: #146EB4;
+  background-color: $primary-color;
   padding: 0.5rem 1rem;
-  transition: .3s ease-in-out;
-}
-.input_form {
-  input,select,option{
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #cfcfcf;
-    background-color: $white;
-    padding: 0.5rem 1rem;
-    outline:  1px solid #cfcfcf;
-    &:focus {
-      border:1px solid $primary-color;
-      outline:1px solid $primary-color;
-    }
-  }
-  textarea{
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #cfcfcf;
-    background-color: $white;
-    padding: 0.5rem 1rem;
-    min-height: 200px;
-    height: 200px;
-    outline:  1px solid #cfcfcf;
-    &:focus {
-      border:1px solid $primary-color;
-      outline:1px solid $primary-color;
-    }
-  }
+  transition: 0.3s ease-in-out;
 }
 
-li{
-  list-style: none;
-  a{
-    text-decoration: none;
-  }
-}
-
-body{
+body {
   overflow-x: hidden;
 }
 
-.bg-white{
+.bg-white {
   background: $white;
 }

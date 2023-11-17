@@ -1,6 +1,20 @@
 <template>
-  <div class="home-sction">
-    welcom {{user_data ? user_data.full_name: "loading..." }}
+  <div class="home-section p-3">
+    <p class="head-text">Overview</p>
+    <div class="home-content d-flex gap-3 align-items-center">
+      <div class="card-data">
+        <p class="small">Items</p>
+        <p class="head-4">40,282</p>
+      </div>
+      <div class="card-data">
+        <p class="small">Items</p>
+        <p class="head-4">40,282</p>
+      </div>
+      <div class="card-data">
+        <p class="small">Items</p>
+        <p class="head-4">40,282</p>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>

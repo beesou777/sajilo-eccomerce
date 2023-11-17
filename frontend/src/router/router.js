@@ -11,12 +11,12 @@ import DashboardProduct from "../components/dashboard/pages/DisplayProduct.vue"
 import DashboardAppearance from "../components/dashboard/pages/Appearance.vue"
 import DashboardHomepageBanner from "../components/dashboard/pages/HomapageBannerScetion.vue"
 import DashboardHomepageSection from "../components/dashboard/pages/HomepageSection.vue"
+import DashboardHomepageProfile from "../components/dashboard/pages/Profile.vue"
+import DashboardHomepageProfileAccount from "../components/dashboard/pages/profileAccount.vue"
+import DashboardHomepagePersonalDetails from "../components/dashboard/pages/personalDetails.vue"
 
 
 import Homepage from "../views/theme1/Homepage.vue"
-//eccomerce
-// import Views from "../views/Views.vue"
-// import MainPage from "../views/theme1/Homepage.vue"
 let sub_domain;
 const path = window.location.pathname.startsWith("/dashboard") || window.location.pathname.startsWith("/register") || window.location.pathname.startsWith("/login")
 if(!path){
@@ -40,10 +40,14 @@ const router = createRouter({
             name: "dashboard",
             component: DashboardMain,
             children: [
-            { path: "", name: "home", component: DashboardHome, },
+            { path: "", name: "dashboard-home", component: DashboardHome, },
             { path: "/dashboard/categories", name: "dashboard-category", component: DashboardCategory, },
             { path: "/dashboard/add_product", name: "dashboard-add-product", component: DashboardAddProduct, },
             { path: "/dashboard/products", name: "dashboard-products", component: DashboardProduct, },
+            { path: "/dashboard/profile", component: DashboardHomepageProfile,children:[
+                { path: "", name: "dashboard-profile", component: DashboardHomepageProfileAccount, },
+                { path: "personal-detail", name: "personal-details", component: DashboardHomepagePersonalDetails, },
+            ] },
             { path: "/dashboard/appearance", name: "dashboard-appearance", component: DashboardAppearance, children:[
                 { path: "", name: "appearance-banner", component: DashboardHomepageBanner, },
                 { path: "section", name: "appearance-section", component: DashboardHomepageSection, },

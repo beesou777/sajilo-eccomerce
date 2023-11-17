@@ -1,4 +1,12 @@
 const User = require("../model/userDetails");
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+
+cloudinary.config({
+  cloud_name: "dasuhyei1",
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET_KEY,
+});
 
 const createUser = async (req, res) => {
   try {
@@ -53,7 +61,30 @@ const getUser = async (req, res) => {
   }
 };
 
+const editUserDetails = async (req, res) => {
+  try {
+    const userId = req.params.id
+    const user_details = await User.findOne({user_id:userId});
+    if (!user_details) {
+      return res.status(400).json({ message: "User does not found" });
+    }
+    const {
+      store_name,full_name
+    } = req.body
+    const file1 = req.files.product_images;
+    const result1 = await cloudinary.uploader.upload(file1.tempFilePath);
+    const updateUserDetails = await User.findByIdAndUpdate(id,{
+      store_name,full_name,profile_picture:result1.url
+    },{new:true})
+    res.status(200).json({success:true,updateUserDetails})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   createUser,
-  getUser
+  getUser,
+  editUserDetails
 };

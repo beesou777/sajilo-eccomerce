@@ -51,7 +51,7 @@ const createProduct = async (req, res) => {
   }
 };
 
-const getAllProducts = async (req, res) => {
+const getUsersProducts = async (req, res) => {
   try {
     const currentUser = req.headers.user_id;
     const products = await Product.find({user:currentUser}).select("-user")
@@ -150,7 +150,7 @@ const getSubDomainProduct = async (req,res)=>{
 
 module.exports = {
   createProduct,
-  getAllProducts,
+  getUsersProducts,
   getProductById,
   updateProduct,
   deleteProduct,

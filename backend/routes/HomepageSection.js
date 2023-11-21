@@ -10,8 +10,8 @@ router.route("/homepage-banner").post(createBanner).get(getBanner)
 router.route("/homepage-banner/:id").patch(editBanner)
 
 // section
-router.route("/homepage-section").post(sectionData)
-router.route("/homepage-data").get(homepageData)
+router.route("/homepage-section").get(homepageData)
+// router.route("/homepage-data").get(homepageData)
 // router.route("/getUser/:id").get(checkUserIdCookie,getUser)
 
 module.exports = router

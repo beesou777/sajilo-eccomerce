@@ -10,6 +10,7 @@ export const useProductStore = defineStore("product", {
     products:null,
     user_id: JSON.parse(localStorage.getItem("current_user_details")).user_details._id || null,
     homepageBanner:null,
+    homepage_section:null,
   }),
   actions: {
 
@@ -130,7 +131,23 @@ export const useProductStore = defineStore("product", {
             user_id:this.user_id
           },
         });
-        this.homepageBanner = res.data.findBanner
+        this.homepageBanner = res.data.banner
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.getCategories();
+      }
+    },
+
+    async getHomepageSection(){
+      try {
+        const res = await axios.get(`/homepage-section`, {
+          headers: {
+            access_token: this.access_token,
+            user_id:this.user_id
+          },
+        });
+        this.homepage_section = res.data.sections
       } catch (error) {
         console.log(error);
       } finally {

@@ -22,11 +22,7 @@ const userDetails = new mongoose.Schema({
     sub_domain:{
         type:String,
         unique:true
-    },
-    theme:{
-        type:String,
-        default:"1"
     }
 })
 
-module.exports = mongoose.model("user_details",userDetails)
+module.exports = mongoose.model("User",userDetails)

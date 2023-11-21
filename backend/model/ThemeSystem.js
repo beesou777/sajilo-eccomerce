@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 
+
 const themeSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,12 +14,11 @@ const themeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "banners",
   },
-  section_details: [
+  section_details:
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "section_details",
     },
-  ],
 });
 
-module.exports = mongoose.model("themes_data", themeSchema);
+module.exports = mongoose.model("Theme_data", themeSchema);

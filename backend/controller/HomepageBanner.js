@@ -33,11 +33,14 @@ const createBanner = async (req, res) => {
 const getBanner = async (req, res) => {
   try {
     const id = req.headers.user_id
-    const findBanner = await Banner.findOne({createdBy:id}).select("-author")
-    if(!findBanner){
-      return res.status(404).json({message:"banner not found"})
+    let banner = await Banner.findOne({createdBy:id}).select("-author")
+    if(!banner){
+      const defaultBanner = new Banner({
+        createdBy: id,
+      });
+      banner = await defaultBanner.save();
     }
-    res.status(200).json({ success: true, findBanner });
+    res.status(200).json({ success: true, banner });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

@@ -4,7 +4,7 @@ const sectionDetailsSchema = new mongoose.Schema({
   section_1: {
     name: {
       type: String,
-      required: [true, "name is required"],
+      default:"section 1"
     },
     products: [
       {
@@ -16,7 +16,7 @@ const sectionDetailsSchema = new mongoose.Schema({
   section_2: {
     name: {
       type: String,
-      required: [true, "name is required"],
+      default:"section 2"
     },
     products: [
       {
@@ -25,10 +25,10 @@ const sectionDetailsSchema = new mongoose.Schema({
       },
     ],
   },
-  section_2: {
+  section_3: {
     name: {
       type: String,
-      required: [true, "name is required"],
+      default: "secton 3"
     },
     products: [
       {
@@ -43,4 +43,4 @@ const sectionDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("section_details", sectionDetailsSchema);
+module.exports = mongoose.model("Section_detail", sectionDetailsSchema);

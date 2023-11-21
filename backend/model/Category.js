@@ -21,7 +21,7 @@ const createCategory =new mongoose.Schema({
     timestamps:true,
 })
 
-module.exports = mongoose.model("product_category",createCategory)
+module.exports = mongoose.model("Category",createCategory)
 
 
 // category name

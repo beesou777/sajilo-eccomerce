@@ -39,9 +39,9 @@ const file = ref(null)
 onMounted(async ()=>{
     await productStore.getHomepageBanner()
     heading.value = productStore.homepageBanner.heading
-    smallText.value = productStore.homepageBanner.smallText
-    buttonLink.value = productStore.homepageBanner.buttonLink
-    buttonText.value = productStore.homepageBanner.buttonText
+    smallText.value = productStore.homepageBanner.sub_title
+    buttonLink.value = productStore.homepageBanner.button_link
+    buttonText.value = productStore.homepageBanner.button_text
 })
 
 const handleFile = (event)=>{

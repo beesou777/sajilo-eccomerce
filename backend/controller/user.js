@@ -1,4 +1,4 @@
-const User = require("../model/userDetails");
+const User = require("../model/user");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 

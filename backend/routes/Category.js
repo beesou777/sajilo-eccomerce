@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const {checkUserIdCookie, checkUser} = require("../middlewares/veryfyToken")
-const {createCategory,getCategories, deleteCategories, editCategories} =require("../controller/CreateCategory")
+const {createCategory,getCategories, deleteCategories, editCategories} =require("../controller/Category")
 router.route("/create-category").post(checkUser,checkUserIdCookie, createCategory)
 router.route("/get-category/:id").get(getCategories)
 router.route("/delete-category/:id").delete(checkUserIdCookie,deleteCategories)

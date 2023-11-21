@@ -1,5 +1,5 @@
-const Product = require("../model/CreateProduct");
-const User = require("../model/userDetails")
+const Product = require("../model/Product");
+const User = require("../model/user")
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -22,32 +22,32 @@ const createProduct = async (req, res) => {
       product_category,
     } = req.body;
 
-    const file1 = req.files.product_images;
-    const result1 = await cloudinary.uploader.upload(file1.tempFilePath);
+      console.log(req.files)  
+    // const file1 = req.files.product_images;
+    // const result1 = await cloudinary.uploader.upload(file1.tempFilePath);
 
-    if (!product_name && !status && !actual_price) {
-      return res.status(400).json({ error: "Please fill all forms" });
-    }
-    const createProduct = new Product({
-      user:req.headers.user_id,
-      product_name,
-      product_description,
-      product_images: result1.url,
-      product_sku,
-      selling_price,
-      status,
-      quantity,
-      actual_price,
-      product_category,
-    });
-    console.log(createProduct)
-    await createProduct.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Product created successfully" });
+    // if (!product_name && !status && !actual_price) {
+    //   return res.status(400).json({ error: "Please fill all forms" });
+    // }
+    // const createProduct = new Product({
+    //   user:req.headers.user_id,
+    //   product_name,
+    //   product_description,
+    //   product_images: result1.url,
+    //   product_sku,
+    //   selling_price,
+    //   status,
+    //   quantity,
+    //   actual_price,
+    //   product_category,
+    // });
+    // console.log(createProduct)
+    // await createProduct.save();
+    // res
+    //   .status(200)
+    //   .json({ success: true, message: "Product created successfully" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ msg: "Internal server error." });
+    return res.status(500).json({ error: "Internal server error." });
   }
 };
 

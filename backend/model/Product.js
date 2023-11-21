@@ -19,7 +19,7 @@ const createProduct =new  mongoose.Schema({
     },
     actual_price:{
         type:String,
-        required:true
+        required:[true,"actual price i reuired"]
     },
     quantity:{
         type:String
@@ -36,9 +36,9 @@ const createProduct =new  mongoose.Schema({
     },
     product_category:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"product_category"
+        ref:"Category"
     }
 },{
     timestamps:true
 })
-module.exports = mongoose.model("products",createProduct)
+module.exports = mongoose.model("Product",createProduct)

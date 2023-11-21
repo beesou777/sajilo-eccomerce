@@ -1,11 +1,11 @@
 <template>
-  <div class="dashboard-homepage-section me-3" >
+  <div class="dashboard-homepage-section me-3" v-if="homepageSection">
     <!-- section one -->
     <div class="section-container py-2 px-3 mb-3">
       <p class="head-4">Section 1</p>
       <div class="input-form2">
         <label for="" class="small">Banner Title</label>
-        <input type="text" class="w-100" />
+        <input type="text" class="w-100"  v-model="name_1"/>
       </div>
       <div class="input-form2">
         <label for="" class="small">Select Products</label>
@@ -17,7 +17,7 @@
       <p class="head-4">Section 2</p>
       <div class="input-form2">
         <label for="" class="small">Banner Title</label>
-        <input type="text" class="w-100" />
+        <input type="text" class="w-100" v-model="name_2"/>
       </div>
       <div class="input-form2">
         <label for="" class="small">Select Products</label>
@@ -29,7 +29,7 @@
       <p class="head-4">Section 3</p>
       <div class="input-form2">
         <label for="" class="small">Banner Title</label>
-        <input type="text" class="w-100" />
+        <input type="text" class="w-100" v-model="name_3"/>
       </div>
       <div class="input-form2">
         <label for="" class="small">Select Products</label>
@@ -39,33 +39,34 @@
     <div class="button-wrapper text-end">
         <button class="primary-btn">Update</button>
     </div>
+
+    <!-- overlay -->
+    <!-- <div class="overlay"></div> -->
+
+    <!-- form -->
+   <formData/>
   </div>
 </template>
 
 <script setup>
+import formData from "./FormData.vue"
 import { computed, onMounted, ref } from "vue";
 import { useProductStore } from "../../../store/products";
 const productStore = useProductStore();
 
-const heading = ref("");
-const smallText = ref("");
-const buttonText = ref("");
-const buttonLink = ref("http://127.0.0.1:5173/dashboard/");
-const file = ref(null);
+const name_1 = ref("");
+const name_2 = ref("");
+const name_3 = ref("");
+
 onMounted(async () => {
-  await productStore.getHomepageBanner();
-  heading.value = productStore.homepageBanner.heading;
-  smallText.value = productStore.homepageBanner.smallText;
-  buttonLink.value = productStore.homepageBanner.buttonLink;
-  buttonText.value = productStore.homepageBanner.buttonText;
+  await productStore.getHomepageSection();
+  name_1.value = productStore.homepage_section.section_1.name
+  name_2.value = productStore.homepage_section.section_2.name
+  name_3.value = productStore.homepage_section.section_3.name
 });
 
-const handleFile = (event) => {
-  const files = event.target.files[0];
-  file.value = files;
-};
-const homepageBannerData = computed(() => {
-  return productStore.homepageBanner;
+const homepageSection = computed(() => {
+  return productStore.homepage_section;
 });
 
 const editBanner = async () => {
@@ -75,7 +76,6 @@ const editBanner = async () => {
   formdata.append("smallText", smallText.value);
   formdata.append("buttonText", buttonText.value);
   formdata.append("buttonLink", buttonLink.value);
-
   await productStore.editHomepageBanner(formdata);
 };
 </script>

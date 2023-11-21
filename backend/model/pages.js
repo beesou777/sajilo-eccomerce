@@ -29,4 +29,4 @@ const createPages = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model("store-page",createPages)
+module.exports = mongoose.model("Store_product",createPages)

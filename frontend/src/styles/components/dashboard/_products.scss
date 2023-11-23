@@ -1,17 +1,17 @@
 @import "../../base/variable.scss";
-@import "../../base/utility.scss";
+
 .dashboard-product-page{
     .product-section{
         background: $white;
         padding:0 1rem;
         border-radius: 4px;
-        border: 1px solid $light-300;
+        border: 1px solid $text-300;
         .product-data-heads{
             padding: .7rem 0;
-            border-bottom: 1px solid $light-300;
+            border-bottom: 1px solid $text-300;
         }
         .product-data{
-            border-bottom: 1px solid $light-300;
+            border-bottom: 1px solid $text-300;
             padding: 0.7rem 0;
             .image-wrapper{
                 img{
@@ -27,7 +27,7 @@
                     color: red;
                     border-radius: 4px;
                     &:hover{
-                        background-color: $light-300;
+                        background-color: $text-300;
                     }
                 }
             }

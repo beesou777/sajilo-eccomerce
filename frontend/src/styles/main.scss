@@ -1,7 +1,5 @@
+@import "./base/variable.scss";
+@import "./base/mixins";
+@import "./base/base";
 @import "./base/utility.scss";
-@import "./components/dashboard/categories";
-@import "./components/dashboard/dashboard-main";
-@import "./components/dashboard/login";
-@import "./components/dashboard/products" ;
-@import "./components/dashboard/appearance" ;
-
+@import "./base/topography";

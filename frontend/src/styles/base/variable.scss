@@ -1,20 +1,37 @@
-
-$dark-500: #141719;
-$dark-400: #212529;
-$dark-300: #292e33;
-$dark-200: #4d5359;
-$dark: #000;
-
-$light-400: #cfcfcf;
-$light-300: #e8e8e8;
-$light-250: #edeff2;
-$light-200: #f5f5f5;
-$white: #fff;
-
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
 $primary-color: #F53D3D;
 $primary-low:hsl(0, 90%, 60%,45%);
-$secondary-color: #0084aa;
-$tertiary-color: #eee2dd;
 
 $success: #0EB893;
 $success-200:#D3F3ED;
+$danger: #f44336;
+$warning: #fca004;
+$info: #0052ea;
+
+$text-900: #121926;
+$text-800: #202939;
+$text-700: #364152;
+$text-600: #4b5565;
+$text-500: #6d7582;
+$text-400: #9aa4b2;
+$text-300: #cdd5df;
+$text-200: #eef0f2;
+$text-100: #fafafa;
+
+$skeleton-color: #f5f5f5;
+
+$white: #ffffff;
+
+$danger: #f44336;
+$warning: #fca004;
+$info: #0052ea;
+
+// FONT VARIABLES
+$font-primary: "Quicksand";
+
+// RESPONSIVE BREAKPOINTS
+$bp-double-large: 87.5em; // 1400px
+$bp-extra-large: 75em; // 1200px
+$bp-large: 62em; // 992px
+$bp-medium: 48em; // 768px
+$bp-small: 35.5em; // 576px

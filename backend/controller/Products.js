@@ -1,5 +1,5 @@
 const Product = require("../model/Product");
-const User = require("../model/user")
+const User = require("../model/user.model")
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 

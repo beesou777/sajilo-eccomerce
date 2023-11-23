@@ -21,7 +21,5 @@
     </div>
   </template>
   <style lang="scss" scoped>
-  @import "../../../styles/base/utility.scss";
-  @import "../../../styles/base/variable.scss";
   @import "../../../styles/components/dashboard/_user-profile.scss";
   </style>

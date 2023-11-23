@@ -1,7 +1,7 @@
 const ThemeSystem = require("../model/ThemeSystem");
 const Section = require("../model/HomepageSection")
 const Banner = require("../model/HomepageBanner")
-const User = require("../model/user")
+const User = require("../model/user.model")
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 

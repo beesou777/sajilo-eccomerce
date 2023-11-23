@@ -17,4 +17,8 @@ const checkUser = (req, res, next) => {
 };
 
 
-module.exports = {checkUserIdCookie,checkUser}
+module.exports = 
+{
+  checkUserIdCookie,
+  checkUser
+}

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+@import "../../base/variable.scss";
 .side-navbar{
     .users{
         .user-attribute{
@@ -20,7 +21,7 @@
             padding: 12px 6px;
             border-radius: 4px;
             a{
-                color: $dark-400 ;
+                color: $text-800 ;
                 font-weight: 500;
             }
             .currentRoute{

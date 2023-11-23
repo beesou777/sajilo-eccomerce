@@ -1,9 +1,10 @@
-@import "../../base/utility.scss";
+@import "../../base/variable.scss";
+
 .appearance-container {
   padding-top: 30px;
   padding-left: 30px;
   .appearance-headings {
-    background-color: white;
+    background-color: $white;
     padding: 15px;
     ul {
       padding: 0;

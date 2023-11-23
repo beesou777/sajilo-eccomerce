@@ -19,7 +19,7 @@ const createProduct =new  mongoose.Schema({
     },
     actual_price:{
         type:String,
-        required:[true,"actual price i reuired"]
+        required:[true,"actual price is required"]
     },
     quantity:{
         type:String

@@ -1,3 +1,4 @@
+@import "../../base/variable.scss";
 .dashboard-category-page{
     .categories-section{
         background: $white;
@@ -54,13 +55,4 @@
             }
         }
     }
-
-}
-.overlay{
-    height: 100vh;
-    width: 150vw;
-    top: 0;
-    left: -30%;
-    z-index: 999;
-    background: hsl(0, 0%, 0%,.5);
 }

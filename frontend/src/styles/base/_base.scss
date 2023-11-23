@@ -1,0 +1,24 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 16px; // 1rem = 16px;
+
+  @include respond(tab-port) {
+    font-size: 14px; // 1rem = 14px
+  }
+}
+
+body {
+  box-sizing: border-box;
+}
+
+::selection {
+  background-color: $primary-color;
+  color: $white;
+}

@@ -274,7 +274,5 @@ const user_data = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../styles/base/utility.scss";
-@import "../../../styles/base/variable.scss";
 @import "../../../styles/components/dashboard/_sidenavbar.scss";
 </style>

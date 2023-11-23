@@ -1,10 +1,12 @@
+@import "../../base/variable.scss";
+
 .dashboard-profile {
   .user-profile-section {
     background: $white;
     border-radius: 4px;
     .profile-links {
       li > a {
-        color: $dark-400;
+        color: $text-800;
         font-weight: 600;
         font-family: Quicksand;
       }

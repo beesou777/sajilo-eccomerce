@@ -1,218 +1,62 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
-@import "./variable.scss";
-.head-1 {
-  font-family: "Quicksand";
-  font-size: 48px;
-  font-weight: 700;
-  color: $dark;
-  letter-spacing: -1.3px;
-  @media (max-width: 767px) {
-    letter-spacing: -0.6px;
-    font-size: 28px;
-  }
-}
 
-.head-2 {
-  font-family: "Quicksand";
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: -0.6px;
-  color: $dark;
-  line-height: 2.4rem;
-  @media (max-width: 767px) {
-    letter-spacing: -0.3px;
-    font-size: 24px;
-  }
-}
-
-.head-3 {
-  font-family: "Quicksand";
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  line-height: 2.4rem;
-  color: $dark;
-  @media (max-width: 767px) {
-    letter-spacing: -0.6px;
-    font-size: 20px;
-  }
-}
-
-.head-4 {
-  font-family: "Quicksand";
-  font-size: 20px;
-  font-weight: 400;
-  color: $dark;
-  letter-spacing: -0.3px;
-  margin-bottom: 0.25rem !important;
-  @media (max-width: 767px) {
-    letter-spacing: -0.4px;
-    font-size: 18px;
-  }
-}
-
-.head-5 {
-  font-family: "Quicksand";
-  font-size: 18px;
-  font-weight: 600;
-  color: $dark;
-  letter-spacing: -0.3px;
-  @media (max-width: 767px) {
-    letter-spacing: -0.4px;
-    font-size: 16px;
-  }
-}
-
-.body-1 {
-  font-family: "Quicksand";
-  font-size: 16px;
-  font-weight: 400;
-  color: $dark;
-  letter-spacing: -0.3px;
-  @media (max-width: 767px) {
-    letter-spacing: -0.4px;
-    font-size: 14px;
-  }
-}
-
-.body-b {
-  font-family: "Quicksand";
-  font-size: 16px;
-  font-weight: 600;
-  color: $dark;
-  letter-spacing: -0.1px;
-  @media (max-width: 767px) {
-    letter-spacing: -0.1px;
-    font-size: 16px;
-  }
-}
-
-.head-title {
-  color: #000;
-  font-family: "Quicksand";
-  font-size: 20px;
-  font-weight: 400;
-  @media (max-width: 767px) {
-    font-size: 16px;
-  }
-}
-
-.small-b {
-  font-family: "Quicksand";
-  font-size: 14px;
-  color: $dark;
-  font-weight: 600;
-  @media (max-width: 767px) {
-    font-size: 13px;
-  }
-}
-
-.small {
-  font-family: "Quicksand";
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.1px;
-
-  @media (max-width: 767px) {
-    font-size: 13px;
-  }
-}
-
-.primary-btn {
-  border-radius: 4px;
+.btn {
+  background: $text-900;
   color: $white;
+  padding: 12px 20px 12px 20px;
+  outline: none;
   border: none;
-  background-color: $primary-color;
-  padding: 0.5rem 2rem;
-  transition: 0.3s ease-in-out;
-}
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.4rem;
+  letter-spacing: -0.00625rem;
+  margin: 0;
 
-body {
-  overflow-x: hidden;
-}
-
-.bg-white {
-  background: $white;
-}
-
-.input_form{
-  position: relative;
-  margin: 2rem 0;
-  input,textarea{
-    background-color: $light-200;
-    border: 0;
-    border-radius: 4px;
-    outline: none;
-    padding: 1.5rem 1rem .4rem 0.6rem;
+  @include respond(tab-port) {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
   }
-  label{
-    position: absolute;
-    top: 8px;
-    left: 10px;
+
+  &:hover {
+    background: $text-800;
   }
-  textarea{
-    min-height: 135px;
-    height: 100%;
+}
+
+.form-input {
+  margin: 0.5rem 0;
+
+  input[type="email"],
+  input[type="text"] input[type="search"] {
     width: 100%;
-  }
-}
-
-
-.input-form2{
-  margin: 1rem 0;
-  input,textarea{
-    background-color: $light-200;
-    border: 0;
-    border-radius: 4px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid $text-300;
+    background: $text-100;
+    box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
     outline: none;
-    padding:0.6rem;
-  }
-  label{
-    top: 8px;
-    left: 10px;
-    margin-bottom: .5rem;
-  }
-  textarea{
-    min-height: 135px;
-    height: 100%;
-    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+    letter-spacing: -0.00625rem;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      border: 1px solid $text-400;
+    }
+
+    &:focus {
+      border: 1px solid $text-700;
+    }
   }
 }
-
 
 .image_form{
-  background: $light-200;
+  background: $text-200;
   padding:10px;
   input[type="file"]::file-selector-button {
     padding: 6px 16px;
     border-radius: 4px;
     cursor: pointer;
-    background-color: $white;
-    border: 1px solid $light-400;
+    background-color: $text-100;
+    border: 1px solid $text-400;
     margin-right: 16px;
   }
-}
-
-ul{
-  margin: 0;
-  li{
-    list-style: none;
-    a{
-      text-decoration: none;
-    }
-  }
-}
-
-.text-primary{
-  color: $primary-color !important;
-}
-
-
-.overlay{
-  position:fixed;
-  height: 100vh;
-  width: 100vw;
-  top: 0;
-  left: 0;
 }

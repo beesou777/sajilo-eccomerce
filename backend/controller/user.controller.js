@@ -2,7 +2,6 @@ const User = require("../model/user.model");
 const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs");
-const { use } = require("../routes/user.route");
 require("dotenv").config();
 
 cloudinary.config({
@@ -112,5 +111,5 @@ const getUser = async (req, res) => {
 module.exports = {
   Register,
   getUser,
-  Login,
+  Login
 };

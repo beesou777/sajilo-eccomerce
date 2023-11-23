@@ -15,21 +15,24 @@ const createProduct =new  mongoose.Schema({
         required:[true,"product description is required"]
     },
     selling_price:{
-        type:String
+        type:Number,
+        required:[true,"selling price is required"]
     },
     actual_price:{
-        type:String,
+        type:Number,
         required:[true,"actual price is required"]
     },
     quantity:{
-        type:String
+        type:Number,
+        required:[true,"quantity is required"]
     },
     product_sku:{
         type:String
     },
     status:{
-        type:String,
-        required:true
+        type:Boolean,
+        required:true,
+        default:true
     },
     product_images:{
         type:Array,

@@ -3,7 +3,7 @@ const router = express.Router()
 
 const {sectionData, homepageData} =require("../controller/HomepageSection")
 const {createBanner,editBanner, getBanner } =require("../controller/HomepageBanner")
-const {checkUserIdCookie}  = require("../middlewares/verifyToken")
+// const {checkUserIdCookie}  = require("../middlewares/verifyToken")
 
 // banner
 router.route("/homepage-banner").post(createBanner).get(getBanner)

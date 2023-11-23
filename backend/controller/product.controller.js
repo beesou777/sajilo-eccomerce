@@ -1,4 +1,4 @@
-const Product = require("../model/Product");
+const Product = require("../model/product.model");
 const User = require("../model/user.model")
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
@@ -9,7 +9,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
-const createProduct = async (req, res) => {
+const postProduct = async (req, res) => {
   try {
     const {
       product_name,
@@ -21,37 +21,35 @@ const createProduct = async (req, res) => {
       status,
       product_category,
     } = req.body;
+ 
+    const file1 = req.files.product_images;
+    const result1 = await cloudinary.uploader.upload(file1.tempFilePath);
 
-      console.log(req.files)  
-    // const file1 = req.files.product_images;
-    // const result1 = await cloudinary.uploader.upload(file1.tempFilePath);
-
-    // if (!product_name && !status && !actual_price) {
-    //   return res.status(400).json({ error: "Please fill all forms" });
-    // }
-    // const createProduct = new Product({
-    //   user:req.headers.user_id,
-    //   product_name,
-    //   product_description,
-    //   product_images: result1.url,
-    //   product_sku,
-    //   selling_price,
-    //   status,
-    //   quantity,
-    //   actual_price,
-    //   product_category,
-    // });
-    // console.log(createProduct)
-    // await createProduct.save();
-    // res
-    //   .status(200)
-    //   .json({ success: true, message: "Product created successfully" });
+    if (!product_name && !status && !actual_price) {
+      return res.status(400).json({ error: "Please fill all forms" });
+    }
+    const createProduct = new Product({
+      user:req.headers.user_id,
+      product_name,
+      product_description,
+      product_images: result1.url,
+      product_sku,
+      selling_price,
+      status,
+      quantity,
+      actual_price,
+      product_category,
+    });
+    await createProduct.save();
+    res
+      .status(200)
+      .json({ success: true, message: "Product created successfully" });
   } catch (error) {
     return res.status(500).json({ error: "Internal server error." });
   }
 };
 
-const getUsersProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
   try {
     const currentUser = req.headers.user_id;
     const products = await Product.find({user:currentUser}).select("-user")
@@ -67,13 +65,15 @@ const getUsersProducts = async (req, res) => {
     console.log("Error fetching products", error);
     res.status(500).json({ error: "Internal server error" });
   }
-};
-
+}
 
 const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).populate({
+      path:"product_category",
+      select:"-user"
+    }).select("-user")
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
@@ -82,9 +82,9 @@ const getProductById = async (req, res) => {
     console.log("Error fetching product", error);
     res.status(500).json({ error: "Internal server error" });
   }
-};
+}
 
-const updateProduct = async (req, res) => {
+const updateProductById = async (req, res) => {
   const { id } = req.params;
   const {
     product_name,
@@ -116,7 +116,7 @@ const updateProduct = async (req, res) => {
     console.log("Error updating product", error);
     res.status(500).json({ error: "Internal server error" });
   }
-};
+}
 
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
@@ -128,7 +128,7 @@ const deleteProduct = async (req, res) => {
     console.log("Error deleting product", error);
     res.status(500).json({ error: "Internal server error" });
   }
-};
+}
 
 const getSubDomainProduct = async (req,res)=>{
   try {
@@ -149,10 +149,10 @@ const getSubDomainProduct = async (req,res)=>{
 }
 
 module.exports = {
-  createProduct,
-  getUsersProducts,
+  postProduct,
+  getAllProducts,
   getProductById,
-  updateProduct,
+  updateProductById,
   deleteProduct,
   getSubDomainProduct
 };

@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
 
 const OrderSchema = new mongoose.Schema({
-    owner:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required:[true,"user is required"]
     },
     orderItems:[{
        quantity:{type:String,required:[true,"quantity is required"]},
@@ -16,15 +17,15 @@ const OrderSchema = new mongoose.Schema({
     shippingAddress:{
         address:{
             type:String,
-            required:[true,"shipping address is true"],
+            required:[true,"shipping address is required"],
         },
         city:{
             type:String,
-            required:[true,"city is true"],
+            required:[true,"city is required"],
         },
-        city:{
+        tole:{
             type:String,
-            required:[true,"city is true"],
+            required:[true,"tole is required"],
         },
         postalCode: {
             type: String,

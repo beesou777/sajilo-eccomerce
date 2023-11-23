@@ -1,4 +1,4 @@
-const Category = require("../model/Category");
+const Category = require("../model/category.model");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -9,20 +9,17 @@ cloudinary.config({
 });
 
 const createCategory = async (req, res) => {
-  const { name } = req.body;
-
+  
   try {
+    const { name } = req.body;
     const file = req.files.image;
     const result = await cloudinary.uploader.upload(file.tempFilePath);
-    const slug = name.toLowerCase().replace(/\s/g, '-');
 
     const userId = req.headers.user_id;
-    console.log(userId)
     const newCategory = new Category({
-      owner: userId,
+      user: userId,
       name,
       image: result.url,
-      slug
     });
     await newCategory.save();
     res.status(200).json({ success: true, message: newCategory });
@@ -32,7 +29,6 @@ const createCategory = async (req, res) => {
     return res.status(500).json({ msg: "Internal server error." });
   }
 };
-
 
 const getCategories = async (req, res) => {
   try {

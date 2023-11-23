@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const createCategory =new mongoose.Schema({
-    owner:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
         ref:"user_details"
@@ -13,9 +13,6 @@ const createCategory =new mongoose.Schema({
     image:{
         type:String,
         required:true
-    },
-    slug:{
-        type:String
     }
 },{
     timestamps:true,

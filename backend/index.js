@@ -5,10 +5,11 @@ const app = express();
 const {connect} = require("./db/connect");
 const PORT = process.env.PORT || 8000;
 const user = require('./routes/user.route')
-const createCategory = require("./routes/Category")
-const createProduct= require("./routes/Product")
+const createCategory = require("./routes/category.routes")
+const createProduct= require("./routes/product.routes")
 const homepage= require("./routes/HomepageSection")
 const ThemeSystem = require("./routes/themeRouter")
+const Order = require("./routes/order.routes")
 const cookieParser = require("cookie-parser")
 const fileUpload = require("express-fileupload")
 const compression = require("compression")
@@ -25,6 +26,7 @@ app.use("",createCategory)
 app.use("",createProduct)
 app.use("",homepage)
 app.use("",ThemeSystem)
+app.use("",Order)
 
 
 const start = async () => {

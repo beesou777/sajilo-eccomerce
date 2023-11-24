@@ -104,11 +104,18 @@ ul{
 
 .input_form{
   input,textarea{
-    border: 1px solid $text-300;
+    border: 2px solid $text-300;
     border-radius: 4px;
     outline: none;
     padding:0.6rem;
     width: 100%;
+    transition: .3s ease-in-out;
+    &:focus{
+      border: 2px solid $text-400;
+    }
+    &:hover{
+      border: 2px solid $text-400;
+    }
   }
   label{
     top: 8px;
@@ -129,5 +136,8 @@ ul{
     border: 1px solid $primary-color;
     padding: .5rem 1rem;
     border-radius: 4px;
+    &:hover{
+      background-color: rgba($primary-color,.9);
+    }
   }
 }

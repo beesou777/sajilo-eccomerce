@@ -104,17 +104,17 @@
         </svg>
       </div>
       <p class="h3 fw-semibold pb-2">Sign Up</p>
-      <p class="h6">Enter your details and create your account</p>
+      <p class="body-1">Enter your details and create your account</p>
       <form @submit.prevent>
         <div class="d-flex gap-3 my-2">
           <div class="input_form w-100">
-            <label for="first_name"
+            <label for="first_name" class="small fw-medium"
               >First Name: <span class="text-danger fs-5">*</span></label
             >
             <input type="text" id="first_name" v-model="first_name" required />
           </div>
           <div class="input_form w-100">
-            <label for="last_name"
+            <label for="last_name" class="small fw-medium"
               >Last Name: <span class="text-danger fs-5">*</span></label
             >
             <input type="text" id="last_name" v-model="last_name" required />
@@ -122,13 +122,13 @@
         </div>
         <div class="d-flex gap-3 my-2">
           <div class="input_form w-100">
-            <label for="number"
+            <label for="number" class="small fw-medium"
               >Phone Number: <span class="text-danger fs-5">*</span></label
             >
             <input type="number" id="number" v-model="phone_number" required />
           </div>
           <div class="input_form w-100">
-            <label for="email"
+            <label for="email" class="small fw-medium"
               >E-mail: <span class="text-danger fs-5">*</span></label
             >
             <input type="email" id="email" v-model="email" required />
@@ -136,13 +136,13 @@
         </div>
         <div class="d-flex gap-3 my-2">
           <div class="input_form w-100">
-            <label for="password"
+            <label for="password" class="small fw-medium"
               >Password: <span class="text-danger fs-5">*</span></label
             >
             <input type="password" id="password" v-model="password" required />
           </div>
           <div class="input_form w-100">
-            <label for="comfirm_password"
+            <label for="comfirm_password" class="small fw-medium"
               >Confirm Password: <span class="text-danger fs-5">*</span></label
             >
             <input type="password" id="confirm_password" v-model="password" required />
@@ -150,13 +150,13 @@
         </div>
         <div class="d-flex gap-3 my-2">
           <div class="input_form w-100">
-            <label for="store_name"
+            <label for="store_name" class="small fw-medium"
               >Store Name: <span class="text-danger fs-5">*</span></label
             >
             <input type="text" id="store_name" v-model="store_name" required />
           </div>
           <div class="input_form w-100">
-            <label for="username"
+            <label for="username" class="small fw-medium"
               >Username: <span class="text-danger fs-5">*</span></label
             >
             <input type="text" id="username" v-model="username" required />

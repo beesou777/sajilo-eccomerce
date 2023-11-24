@@ -1,102 +1,77 @@
 import { defineStore } from "pinia";
 import axios from "../utility/axios";
-import { googleTokenLogin } from "vue3-google-login";
+import Cookies from "js-cookie"
 import router from "../router/router";
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    current_user_id:JSON.parse(localStorage.getItem("user_id")) || null,
+    uuid:JSON.parse(localStorage.getItem("uuid")) || null,
+    user_details:JSON.parse(localStorage.getItem("user_details")) || null,
     access_token:JSON.parse(localStorage.getItem("access_token")) || null,
-    current_user_details: JSON.parse(localStorage.getItem("current_user_details")) || null,
+    // current_user_details: JSON.parse(localStorage.getItem("current_user_details")) || null,
   }),
   getters: {
-    is_user: (state) => !!state.access_token,
+    // is_user: (state) => !!state.access_token,
   },
   actions: {
-    async login() {
+    async login(data) {
       try {
-        googleTokenLogin().then((response) => {
-          if (response) {
-           localStorage.setItem("access_token",JSON.stringify(response.access_token))
-           this.access_token = response.access_token;
-           axios.defaults.headers.common['Authorization'] = `Bearer ${this.access_token}`
-          }
+        const res = await axios.post("/users/login", {
+          email: data.email,
+          password: data.password,
         });
-      } catch (error) {
-        console.log("Login Failed!!");
+        if(res.status = 200){
+        this.uuid = res.data.uuid
+        Cookies.set("token",res.data.access_token,{expires:7})
+        localStorage.setItem("uuid",JSON.stringify(res.data.uuid))
+        router.push("/dashboard")
       }
-    },
-    async getUserData() {
-      try {
-        const response = await axios.get(
-          "https://www.googleapis.com/userinfo/v2/me",
-          {
-            headers: {
-              Authorization: `Bearer ${this.access_token}`,
-            },
-          }
-        );
-        if (response.data) {
-          const data = {
-            email: response.data.email,
-            full_name: response.data.name,
-            profile_picture: response.data.picture,
-            id: response.data.id,
-          };
-          this.current_user_id = data.id
-          localStorage.setItem("user_id",JSON.stringify(response.data.id))
-          return data;
-        }
-      } catch (error) {
-        console.log(error?.response?.data?.error?.status);
-      }
-    },
-    
-    async registerUser({
-      store_name,
-      email,
-      full_name,
-      profile_picture,
-    }) {
-      try {
-        const response = await axios.post("/createUser", {
-          store_name,
-          email,
-          full_name,
-          profile_picture,
-        },{
-          headers:{
-            user_id:this.current_user_id
-          }
-        });
-        if (response.status == 200) {
-          router.push("/dashboard");
-        }
-      } catch (error) {
-        console.log(error);
-        console.log("an error occur");
-      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
     },
 
-    async getUserInfomation() {
+    async getUserDetails() {
       try {
-        if (this.is_user) {
-          const res = await axios.get(`/getUser/${this.current_user_id}`,{
-            headers:{
-              Authorization: `Bearer ${this.access_token}`,
-              "access_token":this.access_token
-            }
-          });
-          if (res.status == 200) {
-            this.current_user_details = res.data;
-           localStorage.setItem("current_user_details",JSON.stringify(res.data))
+        const res = await axios.get(`/users`,{
+          headers:{
+            user_id:this.uuid || null
           }
+        })
+        if(res.status == 200){
+            localStorage.setItem("user_details",JSON.stringify(res.data.user_details))
         }
-      } catch (error) {
-        if(error?.response?.data.message == "User does not found"){
-          console.log(error?.response?.data.message);
-          router.push('/register')
+    } catch (error) {
+      if(error?.response?.status == 404){
+          localStorage.clear()
+          router.push("/login")
         }
       }
-    },
+    }
+    
+    // async registerUser({
+    //   store_name,
+    //   email,
+    //   full_name,
+    //   profile_picture,
+    // }) {
+    //   try {
+    //     const response = await axios.post("/createUser", {
+    //       store_name,
+    //       email,
+    //       full_name,
+    //       profile_picture,
+    //     },{
+    //       headers:{
+    //         user_id:this.current_user_id
+    //       }
+    //     });
+    //     if (response.status == 200) {
+    //       router.push("/dashboard");
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //     console.log("an error occur");
+    //   }
+    // },
   },
 });

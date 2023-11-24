@@ -25,14 +25,14 @@
       </div>
       <p class="h5 text-center mb-3">Login to get started</p>
       <form @submit.prevent>
-          <div class="input_form w-100">
-            <label for="email"
+          <div class="input_form w-100 my-2">
+            <label for="email" class="small fw-medium"
               >E-mail: <span class="text-danger fs-5">*</span></label
             >
             <input type="email" id="email" v-model="email" required />
           </div>
-          <div class="input_form w-100">
-            <label for=" password"
+          <div class="input_form w-100 my-2">
+            <label for=" password" class="small fw-medium"
               >Password: <span class="text-danger fs-5">*</span></label
             >
             <input type="password" id="password" v-model="password" required />
@@ -40,9 +40,11 @@
           <p class="text-center body-1 my-4"><a href="#" class="text-primary">
             Forgot Password ?</a></p>
         <div class="button-wrapper mt-3">
-          <button class="w-100 fw-semibold">Login</button>
+          <button class="w-100 fw-semibold" @click="Login">Login</button>
         </div>
-        <p class="text-center body-1 my-4">Don’t have an account ? <a href="#" class="text-primary" @click="router.push('/register')">Register</a></p>
+        <p class="text-center body-1 my-4">Don’t have an account ? 
+          <a href="#" class="text-primary"
+           @click="router.push('/register')">Register</a></p>
       </form>
     </div>
   </div>
@@ -51,23 +53,21 @@
 <script setup>
 import { useAuthStore } from "../../store/authentication";
 const authStore = useAuthStore();
-import { watch } from "vue";
 import router from "../../router/router";
+import { ref } from "vue";
+
+const email = ref("")
+const password = ref("")
 
 const Login = async () => {
-  await authStore.login();
+  const data = {
+    email:email.value,
+    password:password.value
+  }
+  await authStore.login(data);
 };
 
-watch(async () => {
-  if (!authStore.currentId && authStore.access_token) {
-    await authStore.getUserData();
-    await authStore.getUserInfomation();
-  }
 
-  if (localStorage.getItem("current_user_details")) {
-    router.push("/dashboard");
-  }
-});
 </script>
 <style  scoped src="../../styles/components/dashboard/_login.scss">
 @import "../../styles/base/variable.scss";

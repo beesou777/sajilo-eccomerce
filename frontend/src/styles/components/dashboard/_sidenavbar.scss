@@ -1,34 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap");
 @import "../../base/variable.scss";
-.side-navbar{
-    .users{
-        .user-attribute{
-            p{
-                font-family: Rubik Wet Paint;
-                font-size: 18px;
-                font-style: normal;
-                font-weight: 400;
-                letter-spacing: 2px;
-            }
+.side-navbar {
+  .main-links {
+    padding: 0;
+    li {
+      padding: 0 16px 0 24px;
+      margin: 4px;
+      line-height: 43px;
+      display: flex;
+      align-items: center;
+      span:first-child {
+        svg {
+          height: 15px;
+          width: 15px;
         }
+      }
+      span:last-child {
+        font-size: 14px;
+        height: 40px;
+        width: 100%;
+        font-family: $font-primary;
+        margin-left: 10px;
+      }
+      .currentRoute {
+        color: $primary-color !important;
+        font-weight: 600;
+      }
     }
-    
-    .main-links{
-        padding: 10px 10px 10px 20px;
-        ul{
-           padding: 0;
-           li{
-            padding: 12px 6px;
-            border-radius: 4px;
-            a{
-                color: $text-800 ;
-                font-weight: 500;
-            }
-            .currentRoute{
-                color: $primary-color !important;
-                font-weight: 600;
-            }
-           }
-        }
-    }
+  }
 }
+

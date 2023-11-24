@@ -14,7 +14,10 @@ const cookieParser = require("cookie-parser")
 const fileUpload = require("express-fileupload")
 const compression = require("compression")
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://127.0.0.1:5173',
+  credentials: true,
+}));
 app.use(cookieParser())
 app.use(fileUpload({
   useTempFiles:true

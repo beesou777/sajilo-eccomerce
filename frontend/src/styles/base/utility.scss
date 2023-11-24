@@ -60,3 +60,74 @@
     margin-right: 16px;
   }
 }
+
+.overlay{
+  position:fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+}
+
+ul{
+  margin: 0;
+  li{
+    list-style: none;
+    a{
+      text-decoration: none;
+    }
+  }
+}
+
+
+// .input_form{
+//   position: relative;
+//   margin: 2rem 0;
+//   input,textarea{
+//     background-color: $text-200;
+//     border: 0;
+//     border-radius: 4px;
+//     outline: none;
+//     padding: 1.5rem 1rem .4rem 0.6rem;
+//   }
+//   label{
+//     position: absolute;
+//     top: 8px;
+//     left: 10px;
+//   }
+//   textarea{
+//     min-height: 135px;
+//     height: 100%;
+//     width: 100%;
+//   }
+// }
+
+.input_form{
+  input,textarea{
+    border: 1px solid $text-300;
+    border-radius: 4px;
+    outline: none;
+    padding:0.6rem;
+    width: 100%;
+  }
+  label{
+    top: 8px;
+    left: 10px;
+    margin-bottom: .5rem;
+  }
+  textarea{
+    min-height: 135px;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.button-wrapper{
+  button{
+    background: $primary-color;
+    color: $white;
+    border: 1px solid $primary-color;
+    padding: .5rem 1rem;
+    border-radius: 4px;
+  }
+}

@@ -4,13 +4,18 @@ const router = express.Router();
 const { protect } = require("../middlewares/verifyToken");
 
 const {
-  getOrderItems,
-  addOrderItems
+  getAllOrderItems,
+  addOrderItems,
+  getOrderById,
+  updateOrderById,
+  deleteOrderById
 } = require("../controller/order.controller");
 
-router.route("/order/create").post(addOrderItems);
+router.route("/order/create").post(protect,addOrderItems);
+
+router.route("/order").get(protect,getAllOrderItems)
 
 router
   .route("/order/:id")
-  .get(getOrderItems)
+  .get(getOrderById).put(protect,updateOrderById).delete(protect,deleteOrderById)
 module.exports = router;

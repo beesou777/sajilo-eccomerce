@@ -66,7 +66,6 @@ body {
   h2,
   .h2 {
     font-size: 2.25rem;
-    font-weight: bold;
     line-height: 2.625rem;
     letter-spacing: -0.025rem;
     margin: 0;
@@ -90,7 +89,6 @@ body {
   h3,
   .h3 {
     font-size: 1.5rem;
-    font-weight: bold;
     line-height: 1.875rem;
     letter-spacing: -0.025rem;
     margin: 0;
@@ -114,7 +112,6 @@ body {
   h4,
   .h4 {
     font-size: 1.25rem;
-    font-weight: bold;
     line-height: 1.5rem;
     letter-spacing: -0.02rem;
     margin: 0;
@@ -134,7 +131,6 @@ body {
   h5,
   .h5 {
     font-size: 1.125rem;
-    font-weight: bold;
     line-height: 1.3rem;
     letter-spacing: -0.02rem;
     margin: 0;
@@ -217,67 +213,4 @@ body {
 
   .bg-white {
     background: $text-100;
-  }
-
-  .overlay{
-    position:fixed;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-  }
-
-  ul{
-    margin: 0;
-    li{
-      list-style: none;
-      a{
-        text-decoration: none;
-      }
-    }
-  }
-
-
-  .input_form{
-    position: relative;
-    margin: 2rem 0;
-    input,textarea{
-      background-color: $text-200;
-      border: 0;
-      border-radius: 4px;
-      outline: none;
-      padding: 1.5rem 1rem .4rem 0.6rem;
-    }
-    label{
-      position: absolute;
-      top: 8px;
-      left: 10px;
-    }
-    textarea{
-      min-height: 135px;
-      height: 100%;
-      width: 100%;
-    }
-  }
-  
-  
-  .input-form2{
-    margin: 1rem 0;
-    input,textarea{
-      background-color: $text-200;
-      border: 0;
-      border-radius: 4px;
-      outline: none;
-      padding:0.6rem;
-    }
-    label{
-      top: 8px;
-      left: 10px;
-      margin-bottom: .5rem;
-    }
-    textarea{
-      min-height: 135px;
-      height: 100%;
-      width: 100%;
-    }
   }

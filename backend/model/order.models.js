@@ -12,7 +12,7 @@ const OrderSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         required:[true,"product is required"],
         ref:"Product"
-       }
+       },
     }],
     shippingAddress:{
         address:{
@@ -66,8 +66,11 @@ const OrderSchema = new mongoose.Schema({
         type:Number,
         required:[true,"Final Price is required"]
     },
-    paidAt:{
-        type:Date
+    deliver_status:{
+        type:String,
+        enum:['Pending','Delivered','Draft','Cancelled','Returned'],
+        default:'Pending',
+        required:[true,"required"]
     },
     deliveredAt:{
         type:Date

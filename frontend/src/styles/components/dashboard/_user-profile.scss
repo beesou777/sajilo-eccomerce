@@ -5,17 +5,20 @@
     background: $white;
     border-radius: 4px;
     .profile-links {
-      li > a {
-        color: $text-800;
-        font-weight: 600;
-        font-family: Quicksand;
-      }
-      li > .active-link {
-        color: $primary-color;
-      }
-      li > a > .currentRoute {
-        color: $primary-color !important;
-        font-weight: 600;
+      li{
+        margin: 4px;
+        line-height: 40px;
+        cursor: pointer;
+        span:first-child{
+         svg{
+          height: 18px;
+          width: 18px;
+         }
+        }
+        span:last-child{
+          height: 40px;
+          margin-left: 8px;
+        }
       }
     }
   }
@@ -25,35 +28,22 @@
       border-radius: 4px;
       max-width: 350px;
       width: 100%;
-      .data-container {
-        .text {
-          color: #0eb893;
-          background: #d3f3ed;
-          border-radius: 4px;
-          font-weight: 500;
+      line-height: 40px;
+      span:first-child{
+        svg{
+          max-height: 18px;
+          max-width: 18px;
         }
+      }
+      span:last-child{
+        height: 40px;
+        margin-left: 8px;
       }
     }
   }
   .personal-details-page {
     background: white;
     max-width: 340px;
-    .store-name,
-    .name,
-    .email {
-      input {
-        border-radius: 4px;
-        background: #f5f5f5;
-        border: 0;
-        padding: 15px 10px 10px 10px;
-        outline: 0;
-        font-size: 12px;
-      }
-      .small{
-        top: 0;
-        left: 10px;
-      }
-    }
     .button-wrapper{
         button{
             background-color: $primary-color;

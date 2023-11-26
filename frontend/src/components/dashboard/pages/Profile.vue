@@ -6,8 +6,8 @@
           <p class="head-title">Owner Information</p>
           <div class="profile-links">
             <ul class="p-0">
-              <li class="py-2">
-                <a href="/dashboard/profile" class="d-flex gap-2 align-items-center">
+              <li @click="router.push('/dashboard/profile')">
+                <span>
                   <svg
                     width="22"
                     height="23"
@@ -35,12 +35,14 @@
                       </clipPath>
                     </defs>
                   </svg>
-
-                  <span :class="{currentRoute:profileActive('dashboard-profile')}">Account</span></a
+                </span>
+                <span
+                  :class="{ currentRoute: profileActive('dashboard-profile') }"
+                  >Account</span
                 >
               </li>
-              <li class="py-2">
-                <a href="/dashboard/profile/personal-detail" class="d-flex gap-2 align-items-center">
+              <li @click="router.push('/dashboard/profile/details')">
+                <span>
                   <svg
                     width="22"
                     height="22"
@@ -69,11 +71,15 @@
                       fill="black"
                     />
                   </svg>
-                  <span :class="{currentRoute : profileActive('personal-details')}" >Personal details</span></a>
+                </span>
+                <span
+                  :class="{ currentRoute: profileActive('personal-details') }"
+                  >Personal details</span
+                >
               </li>
-              <li class="py-2">
-                <a href="#" class="d-flex gap-2 align-items-center"
-                  ><svg
+              <li @click="router.push('/dashboard/profile/update-password')">
+                <span>
+                  <svg
                     width="18"
                     height="20"
                     viewBox="0 0 18 20"
@@ -87,8 +93,8 @@
                       fill="black"
                     />
                   </svg>
-                  <span>Change Password</span></a
-                >
+                </span>
+                <span>Change Password</span>
               </li>
             </ul>
           </div>
@@ -102,15 +108,15 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
-const activeRouter = ref(router.currentRoute.value.name)
-const profileActive = (route)=>{
-    return activeRouter.value == route
-}
+const activeRouter = ref(router.currentRoute.value.name);
+const profileActive = (route) => {
+  return activeRouter.value == route;
+};
 </script>
 
 <style lang="scss" scoped>

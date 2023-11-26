@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="dashboard-product-page px-2 position-relative">
+    <div class="dashboard-product-page position-relative bg-white p-3">
       <div class="py-3">
         <p class="head-4 text-primary fw-semibold">Store Products</p>
       </div>
@@ -70,23 +69,22 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
   <script setup>
 import { computed, onMounted } from "vue";
 import { useProductStore } from "../../../store/products";
 import { ref } from "vue";
 
-let count = ref(1)
-const productStore = useProductStore();
+// let count = ref(1)
+// const productStore = useProductStore();
 
-onMounted(async () => {
-  await productStore.getProduct();
-});
+// onMounted(async () => {
+//   await productStore.getProduct();
+// });
 
 
 
-const product = computed(() => {
-  return productStore.products ? productStore.products : "";
-});
+// const product = computed(() => {
+//   return productStore.products ? productStore.products : "";
+// });
 </script>

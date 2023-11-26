@@ -10,7 +10,7 @@ const {
   getSubDomainProduct,
 } = require("../controller/product.controller");
 
-const { protect } = require("../middlewares/verifyToken");
+const { protect } = require("../middlewares/auth.middleware");
 
 router.route("/product/create").post(protect,postProduct);
 

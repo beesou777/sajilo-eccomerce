@@ -12,9 +12,10 @@ import DashboardAppearance from "../components/dashboard/pages/Appearance.vue"
 import DashboardHomepageBanner from "../components/dashboard/pages/HomapageBannerScetion.vue"
 import DashboardHomepageSection from "../components/dashboard/pages/HomepageSection.vue"
 import DashboardHomepageProfile from "../components/dashboard/pages/Profile.vue"
-import DashboardHomepageProfileAccount from "../components/dashboard/pages/profileAccount.vue"
-import DashboardHomepagePersonalDetails from "../components/dashboard/pages/personalDetails.vue"
-
+import DashboardHomepageProfileAccount from "../components/dashboard/pages/profile/profileAccount.vue"
+import DashboardHomepagePersonalDetails from "../components/dashboard/pages/profile/personalDetails.vue"
+import DashboardHomepageUpdatePassword from "../components/dashboard/pages/profile/ChangePassword.vue"
+import DashboardOrder  from "../components/dashboard/pages/Order.vue"
 
 import Homepage from "../views/theme1/Homepage.vue"
 let sub_domain;
@@ -43,15 +44,17 @@ const router = createRouter({
             { path: "", name: "dashboard-home", component: DashboardHome, },
             { path: "/dashboard/categories", name: "dashboard-category", component: DashboardCategory, },
             { path: "/dashboard/add_product", name: "dashboard-add-product", component: DashboardAddProduct, },
-            { path: "/dashboard/products", name: "dashboard-products", component: DashboardProduct, },
+            { path: "/dashboard/product", name: "dashboard-products", component: DashboardProduct, },
             { path: "/dashboard/profile", component: DashboardHomepageProfile,children:[
                 { path: "", name: "dashboard-profile", component: DashboardHomepageProfileAccount, },
-                { path: "personal-detail", name: "personal-details", component: DashboardHomepagePersonalDetails, },
+                { path: "details", name: "personal-details", component: DashboardHomepagePersonalDetails, },
+                { path: "update-password", name: "update-Password", component: DashboardHomepageUpdatePassword, },
             ] },
             { path: "/dashboard/appearance", name: "dashboard-appearance", component: DashboardAppearance, children:[
                 { path: "", name: "appearance-banner", component: DashboardHomepageBanner, },
                 { path: "section", name: "appearance-section", component: DashboardHomepageSection, },
             ] },
+            { path: "/dashboard/order", name: "dashboard-order", component: DashboardOrder, },
               
         ]},
         {

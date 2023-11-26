@@ -1,53 +1,4 @@
 
-.btn {
-  background: $text-900;
-  color: $white;
-  padding: 12px 20px 12px 20px;
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  line-height: 1.4rem;
-  letter-spacing: -0.00625rem;
-  margin: 0;
-
-  @include respond(tab-port) {
-    font-size: 0.875rem;
-    line-height: 1.2rem;
-  }
-
-  &:hover {
-    background: $text-800;
-  }
-}
-
-.form-input {
-  margin: 0.5rem 0;
-
-  input[type="email"],
-  input[type="text"] input[type="search"] {
-    width: 100%;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid $text-300;
-    background: $text-100;
-    box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
-    outline: none;
-    font-size: 0.875rem;
-    line-height: 1.2rem;
-    letter-spacing: -0.00625rem;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      border: 1px solid $text-400;
-    }
-
-    &:focus {
-      border: 1px solid $text-700;
-    }
-  }
-}
-
 .image_form{
   background: $text-200;
   padding:10px;
@@ -67,6 +18,8 @@
   width: 100vw;
   top: 0;
   left: 0;
+  background: rgb($text-900,.4);
+  z-index: 1;
 }
 
 ul{
@@ -78,29 +31,6 @@ ul{
     }
   }
 }
-
-
-// .input_form{
-//   position: relative;
-//   margin: 2rem 0;
-//   input,textarea{
-//     background-color: $text-200;
-//     border: 0;
-//     border-radius: 4px;
-//     outline: none;
-//     padding: 1.5rem 1rem .4rem 0.6rem;
-//   }
-//   label{
-//     position: absolute;
-//     top: 8px;
-//     left: 10px;
-//   }
-//   textarea{
-//     min-height: 135px;
-//     height: 100%;
-//     width: 100%;
-//   }
-// }
 
 .input_form{
   input,textarea{

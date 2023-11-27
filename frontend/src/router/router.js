@@ -16,6 +16,7 @@ import DashboardHomepageProfileAccount from "../components/dashboard/pages/profi
 import DashboardHomepagePersonalDetails from "../components/dashboard/pages/profile/personalDetails.vue"
 import DashboardHomepageUpdatePassword from "../components/dashboard/pages/profile/ChangePassword.vue"
 import DashboardOrder  from "../components/dashboard/pages/Order.vue"
+import DashboardOrderAdd  from "../components/dashboard/pages/order/AddOrder.vue"
 
 import Homepage from "../views/theme1/Homepage.vue"
 let sub_domain;
@@ -54,7 +55,8 @@ const router = createRouter({
                 { path: "", name: "appearance-banner", component: DashboardHomepageBanner, },
                 { path: "section", name: "appearance-section", component: DashboardHomepageSection, },
             ] },
-            { path: "/dashboard/order", name: "dashboard-order", component: DashboardOrder, },
+            { path: "/dashboard/order", name: "dashboard-order", component: DashboardOrder},
+             {path:"/dashboard/order/add", name:"add-order" , component:DashboardOrderAdd}
               
         ]},
         {

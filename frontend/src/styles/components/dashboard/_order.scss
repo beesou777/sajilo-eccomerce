@@ -24,14 +24,16 @@
         td {
           gap: 10px;
           button {
-            padding: 0.4rem 0.7rem;
-            color: $white;
+            padding: 0.2rem 0.9rem;
+            border-radius: 4px;
+            outline: none !important;
           }
           button:first-child {
+            color: $white;
             background: $primary-color;
           }
           button:last-child {
-            background: $text-400;
+            background: $text-300;
           }
         }
       }
@@ -52,6 +54,12 @@
     top: 0;
     right: 0;
     background: $text-200;
+    .text-end {
+      svg {
+        cursor: pointer;
+        transform: translate(-20px, 5px);
+      }
+    }
     .order-info {
       border-radius: 4px;
       line-height: 40px;
@@ -61,6 +69,11 @@
           th,
           td {
             height: 30px;
+            svg{
+              height: 15px;
+              width: 15px;
+              margin-left: 10px;
+            }
           }
         }
       }
@@ -75,8 +88,16 @@
     .orders {
       height: 100%;
       .order-data {
-        overflow-y: auto;
+        overflow-y: scroll;
         max-height: 200px;
+        scroll-behavior: smooth;
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: $text-300;
+          border-radius: 32px;
+        }
         .ordered-product {
           display: flex;
           align-items: center;
@@ -92,21 +113,100 @@
       }
     }
     .customer-details {
-      max-height: 250px;
+      max-height: 350px;
       height: 100%;
-      max-width: 380px;
+      max-width: 400px;
       width: 100%;
+      svg{
+        height: 15px;
+        width: 15px;
+      }
     }
   }
-
-  .delete-section{
+  .delete-section {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background: $white;
     align-items: self-end;
     padding: 2rem;
     z-index: 5;
+    border-radius: 4px;
+    .button-wrapper {
+      button:last-child {
+        background-color: $text-300;
+        border: 0;
+      }
+    }
+  }
+  .update-shipping_address {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $white;
+    align-items: self-end;
+    padding: 2rem;
+    z-index: 12;
+    border-radius: 4px;
+    form>.button-wrapper{
+      button:first-child{
+        background: $success;
+        border: 1px solid $success;
+      }
+      button:last-child{
+        background: $text-300;
+        border: 1px solid $text-300;
+      }
+    }
+  }
+
+  .update-overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background: rgb($text-900, 0.7);
+    z-index: 10;
+  }
+  .update-order-status{
+    max-width: 450px;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 1.5rem;
+    z-index: 999;
+    form{
+      .input_form{
+        select{
+          border: 2px solid $text-300;
+          border-radius: 4px;
+          outline: none;
+          padding:0.6rem;
+          width: 100%;
+          transition: .3s ease-in-out;
+          &:focus{
+            border: 2px solid $text-400;
+          }
+          &:hover{
+            border: 2px solid $text-400;
+          }
+        }
+      }
+      .button-wrapper{
+        button:first-child{
+          background: $success;
+          border: 1px solid $success;
+        }
+        button:last-child{
+          background: $text-300;
+          border: 1px solid $text-300;
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,19 @@
+.create-order-container {
+
+    .order-points{
+        .create-order {
+          background: $white;
+          align-items: self-end;
+          padding: 2rem;
+          z-index: 12;
+          border-radius: 4px;
+        }
+        .button-wrapper{
+          button{
+            background: $success;
+            border: 1px solid $success;
+          }
+        }
+    }
+  }
+  

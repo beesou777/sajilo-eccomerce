@@ -155,7 +155,7 @@ const updateUserDetails = async (req, res,next) => {
     const id = req.headers.user_id;
     const { store_name, first_name, last_name } = req.body;
     const user_details = await User.findByIdAndUpdate(
-      { _id: id },
+      id,
       {
         store_name,
         first_name,

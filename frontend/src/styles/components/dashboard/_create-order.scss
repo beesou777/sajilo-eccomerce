@@ -1,19 +1,97 @@
 .create-order-container {
-
-    .order-points{
-        .create-order {
-          background: $white;
-          align-items: self-end;
-          padding: 2rem;
-          z-index: 12;
-          border-radius: 4px;
+  .product-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgb($text-900, 0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
+  .add-product{
+    .products{
+      .img-wrapper{
+        max-width: 80px;
+        max-height: 80px;
+        img{
+          width: 100%;
         }
-        .button-wrapper{
-          button{
-            background: $success;
-            border: 1px solid $success;
-          }
-        }
+      }
     }
   }
-  
+  .product-model {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    border-radius: 4px;
+    max-width: 700px;
+    width: 100%;
+    .search-container {
+      input {
+        border: 1px solid $text-300;
+        padding: 0.5rem 1rem;
+        min-width: 500px;
+        border-radius: 4px;
+        outline: none;
+        width: 100%;
+      }
+      .button-wrapper{
+        button{
+          background: $success;
+          border: 1px solid $success-200;
+        }
+      }
+    }
+
+    .products {
+      transition: .3s;
+      .img-wrapper {
+        height: 65px;
+        width: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 100%;
+          max-width: 60px;
+          max-height: 60px;
+          object-fit: contain;
+        }
+      }
+      &:hover{
+        background: $text-300 !important;
+      }
+    }
+    .products:nth-child(even) {
+      transition: .3s;
+      background-color: $text-200;
+      border: 1px solid $text-200;
+    }
+    .products:nth-child(odd) {
+      transition: .3s;
+      background-color: $white;
+      border: 1px solid $white;
+    }
+    .active {
+      background: $text-300 !important;
+      border: 1px solid $text-300 !important;
+    }
+  }
+  .order-points {
+    .create-order {
+      background: $white;
+      align-items: self-end;
+      padding: 2rem;
+      z-index: 12;
+      border-radius: 4px;
+    }
+    .button-wrapper {
+      button {
+        background: $success;
+        border: 1px solid $success;
+      }
+    }
+  }
+}

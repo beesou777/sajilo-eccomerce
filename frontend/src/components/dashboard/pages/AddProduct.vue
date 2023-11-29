@@ -127,52 +127,52 @@
   </div>
 </template>
 
-<script setup>
-// imports
-import { ref, computed, onMounted } from 'vue';
-import { useProductStore } from '../../../store/products';
-// import { useRouter } from 'vue-router';
+// <script setup>
+// // imports
+// import { ref, computed, onMounted } from 'vue';
+// import { useProductStore } from '../../../store/Order.store';
+// // import { useRouter } from 'vue-router';
 
-const productStore = useProductStore()
-// variables
-const product_name = ref('');
-const product_description = ref("")
-const product_discount = ref("")
-const actual_price = ref("")
-const quantity = ref()
-const product_sku = ref("")
-const status = ref("")
-const product_category = ref()
-const files = ref(null)
+// const productStore = useProductStore()
+// // variables
+// const product_name = ref('');
+// const product_description = ref("")
+// const product_discount = ref("")
+// const actual_price = ref("")
+// const quantity = ref()
+// const product_sku = ref("")
+// const status = ref("")
+// const product_category = ref()
+// const files = ref(null)
 
-onMounted(async()=>{
-  await productStore.getCategories()
-  await productStore.getProduct()
-})
+// onMounted(async()=>{
+//   await productStore.getCategories()
+//   await productStore.getProduct()
+// })
 
-const handleFIleUpload = (event)=>{
-  const file = event.target.files[0]
-  files.value = file
-}
+// const handleFIleUpload = (event)=>{
+//   const file = event.target.files[0]
+//   files.value = file
+// }
 
-const product_ca =computed(()=>{
-  return productStore.categories ? productStore.categories : ""
-})
+// const product_ca =computed(()=>{
+//   return productStore.categories ? productStore.categories : ""
+// })
 
-const createProduct = async()=>{
-    const formdata = new FormData()
-    formdata.append("product_name",product_name.value)
-    formdata.append("product_description",product_description.value)
-    formdata.append("selling_price",product_discount.value)
-    formdata.append("actual_price",actual_price.value)
-    formdata.append("quantity",quantity.value)
-    formdata.append("product_sku",product_sku.value)
-    formdata.append("status",status.value)
-    formdata.append("product_category",product_category.value._id)
-    formdata.append("product_images",files.value)
-    await productStore.createProduct(formdata);
-}
-</script>
+// const createProduct = async()=>{
+//     const formdata = new FormData()
+//     formdata.append("product_name",product_name.value)
+//     formdata.append("product_description",product_description.value)
+//     formdata.append("selling_price",product_discount.value)
+//     formdata.append("actual_price",actual_price.value)
+//     formdata.append("quantity",quantity.value)
+//     formdata.append("product_sku",product_sku.value)
+//     formdata.append("status",status.value)
+//     formdata.append("product_category",product_category.value._id)
+//     formdata.append("product_images",files.value)
+//     await productStore.createProduct(formdata);
+// }
+// </script>
 
 <style scoped src="../../../styles/components/dashboard/_products.scss">
 

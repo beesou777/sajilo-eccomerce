@@ -48,34 +48,34 @@
   </div>
 </template>
 
-<script setup>
-import formData from "./FormData.vue"
-import { computed, onMounted, ref } from "vue";
-import { useProductStore } from "../../../store/products";
-const productStore = useProductStore();
+// <script setup>
+// import formData from "./FormData.vue"
+// import { computed, onMounted, ref } from "vue";
+// import { useProductStore } from "../../../store/Order.store";
+// const productStore = useProductStore();
 
-const name_1 = ref("");
-const name_2 = ref("");
-const name_3 = ref("");
+// const name_1 = ref("");
+// const name_2 = ref("");
+// const name_3 = ref("");
 
-onMounted(async () => {
-  await productStore.getHomepageSection();
-  name_1.value = productStore.homepage_section.section_1.name
-  name_2.value = productStore.homepage_section.section_2.name
-  name_3.value = productStore.homepage_section.section_3.name
-});
+// onMounted(async () => {
+//   await productStore.getHomepageSection();
+//   name_1.value = productStore.homepage_section.section_1.name
+//   name_2.value = productStore.homepage_section.section_2.name
+//   name_3.value = productStore.homepage_section.section_3.name
+// });
 
-const homepageSection = computed(() => {
-  return productStore.homepage_section;
-});
+// const homepageSection = computed(() => {
+//   return productStore.homepage_section;
+// });
 
-const editBanner = async () => {
-  const formdata = new FormData();
-  formdata.append("image", file.value);
-  formdata.append("heading", heading.value);
-  formdata.append("smallText", smallText.value);
-  formdata.append("buttonText", buttonText.value);
-  formdata.append("buttonLink", buttonLink.value);
-  await productStore.editHomepageBanner(formdata);
-};
-</script>
+// const editBanner = async () => {
+//   const formdata = new FormData();
+//   formdata.append("image", file.value);
+//   formdata.append("heading", heading.value);
+//   formdata.append("smallText", smallText.value);
+//   formdata.append("buttonText", buttonText.value);
+//   formdata.append("buttonLink", buttonLink.value);
+//   await productStore.editHomepageBanner(formdata);
+// };
+// </script>

@@ -19,7 +19,7 @@
 </template>
 <script setup>
 import { computed, onMounted } from 'vue';
-import { useAuthStore } from '../../../store/authentication';
+import { useAuthStore } from '@store/authentication';
 
 const authStore = useAuthStore()
 // const user_data = computed(()=>{
@@ -27,7 +27,7 @@ const authStore = useAuthStore()
 // })
 </script>
 <style lang="scss" scoped>
-@import "../../../styles/base/variable.scss";
+@import "@style/base/variable.scss";
 .home-section {
   .head-text {
     color: #f53d3d;

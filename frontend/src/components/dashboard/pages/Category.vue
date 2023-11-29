@@ -153,94 +153,94 @@
     </div>
   </div>
 </template>
-<script setup>
-import { computed, onMounted } from "vue";
-import { useProductStore } from "../../../store/products";
-// import { useAuthStore } from "../../../store/authentication";
-import { ref } from "vue";
-import router from "../../../router/router";
+// <script setup>
+// import { computed, onMounted } from "vue";
+// import { useProductStore } from "../../../store/Order.store";
+// // import { useAuthStore } from "../../../store/authentication";
+// import { ref } from "vue";
+// import router from "../../../router/router";
 
-// const authStore = useAuthStore();
-const productStore = useProductStore();
-const category_name = ref("");
-const file = ref(null);
-const edit_category_name = ref("");
-const edit_category_images = ref("");
-let isEditable = ref(false);
-let isloading = ref(false)
-let imageUrl = ref('')
-let file2 = ref(null)
-let categoryIds;
+// // const authStore = useAuthStore();
+// const productStore = useProductStore();
+// const category_name = ref("");
+// const file = ref(null);
+// const edit_category_name = ref("");
+// const edit_category_images = ref("");
+// let isEditable = ref(false);
+// let isloading = ref(false)
+// let imageUrl = ref('')
+// let file2 = ref(null)
+// let categoryIds;
 
-onMounted(async () => {
-  await productStore.getCategories();
-});
+// onMounted(async () => {
+//   await productStore.getCategories();
+// });
 
 
-const handleFileUpload = (event) => {
-  const file = event.target.files[0];
-  file2.value = file
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      imageUrl.value = reader.result;
-    }
-    reader.readAsDataURL(file);
-  }
-}
+// const handleFileUpload = (event) => {
+//   const file = event.target.files[0];
+//   file2.value = file
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = () => {
+//       imageUrl.value = reader.result;
+//     }
+//     reader.readAsDataURL(file);
+//   }
+// }
 
-const onFileChange = (event)=>{
-  file.value = event.target.files[0]
-}
+// const onFileChange = (event)=>{
+//   file.value = event.target.files[0]
+// }
 
-const addCategories = async () => {
-  const formdata = new FormData();
-  formdata.append("name", category_name.value);
-  formdata.append("image", file.value);
+// const addCategories = async () => {
+//   const formdata = new FormData();
+//   formdata.append("name", category_name.value);
+//   formdata.append("image", file.value);
 
-  try {
-    const res = await productStore.createCategories(formdata);
-    if (res.status === 200) {
-      await productStore.getCategories();
-      category_name.value = "";
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+//   try {
+//     const res = await productStore.createCategories(formdata);
+//     if (res.status === 200) {
+//       await productStore.getCategories();
+//       category_name.value = "";
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
 
-const deleteCategory = async (index) => {
-  const currentIndex = categories.value[index]._id;
-  await productStore.deleteCategories(currentIndex);
-};
+// const deleteCategory = async (index) => {
+//   const currentIndex = categories.value[index]._id;
+//   await productStore.deleteCategories(currentIndex);
+// };
 
-const showEditCategory = (index) => {
-  isEditable.value = !isEditable.value;
-  const categoryId = categories.value[index];
-  categoryIds = categoryId._id;
-  productStore.category_id = categoryId._id
-  edit_category_name.value = categoryId.name;
-  edit_category_images.value = categoryId.image;
-  isloading = false
-};
+// const showEditCategory = (index) => {
+//   isEditable.value = !isEditable.value;
+//   const categoryId = categories.value[index];
+//   categoryIds = categoryId._id;
+//   productStore.category_id = categoryId._id
+//   edit_category_name.value = categoryId.name;
+//   edit_category_images.value = categoryId.image;
+//   isloading = false
+// };
 
-const editCategory = async () => {
-  if(file2.value !== null){
-    const formdata = new FormData()
-    formdata.append("image",file2.value)
-    formdata.append("name",edit_category_name.value)
-    await productStore.editCategories(formdata);
-    isEditable.value = !isEditable.value
-    console.log(formdata)
-  }else{
-    const formdata = new FormData()
-    formdata.append("name",edit_category_name.value)
-    await productStore.editCategories(formdata)
-    isEditable.value = !isEditable.value
-  }
-};
+// const editCategory = async () => {
+//   if(file2.value !== null){
+//     const formdata = new FormData()
+//     formdata.append("image",file2.value)
+//     formdata.append("name",edit_category_name.value)
+//     await productStore.editCategories(formdata);
+//     isEditable.value = !isEditable.value
+//     console.log(formdata)
+//   }else{
+//     const formdata = new FormData()
+//     formdata.append("name",edit_category_name.value)
+//     await productStore.editCategories(formdata)
+//     isEditable.value = !isEditable.value
+//   }
+// };
 
-const categories = computed(() => {
-  return productStore.categories ? productStore.categories : "";
-});
-</script>
+// const categories = computed(() => {
+//   return productStore.categories ? productStore.categories : "";
+// });
+// </script>

@@ -120,5 +120,5 @@ const profileActive = (route) => {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../styles/components/dashboard/_user-profile.scss";
+@import "@style/components/dashboard/_user-profile.scss";
 </style>

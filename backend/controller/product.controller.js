@@ -1,5 +1,5 @@
 const Product = require("../model/product.model");
-const User = require("../model/user.model")
+const User = require("../model/user.model");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -21,7 +21,7 @@ const postProduct = async (req, res) => {
       status,
       product_category,
     } = req.body;
- 
+
     const file1 = req.files.product_images;
     const result1 = await cloudinary.uploader.upload(file1.tempFilePath);
 
@@ -29,7 +29,7 @@ const postProduct = async (req, res) => {
       return res.status(400).json({ error: "Please fill all forms" });
     }
     const createProduct = new Product({
-      user:req.headers.user_id,
+      user: req.headers.user_id,
       product_name,
       product_description,
       product_images: result1.url,
@@ -52,28 +52,33 @@ const postProduct = async (req, res) => {
 const getAllProducts = async (req, res) => {
   try {
     const currentUser = req.headers.user_id;
-    const products = await Product.find({user:currentUser}).select("-user")
+    const products = await Product.find({ user: currentUser })
+      .select("-user")
       .populate({
         path: "product_category",
         select: "name image",
-      })
-      if(!products){
-        return res.status(404).json({success:true,message:"product not found"})
-      }
-      res.status(200).json({success:true,products})
+      });
+    if (!products) {
+      return res
+        .status(404)
+        .json({ success: true, message: "product not found" });
+    }
+    res.status(200).json({ success: true, products });
   } catch (error) {
     console.log("Error fetching products", error);
     res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
 const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id).populate({
-      path:"product_category",
-      select:"-user"
-    }).select("-user")
+    const product = await Product.findById(id)
+      .populate({
+        path: "product_category",
+        select: "-user",
+      })
+      .select("-user");
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
@@ -82,7 +87,7 @@ const getProductById = async (req, res) => {
     console.log("Error fetching product", error);
     res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
 const updateProductById = async (req, res) => {
   const { id } = req.params;
@@ -116,7 +121,7 @@ const updateProductById = async (req, res) => {
     console.log("Error updating product", error);
     res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
@@ -128,25 +133,44 @@ const deleteProduct = async (req, res) => {
     console.log("Error deleting product", error);
     res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
-const getSubDomainProduct = async (req,res)=>{
+const getSubDomainProduct = async (req, res) => {
   try {
-    const getSubDomain = req.params.id
-    const getUser = await User.findOne({sub_domain:getSubDomain})
-    
-    if(!getUser){
-      return res.status(404).json({message:"page not found"})
+    const getSubDomain = req.params.id;
+    const getUser = await User.findOne({ sub_domain: getSubDomain });
+
+    if (!getUser) {
+      return res.status(404).json({ message: "page not found" });
     }
-    const product = await Product.find({user:getUser})
-    if(!product){
-      return res.status(404).json({message:"product not found"})
+    const product = await Product.find({ user: getUser });
+    if (!product) {
+      return res.status(404).json({ message: "product not found" });
     }
-    return res.status(200).json({product})
+    return res.status(200).json({ product });
   } catch (error) {
-    res.status(500).json({message:"internal server error"})
+    res.status(500).json({ message: "internal server error" });
   }
-}
+};
+
+const searchProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id)
+      .populate({
+        path: "product_category",
+        select: "-user",
+      })
+      .select("-user");
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.status(200).json({ product });
+  } catch (error) {
+    console.log("Error fetching product", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 module.exports = {
   postProduct,
@@ -154,5 +178,6 @@ module.exports = {
   getProductById,
   updateProductById,
   deleteProduct,
-  getSubDomainProduct
+  getSubDomainProduct,
+  searchProduct,
 };

@@ -54,14 +54,14 @@ const addOrderItems = async (req, res, next) => {
       tax_price: (13 / 100) * total_price,
       final_price: new_final_price,
       order_status: "Pending",
-      payment_status:'Unpaid'
+      payment_status: "Unpaid",
     });
     await order.save();
 
-    return res.status(200).json({ order });
+    return res.status(200).json({success:ture, order });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
+    next({ message: "Internal server error" });
   }
 };
 
@@ -82,11 +82,12 @@ const getAllOrderItems = async (req, res, next) => {
         },
       });
     if (!order) {
-      res.status(404).json({ message: "order not found please order" });
+      res.status(404);
+      return next({ message: "order not found please order" });
     }
     res.status(200).json({ success: true, order });
   } catch (error) {
-    return res.status(500).json({ message: "internal server error" });
+    next({ message: "internal server error" });
   }
 };
 
@@ -107,11 +108,14 @@ const getOrderById = async (req, res, next) => {
         },
       });
     if (!order) {
-      return res.status(404).json({ message: "order not found" });
+      res.status(404);
+      return next({ message: "order not found" });
     }
     res.status(200).json({ success: true, order });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    next({
+      message: "Internal server error",
+    });
   }
 };
 
@@ -119,10 +123,10 @@ const updateShippingAddress = async (req, res, next) => {
   try {
     const id = req.params.id;
     const { address, city, tole, name, country, email, phone } = req.body;
-    const order = await Order.findOneAndUpdate(
+    const order = await Order.findByIdAndUpdate(
       { _id: id },
       {
-        shippingAddress: {
+        customer_details: {
           address,
           city,
           tole,
@@ -148,7 +152,9 @@ const updateShippingAddress = async (req, res, next) => {
       });
     res.status(200).json({ success: true, order });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    next({
+      message: "internal server error",
+    });
   }
 };
 
@@ -157,15 +163,16 @@ const deleteOrderById = async (req, res, next) => {
     const id = req.params.id;
     const deleteOrder = await Order.findOneAndDelete({ _id: id });
     if (!deleteOrder) {
-      return res
-        .status(400)
-        .json({ message: "some error occur while deleting order" });
+      res.status(400);
+      return next({ message: "some error occur while deleting order" });
     }
     res
       .status(200)
       .json({ success: true, message: "Order deleted successfully" });
   } catch (error) {
-    res.status(500).json("internal server error");
+    next({
+      message:"Internal Server error"
+    });
   }
 };
 
@@ -173,7 +180,7 @@ const orderStatus = async (req, res, next) => {
   try {
     const id = req.params.id;
     const { order_status, payment_status } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     if (!order_status || !payment_status) {
       res.status(400);
       return next({

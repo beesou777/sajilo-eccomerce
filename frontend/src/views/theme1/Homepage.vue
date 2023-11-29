@@ -225,19 +225,19 @@
   </div>
 </template>
 
-<script setup>
-import { computed, onMounted, ref } from "vue";
-import { useProductStore } from "../../store/products";
-const productStore = useProductStore();
+// <script setup>
+// import { computed, onMounted, ref } from "vue";
+// import { useProductStore } from "../../store/Order.store";
+// const productStore = useProductStore();
 
-onMounted(async () => {
-  await productStore.getSubDomainProduct();
-  await productStore.getHomepageBanner()
-});
+// onMounted(async () => {
+//   await productStore.getSubDomainProduct();
+//   await productStore.getHomepageBanner()
+// });
 
-const homepageData = computed(()=>{
-  return productStore.homepageBanner ? productStore.homepageBanner : ""
-})
-</script>
-<style scoped src="../../styles/components/theme1/_home-page.scss">
-</style>
+// const homepageData = computed(()=>{
+//   return productStore.homepageBanner ? productStore.homepageBanner : ""
+// })
+// </script>
+// <style scoped src="../../styles/components/theme1/_home-page.scss">
+// </style>

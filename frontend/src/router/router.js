@@ -1,22 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from "../components/customer/Login.vue"
-import Register from "../components/customer/Register.vue"
+
 
 // dashboard
-import DashboardMain from "../components/dashboard/DashboardMain.vue"
-import DashboardHome from "../components/dashboard/pages/Home.vue"
-import DashboardCategory from "../components/dashboard/pages/Category.vue"
-import DashboardAddProduct from "../components/dashboard/pages/AddProduct.vue"
-import DashboardProduct from "../components/dashboard/pages/DisplayProduct.vue"
-import DashboardAppearance from "../components/dashboard/pages/Appearance.vue"
-import DashboardHomepageBanner from "../components/dashboard/pages/HomapageBannerScetion.vue"
-import DashboardHomepageSection from "../components/dashboard/pages/HomepageSection.vue"
-import DashboardHomepageProfile from "../components/dashboard/pages/Profile.vue"
-import DashboardHomepageProfileAccount from "../components/dashboard/pages/profile/profileAccount.vue"
-import DashboardHomepagePersonalDetails from "../components/dashboard/pages/profile/personalDetails.vue"
-import DashboardHomepageUpdatePassword from "../components/dashboard/pages/profile/ChangePassword.vue"
-import DashboardOrder  from "../components/dashboard/pages/Order.vue"
-import DashboardOrderAdd  from "../components/dashboard/pages/order/AddOrder.vue"
+import {
+    DashboardAddProduct,
+    DashboardAppearance,
+    DashboardCategory,
+    DashboardHome,
+    DashboardHomepageBanner,
+    DashboardHomepagePersonalDetails,
+    DashboardHomepageProfile,
+    DashboardHomepageProfileAccount,
+    DashboardHomepageSection,
+    DashboardHomepageUpdatePassword,
+    DashboardMain,
+    DashboardOrder,
+    DashboardOrderAdd,
+    DashboardProduct,
+    Login,
+    Register
+} from "@utility/index"
+
 
 import Homepage from "../views/theme1/Homepage.vue"
 let sub_domain;

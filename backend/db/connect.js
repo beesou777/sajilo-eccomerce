@@ -5,7 +5,7 @@ const connect = (uri) =>{
     return mongoose.connect(uri,{
         useNewUrlParser:true,
         useUnifiedTopology:true,
-        socketTimeoutMS:30000
+        socketTimeoutMS:30000 
     })
 }
 

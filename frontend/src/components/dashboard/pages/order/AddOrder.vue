@@ -1,15 +1,65 @@
 <template>
     <div class="create-order-container container">
         <p class="h3 fw-normal">Orders</p>
-        
+
+        <!-- add product section -->
         <div class="add-product bg-white mb-4 p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <p class="h4">Products</p>
                 <div class="button-wrapper">
-                    <button>Select Product</button>
+                    <button @click="isAddProductClicked = true">Select Product</button>
+                </div>
+            </div>
+            <div class="products d-flex align-items-center justify-content-between" v-for="(data, index) in displayProduct"
+                :key="index">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="img-wrapper">
+                        <img :src="data.product.product_images" alt="image">
+                    </div>
+                    <div class="d-flex flex-column gap-1">
+                        <p class="product-name body-1 fw-medium">{{ data.product.product_name }}</p>
+                        <div class="d-flex gap-3">
+                            <p class="price">{{ data.product.selling_price }}</p>
+                            <select v-model="data.quantity">
+                                <option selected>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <p class="total_price fw-semibold">{{ data.product.selling_price * data.quantity }}</p>
+            </div>
+        </div>
+        <div class="product-overlay" v-if="isAddProductClicked" @click="isAddProductClicked = false"></div>
+        <div class="product-model bg-white p-3" v-if="isAddProductClicked">
+            <div class="search-container mb-4 d-flex justify-content-between align-items-center">
+                <div class="form-input">
+                    <input type="text" placeholder="Search or product">
+                </div>
+                <div class="button-wrapper">
+                    <button @click="addProduct">add product</button>
+                </div>
+            </div>
+            <div class="products d-flex align-items-center " :class="{ 'active': index == activeSelectedProduct }"
+                v-for="(data, index) in fetchProduct" :key="index" @click="selectProduct(index)">
+                <div class="img-wrapper">
+                    <img :src="data.product_images" alt="">
+                </div>
+                <div class="d-flex flex-column ms-4">
+                    <p class="h5">{{ data.product_name }}</p>
+                    <p class="text-muted">{{ data.selling_price }}</p>
                 </div>
             </div>
         </div>
+        <!-- add product section -->
         <!-- update shipping address -->
         <div class="order-points row">
             <div class="col-md-7">
@@ -45,7 +95,7 @@
                                 <label for="tole" class="small fw-medium">tole</label>
                                 <input type="text" id="tole" v-model="tole" />
                             </div>
-                        </div>                                             
+                        </div>
                         <div class="input_form w-100">
                             <label for="city" class="small fw-medium">City</label>
                             <input type="text" id="City" v-model="city" />
@@ -68,23 +118,21 @@
                     </form>
                 </div>
                 <div class="button-wrapper mt-3 text-end">
-                    <button class="fw-semibold" @click="updateShippingAddress">Create Order</button>
+                    <button class="fw-semibold" @click="createOrder">Create Order</button>
                 </div>
             </div>
 
         </div>
         <!-- end of update shipping -->
-
-
     </div>
 </template>
 
 <script setup>
+import {useAuthStore,useOrderStore,useProductStore} from '@utility'
 import { computed, onMounted, ref } from 'vue';
-import { useAuthStore } from '../../../../store/authentication';
-import { useProductStore } from '../../../../store/products';
-import router from '../../../../router/router';
+
 const authStore = useAuthStore()
+const orderStore = useOrderStore()
 const productStore = useProductStore()
 
 const address = ref("")
@@ -94,18 +142,78 @@ const tole = ref("")
 const name = ref("")
 const email = ref("")
 const phone = ref()
+
 const delivery_charges = ref(0.0)
 const discount_amount = ref(0.0)
+
+const isAddProductClicked = ref(false)
+
+const productsArray = ref([])
+const selectedProduct = ref(null)
+const activeSelectedProduct = ref(null)
+
 
 onMounted(async () => {
     const uuid = authStore.uuid
     productStore.uuid = uuid
-    await productStore.getOrderData()
+    orderStore.uuid = uuid
+    await productStore.getProduct()
 })
+
+const fetchProduct = computed(() => {
+    return productStore?.product
+})
+
+const selectProduct = (index) => {
+    const id = productStore.product[index]
+    selectedProduct.value = selectedProduct.value === index ? null : id
+    activeSelectedProduct.value = activeSelectedProduct.value === index ? null : index
+}
+
+const addProduct = () => {
+    if (!productsArray.value.includes(selectedProduct.value)) {
+        const newProduct = {
+            product: selectedProduct.value,
+            quantity: 1
+        }
+        productsArray.value.push(newProduct)
+        isAddProductClicked.value = false
+    }
+}
+const displayProduct = computed(() => {
+    return productsArray.value
+})
+
+const createOrder = async () => {
+    const orderItems = productsArray.value.map(product => ({
+        product: product.product._id, // Assuming `product` contains the product id
+        quantity: product.quantity
+    }));
+
+    const customerDetails = {
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+        address: address.value,
+        country: country.value,
+        tole: tole.value,
+        city: city.value
+    };
+
+    const data = {
+        orderItems,
+        customer_details: customerDetails
+    };
+
+    await orderStore.createOrder(data)
+
+    // Now you can send the `data` object to your API or perform further actions
+};
+
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../styles/base/variable.scss";
-@import "../../../../styles/base/utility.scss";
-@import "../../../../styles/components/dashboard/create-order";
+@import "@style/base/variable.scss";
+@import "@style/base/utility.scss";
+@import "@style/components/dashboard/create-order";
 </style>

@@ -11,10 +11,11 @@
 <script setup>
 import SideNavbar from "./navbars/SideNavbar.vue";
 import Navbar from "./navbars/Navbar.vue"
-import { useAuthStore } from "../../store/authentication";
 import { onMounted } from "vue";
-import router from "../../router/router";
+import {router,useAuthStore} from "@utility/index";
 import NavbarVue from "./navbars/Navbar.vue";
+
+
 const authStore = useAuthStore();
 
 

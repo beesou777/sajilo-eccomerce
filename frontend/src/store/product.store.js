@@ -4,9 +4,9 @@ import axios from "../utility/axios";
 export const useProductStore = defineStore("product", {
   state: () => ({
     uuid:null,
-    order:null,
-    order_id:null,
-    single_order:null
+    product:null,
+    product_id:null,
+    single_product:null
   }),
   actions: {
 
@@ -83,18 +83,20 @@ export const useProductStore = defineStore("product", {
     //   }
     // },
 
-    // async getProduct() {
-    //   try {
-    //     const res = await axios.get("get-product",{
-    //       headers:{
-    //         "user_id":this.user_id
-    //       }
-    //     });
-    //     this.products = res.data.products
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
+    async getProduct() {
+      try {
+        const res = await axios.get("product",{
+          headers:{
+            user_id:this.uuid
+          }
+        });
+       if(res.status == 200){
+        this.product = res.data.products
+       }
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     // async getSubDomainProduct(){
     //   const sub_domain = window.location.pathname.replace("/","").split("/")[0]
@@ -150,76 +152,8 @@ export const useProductStore = defineStore("product", {
     //     this.getCategories();
     //   }
     // }
-    async getOrderData (){
-      try {
-        const res = await axios.get("/order",{
-          headers:{
-            user_id: this.uuid || null
-          }
-        })
-        if(res.status = 200){
-          this.order = res.data.order
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
 
-    async getSingleOrder(id){
-      try {
-        const res = await axios.get(`order/${id}`)
-        if(res.status == 200){
-          this.single_order = res.data.order
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
-
-    async updateShippingAddress(data){
-      try {
-        const res = await axios.patch(`order/shipping/${this.order_id}`,{
-            address:data.address,
-            city:data.city,
-            tole:data.tole,
-            country:data.country,
-            name:data.name
-        })
-        if(res.status == 200){
-          this.single_order = res.data.order
-          return res
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
-
-    async deleteOrder(){
-      try {
-        const res = await axios.delete(`order/${this.order_id}`)
-        if(res.status == 200){
-          this.getOrderData()
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
-
-    async updateOrderStatus(data){
-      try {
-        const res = await axios.patch(`order/status/${this.order_id}`,{
-            order_status:data.order_status,
-            payment_status:data.payment_status
-        })
-        if(res.status == 200){
-          this.single_order = res.data.order
-          this.getOrderData()
-          return res
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
+ 
 
 
 

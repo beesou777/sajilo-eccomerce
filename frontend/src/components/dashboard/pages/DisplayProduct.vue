@@ -70,21 +70,21 @@
       </div>
     </div>
 </template>
-  <script setup>
-import { computed, onMounted } from "vue";
-import { useProductStore } from "../../../store/products";
-import { ref } from "vue";
+// <script setup>
+// import { computed, onMounted } from "vue";
+// import { useProductStore } from "../../../store/Order.store";
+// import { ref } from "vue";
 
-// let count = ref(1)
-// const productStore = useProductStore();
+// // let count = ref(1)
+// // const productStore = useProductStore();
 
-// onMounted(async () => {
-//   await productStore.getProduct();
-// });
+// // onMounted(async () => {
+// //   await productStore.getProduct();
+// // });
 
 
 
-// const product = computed(() => {
-//   return productStore.products ? productStore.products : "";
-// });
-</script>
+// // const product = computed(() => {
+// //   return productStore.products ? productStore.products : "";
+// // });
+// </script>

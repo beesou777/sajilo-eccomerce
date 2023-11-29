@@ -83,7 +83,7 @@
 
 <script setup>
 import { computed } from "vue";
-import { useAuthStore } from "../../../../store/authentication";
+import { useAuthStore } from "@store/authentication";
 const authStore = useAuthStore();
 
 const profileData = computed(() => {
@@ -91,5 +91,5 @@ const profileData = computed(() => {
 });
 </script>
 <style lang="scss" scoped>
-@import "../../../../styles/components/dashboard/_user-profile.scss";
+@import "@style/components/dashboard/_user-profile.scss";
 </style>

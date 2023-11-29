@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 <tr v-for="(data, index) in fetchAllOrder" :key="index">
-                    <td class="p-2">{{ data?.user?.first_name }} {{ data?.user?.last_name }}</td>
+                    <td class="p-2">{{ data?.customer_details?.name }}</td>
                     <td class="p-2">{{ data?.final_price }}</td>
                     <td class="p-2 fw-medium" :class="{
                         'text-danger': data?.payment_status == 'Unpaid',
@@ -47,7 +47,7 @@
                         {{ data?.order_status }}</td>
                     <td class="p-2">{{ data?.payment_method }}</td>
                     <td class="p-2">{{ data?.createdAt.slice(0, 10) }}</td>
-                    <td class="p-2 d-flex">
+                    <td class="p-2 d-flex align-items-center justify-content-center">
                         <button class="btn" @click="deleteId(index)">Delete</button>
                         <button class="btn" @click="showDetails(index)">Details</button>
                     </td>
@@ -191,6 +191,16 @@
             <form @submit.prevent>
                 <div class="d-flex gap-3 my-2">
                     <div class="input_form w-100">
+                        <label for="name" class="small fw-medium">Full Name</label>
+                        <input type="text" id="name" v-model="name" />
+                    </div>
+                    <div class="input_form w-100">
+                        <label for="email" class="small fw-medium">E-mail</label>
+                        <input type="email" id="email" v-model="email" />
+                    </div>
+                </div>
+                <div class="d-flex gap-3 my-2">
+                    <div class="input_form w-100">
                         <label for="address" class="small fw-medium">Address</label>
                         <input type="text" id="address" v-model="address" />
                     </div>
@@ -201,12 +211,12 @@
                 </div>
                 <div class="d-flex gap-3 my-2">
                     <div class="input_form w-100">
-                        <label for="postal_code" class="small fw-medium">Postal code</label>
-                        <input type="text" id="postal_code" v-model="name" />
-                    </div>
-                    <div class="input_form w-100">
                         <label for="tole" class="small fw-medium">Tole</label>
                         <input type="text" id="tole" v-model="tole" />
+                    </div>
+                    <div class="input_form w-100">
+                        <label for="phone" class="small fw-medium">phone</label>
+                        <input type="number" id="phone" v-model="phone" />
                     </div>
                 </div>
                 <div class="input_form w-100">
@@ -225,24 +235,24 @@
         <div class="update-order-status bg-white" v-if="isStatus">
             <p class="h3 fw-semibold pb-2">Update Status</p>
             <form @submit.prevent>
-                    <div class="input_form w-100">
-                        <label for="address" class="small fw-medium">Order Status</label>
-                        <select class="w-100" v-model="order_status">
-                            <option>Pending</option>
-                            <option>Delivered</option>
-                            <option>Cancelled</option>
-                            <option>Draft</option>
-                            <option>Returned</option>
-                        </select>
-                    </div>
-                    <div class="input_form w-100">
-                        <label for="address" class="small fw-medium">Payment Status</label>
-                        <select class="w-100" v-model="payment_status">
-                            <option>Unpaid</option>
-                            <option>Paid</option>
-                        </select>
-                    </div>
-               
+                <div class="input_form w-100">
+                    <label for="address" class="small fw-medium">Order Status</label>
+                    <select class="w-100" v-model="order_status">
+                        <option>Pending</option>
+                        <option>Delivered</option>
+                        <option>Cancelled</option>
+                        <option>Draft</option>
+                        <option>Returned</option>
+                    </select>
+                </div>
+                <div class="input_form w-100">
+                    <label for="address" class="small fw-medium">Payment Status</label>
+                    <select class="w-100" v-model="payment_status">
+                        <option>Unpaid</option>
+                        <option>Paid</option>
+                    </select>
+                </div>
+
                 <div class="button-wrapper mt-3 d-flex gap-3">
                     <button class="w-100 fw-semibold" @click="updateStatus">Update</button>
                     <button class="w-100 fw-semibold text-300" @click="isStatus = false">Cancel</button>
@@ -256,11 +266,11 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import { useAuthStore } from '../../../store/authentication';
-import { useProductStore } from '../../../store/products';
-import router from '../../../router/router';
+import {useAuthStore,useOrderStore,router} from '@utility'
+
+
 const authStore = useAuthStore()
-const productStore = useProductStore()
+const orderStore = useOrderStore()
 
 const isDetailsShown = ref(false)
 const isDeleteShown = ref(false)
@@ -272,6 +282,8 @@ const city = ref("")
 const country = ref("")
 const tole = ref("")
 const name = ref("")
+const phone = ref()
+const email = ref("")
 
 const search = ref("")
 
@@ -280,45 +292,44 @@ const order_status = ref("")
 
 onMounted(async () => {
     const uuid = authStore.uuid
-    productStore.uuid = uuid
-    await productStore.getOrderData()
+    orderStore.uuid = uuid
+    await orderStore.getOrderData()
 })
 
 const fetchAllOrder = computed(() => {
-    return productStore?.order
+    return orderStore?.order
 })
 
 // @desc send id 
 const showDetails = async (index) => {
-    const order = productStore.order[index]._id
-    productStore.order_id = order
-    await productStore.getSingleOrder(order)
-    if (productStore.single_order !== null) {
+    const order = orderStore.order[index]._id
+    orderStore.order_id = order
+    await orderStore.getSingleOrder(order)
+    if (orderStore.single_order !== null) {
         isDetailsShown.value = true
     }
 }
 
 // @desc it will send it to store wont delete
 const deleteId = (index) => {
-    const order_id = productStore?.order[index]._id
-    productStore.order_id = order_id
-    if (productStore.order_id !== null) {
+    const order_id = orderStore?.order[index]._id
+    orderStore.order_id = order_id
+    if (orderStore.order_id !== null) {
         isDeleteShown.value = true
     }
 }
 
 const deleteOrder = async () => {
-    await productStore.deleteOrder()
+    await orderStore.deleteOrder()
     isDeleteShown.value = false
 }
 
 const singleOrder = computed(() => {
-    return productStore?.single_order
+    return orderStore?.single_order
 })
 
-
 const removerId = () => {
-    productStore.order_id = null
+    orderStore.order_id = null
     isDeleteShown.value = false
     isDetailsShown.value = false
 }
@@ -332,11 +343,13 @@ const showOverlay = () => {
 
 const showShippingDetails = () => {
     isEditShippingAddress.value = true
-    address.value = productStore?.single_order?.customer_details?.address
-    city.value = productStore?.single_order?.customer_details?.city
-    name.value = productStore?.single_order?.customer_details?.name
-    tole.value = productStore?.single_order?.customer_details?.tole
-    country.value = productStore?.single_order?.customer_details?.country
+    address.value = orderStore?.single_order?.customer_details?.address
+    city.value = orderStore?.single_order?.customer_details?.city
+    name.value = orderStore?.single_order?.customer_details?.name
+    tole.value = orderStore?.single_order?.customer_details?.tole
+    country.value = orderStore?.single_order?.customer_details?.country
+    email.value = orderStore?.single_order?.customer_details?.email
+    phone.value = orderStore?.single_order?.customer_details?.phone
 }
 
 const updateShippingAddress = async () => {
@@ -345,40 +358,44 @@ const updateShippingAddress = async () => {
         city: city.value,
         tole: tole.value,
         name: name.value,
-        country: country.value
+        country: country.value,
+        phone: phone.value,
+        email: email.value
     }
-    const res = await productStore.updateShippingAddress(data)
+    const res = await orderStore.updateShippingAddress(data)
     if (res.status == 200) {
         isEditShippingAddress.value = false
     }
 
 }
 
-const showStatus = ()=>{
+const showStatus = () => {
     isStatus.value = true
-    order_status.value = productStore?.single_order?.order_status
-    payment_status.value = productStore?.single_order?.payment_status
+    order_status.value = orderStore?.single_order?.order_status
+    payment_status.value = orderStore?.single_order?.payment_status
 }
 
-const removeOverlay = ()=>{
+const removeOverlay = () => {
     isStatus.value = false,
-    isEditShippingAddress.value = false
+        isEditShippingAddress.value = false
 }
 
-const updateStatus =async()=>{
+const updateStatus = async () => {
     const data = {
-        order_status:order_status.value,
-        payment_status:payment_status.value
+        order_status: order_status.value,
+        payment_status: payment_status.value
     }
     console.log(data)
-    const res = await productStore.updateOrderStatus(data)
-    if(res.status == 200){
+    const res = await orderStore.updateOrderStatus(data)
+    if (res.status == 200) {
         isStatus.value = false
     }
 }
+
 </script>
 
 <style lang="scss" scoped>
-@import "../../../styles/base/variable.scss";
-@import "../../../styles/base/utility.scss";
-@import "../../../styles/components/dashboard/order";</style>
+@import "@style/base/variable.scss";
+@import "@style/base/utility.scss";
+@import "@style/components/dashboard/order";
+</style>

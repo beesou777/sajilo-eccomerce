@@ -19,15 +19,15 @@
         </div>
     </div>
 </template>
-<script setup>
-import { onMounted } from 'vue';
-import { useProductStore } from '../../../store/products';
+// <script setup>
+// import { onMounted } from 'vue';
+// import { useProductStore } from '../../../store/Order.store';
 
-// const productStore = useProductStore()
+// // const productStore = useProductStore()
 
 
-// onMounted(async()=>{
-//     await productStore.getHomepageBanner()
-// })
+// // onMounted(async()=>{
+// //     await productStore.getHomepageBanner()
+// // })
 
-</script>
+// </script>

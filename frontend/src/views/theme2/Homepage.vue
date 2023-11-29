@@ -22,9 +22,9 @@
 </div>
   </template>
   
-  <script setup>
+  <!-- <script setup>
   import { onMounted, ref } from "vue";
-  import { useProductStore } from "../../store/products";
+  import { useProductStore } from "../../store/Order.store";
   const productStore = useProductStore();
   
   onMounted(async () => {
@@ -32,4 +32,4 @@
   });
   </script>
   <style scoped src="../../styles/components/theme2/_home-page.scss">
-  </style>
+  </style> -->

@@ -46,8 +46,7 @@
 </template>
  <script setup>
 import { ref} from "vue";
-import router from "../../../../router/router";
-import { useAuthStore } from "../../../../store/authentication";
+import { useAuthStore } from "@store/authentication";
 const authStore = useAuthStore();
 const current_password = ref("");
 const new_password = ref("");
@@ -70,5 +69,5 @@ const updatePassword = async() => {
 };
 </script>
     <style lang="scss" scoped>
-@import "../../../../styles/components/dashboard/_user-profile.scss";
+@import "@style/components/dashboard/_user-profile.scss";
 </style>

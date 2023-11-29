@@ -31,7 +31,7 @@
 </template>
 <script setup>
   import { ref,onMounted } from 'vue';
-import { useAuthStore } from '../../../../store/authentication';
+import { useAuthStore } from '@store/authentication';
   const authStore = useAuthStore()
   const store_name = ref("")
   const first_name = ref("")
@@ -57,5 +57,5 @@ import { useAuthStore } from '../../../../store/authentication';
 
 </script>
   <style lang="scss" scoped>
-@import "../../../../styles/components/dashboard/_user-profile.scss";
+@import "@style/components/dashboard/_user-profile.scss";
 </style>

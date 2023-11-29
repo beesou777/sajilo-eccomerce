@@ -52,13 +52,31 @@ const postProduct = async (req, res) => {
 const getAllProducts = async (req, res) => {
   try {
     const currentUser = req.headers.user_id;
-    const products = await Product.find({ user: currentUser })
+    const keyword = req.query.search
+    ?{
+      $or:[
+        {
+          product_name:{
+            $regex:req.query.search.trim(),
+            $options:"i"
+          }
+        },
+        {
+          product_sku:{
+            $regex:req.query.search.trim(),
+            $options:"i"
+          }
+        }
+      ]
+    } 
+    : {};
+    const products = await Product.find({ user: currentUser,...keyword })
       .select("-user")
       .populate({
         path: "product_category",
         select: "name image",
       });
-    if (!products) {
+    if (!products || products.length == 0) {
       return res
         .status(404)
         .json({ success: true, message: "product not found" });
@@ -153,24 +171,7 @@ const getSubDomainProduct = async (req, res) => {
   }
 };
 
-const searchProduct = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const product = await Product.findById(id)
-      .populate({
-        path: "product_category",
-        select: "-user",
-      })
-      .select("-user");
-    if (!product) {
-      return res.status(404).json({ error: "Product not found" });
-    }
-    res.status(200).json({ product });
-  } catch (error) {
-    console.log("Error fetching product", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
+
 
 module.exports = {
   postProduct,
@@ -178,6 +179,5 @@ module.exports = {
   getProductById,
   updateProductById,
   deleteProduct,
-  getSubDomainProduct,
-  searchProduct,
+  getSubDomainProduct
 };

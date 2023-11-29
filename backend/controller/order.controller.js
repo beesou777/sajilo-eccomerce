@@ -58,7 +58,7 @@ const addOrderItems = async (req, res, next) => {
     });
     await order.save();
 
-    return res.status(200).json({success:ture, order });
+    return res.status(200).json({success:true, order });
   } catch (error) {
     console.error(error);
     next({ message: "Internal server error" });
@@ -68,7 +68,25 @@ const addOrderItems = async (req, res, next) => {
 const getAllOrderItems = async (req, res, next) => {
   try {
     const id = req.headers.user_id;
-    const order = await Order.find({ user: id })
+    const keyword = req.query.search
+    ?{
+      $or:[
+        {
+          "customer_details.email":{
+            $regex:req.query.search.trim(),
+            $options:"i"
+          }
+        },
+        {
+          "customer_details.name":{
+            $regex:req.query.search.trim(),
+            $options:"i"
+          }
+        }
+      ]
+    } 
+    : {};
+    const order = await Order.find({ user: id,...keyword })
       .populate({
         path: "user",
         select: "-password",

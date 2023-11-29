@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <p class="h4">Products</p>
                 <div class="button-wrapper">
-                    <button @click="isAddProductClicked = true">Select Product</button>
+                    <button @click="focusInput">Select Product</button>
                 </div>
             </div>
             <div class="products d-flex align-items-center justify-content-between" v-for="(data, index) in displayProduct"
@@ -42,7 +42,8 @@
         <div class="product-model bg-white p-3" v-if="isAddProductClicked">
             <div class="search-container mb-4 d-flex justify-content-between align-items-center">
                 <div class="form-input">
-                    <input type="text" placeholder="Search or product">
+                    <input type="search" class="search-input flex-grow-1 pl-3" v-model="searchQuery"
+                        @input="onInputChange($event.target.value)" @click="focusInput" />
                 </div>
                 <div class="button-wrapper">
                     <button @click="addProduct">add product</button>
@@ -128,13 +129,16 @@
 </template>
 
 <script setup>
-import {useAuthStore,useOrderStore,useProductStore} from '@utility'
+// imports
+import { useAuthStore, useOrderStore, useProductStore } from '@utility'
 import { computed, onMounted, ref } from 'vue';
 
+// stores
 const authStore = useAuthStore()
 const orderStore = useOrderStore()
 const productStore = useProductStore()
 
+// data
 const address = ref("")
 const city = ref("")
 const country = ref("")
@@ -142,30 +146,38 @@ const tole = ref("")
 const name = ref("")
 const email = ref("")
 const phone = ref()
-
 const delivery_charges = ref(0.0)
 const discount_amount = ref(0.0)
-
-const isAddProductClicked = ref(false)
-
+const searchQuery = ref("")
 const productsArray = ref([])
 const selectedProduct = ref(null)
 const activeSelectedProduct = ref(null)
+const debounceTimer = ref(null)
+// boolean data
+const isAddProductClicked = ref(false)
+const showResults = ref(false)
+const isLoading = ref(true)
 
-
+// mounted
 onMounted(async () => {
     const uuid = authStore.uuid
     productStore.uuid = uuid
     orderStore.uuid = uuid
-    await productStore.getProduct()
 })
 
+
+// computed
 const fetchProduct = computed(() => {
-    return productStore?.product
+    return productStore?.search_product
 })
 
+const displayProduct = computed(() => {
+    return productsArray.value
+})
+
+// methods
 const selectProduct = (index) => {
-    const id = productStore.product[index]
+    const id = productStore.search_product[index]
     selectedProduct.value = selectedProduct.value === index ? null : id
     activeSelectedProduct.value = activeSelectedProduct.value === index ? null : index
 }
@@ -180,9 +192,6 @@ const addProduct = () => {
         isAddProductClicked.value = false
     }
 }
-const displayProduct = computed(() => {
-    return productsArray.value
-})
 
 const createOrder = async () => {
     const orderItems = productsArray.value.map(product => ({
@@ -210,6 +219,34 @@ const createOrder = async () => {
     // Now you can send the `data` object to your API or perform further actions
 };
 
+const focusInput = () => {
+    isAddProductClicked.value = true
+    if (productStore.search_product.length > 0) {
+        showResults.value = true;
+        isLoading.value = false;
+    } else {
+        onInputChange();
+        showResults.value = true;
+    }
+}
+
+const onInputChange = () => {
+    clearTimeout(debounceTimer.value);
+    debounceTimer.value = setTimeout(() => {
+        search();
+    }, 400);
+}
+const search = async () => {
+    showResults.value = true;
+    isLoading.value = true
+    try {
+        await productStore.getSearchResult(searchQuery.value)
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    } finally {
+        isLoading.value = false;
+    }
+}
 </script>
 
 <style lang="scss" scoped>

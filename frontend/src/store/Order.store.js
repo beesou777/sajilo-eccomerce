@@ -27,9 +27,9 @@ export const useOrderStore = defineStore("order", {
         console.log(error)
       }
     },
-    async getOrderData (){
+    async getOrderData (searchQuery){
       try {
-        const res = await axios.get("/order",{
+        const res = await axios.get(`/order?search=${searchQuery}`,{
           headers:{
             user_id: this.uuid || null
           }
@@ -77,7 +77,7 @@ export const useOrderStore = defineStore("order", {
       try {
         const res = await axios.delete(`order/${this.order_id}`)
         if(res.status == 200){
-          this.getOrderData()
+          this.getOrderData('')
         }
       } catch (error) {
         console.log(error)
@@ -92,7 +92,7 @@ export const useOrderStore = defineStore("order", {
         })
         if(res.status == 200){
           this.single_order = res.data.order
-          this.getOrderData()
+          this.getOrderData('')
           return res
         }
       } catch (error) {

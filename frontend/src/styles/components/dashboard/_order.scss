@@ -6,6 +6,15 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .search-container{
+      input{
+        max-width: 500px;
+        width: 400px;
+      }
+    }
+    .active_status{
+      background: $text-300;
+    }
   }
   .order-table {
     thead {

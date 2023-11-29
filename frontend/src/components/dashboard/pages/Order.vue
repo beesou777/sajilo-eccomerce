@@ -3,16 +3,17 @@
         <p class="h3 fw-normal">Orders</p>
         <div class="order-options p-4 d-flex justify-content-between align-items-center">
             <ul class="d-flex gap-3 p-0">
-                <li>All</li>
-                <li>Draft</li>
-                <li>Pending</li>
-                <li>Delivered</li>
-                <li>Cancelled</li>
-                <li>Returned</li>
+                <li :class="{'active_status':active_status === 'All'}" @click="setActiveStatus('All')">All</li>
+                <li :class="{'active_status':active_status === 'Draft'}" @click="setActiveStatus('Draft')">Draft</li>
+                <li :class="{'active_status':active_status === 'Pending'}" @click="setActiveStatus('Pending')">Pending</li>
+                <li :class="{'active_status':active_status === 'Delivered'}" @click="setActiveStatus('Delivered')">Delivered</li>
+                <li :class="{'active_status':active_status === 'Cancelled'}" @click="setActiveStatus('Cancelled')">Cancelled</li>
+                <li :class="{'active_status':active_status === 'Returned'}" @click="setActiveStatus('Returned')">Returned</li>
             </ul>
-            <div class="search-container position-relative d-flex gap-3">
+            <div class="search-container position-relative d-flex gap-3 align-items-center">
                 <div class="input_form">
-                    <input type="text" placeholder="search order" v-model="search">
+                    <input type="search" class="search-input flex-grow-1 pl-3" v-model="searchQuery"
+                        @input="onInputChange($event.target.value)" @click="focusInput" placeholder="search by name or email" />
                 </div>
                 <div class="button-wrapper">
                     <button @click="router.push('/dashboard/order/add')">Add Orders</button>
@@ -265,18 +266,15 @@
 </template>
 
 <script setup>
+// imports
 import { computed, onMounted, ref } from 'vue';
-import {useAuthStore,useOrderStore,router} from '@utility'
+import { useAuthStore, useOrderStore, router } from '@utility'
 
-
+// stores
 const authStore = useAuthStore()
 const orderStore = useOrderStore()
 
-const isDetailsShown = ref(false)
-const isDeleteShown = ref(false)
-const isEditShippingAddress = ref(false)
-const isStatus = ref(false)
-
+// data
 const address = ref("")
 const city = ref("")
 const country = ref("")
@@ -284,22 +282,46 @@ const tole = ref("")
 const name = ref("")
 const phone = ref()
 const email = ref("")
-
-const search = ref("")
-
+const searchQuery = ref("")
 const payment_status = ref("")
 const order_status = ref("")
+const debounceTimer = ref(null)
+const active_status = ref('All')
+// boolean data
+const isDetailsShown = ref(false)
+const isDeleteShown = ref(false)
+const isEditShippingAddress = ref(false)
+const isStatus = ref(false)
+const isLoading = ref(true)
+const showResults = ref(false)
 
+// mounted
 onMounted(async () => {
     const uuid = authStore.uuid
     orderStore.uuid = uuid
-    await orderStore.getOrderData()
+    await orderStore.getOrderData(searchQuery)
 })
 
+
+// computed
 const fetchAllOrder = computed(() => {
-    return orderStore?.order
+    if(active_status.value == "All"){
+        return orderStore?.order
+    }
+    else{
+        return orderStore?.order?.filter((data)=>{
+            if(data?.order_status == active_status.value){
+                return data
+            }
+        })
+    }
 })
 
+const singleOrder = computed(() => {
+    return orderStore?.single_order
+})
+
+// methods
 // @desc send id 
 const showDetails = async (index) => {
     const order = orderStore.order[index]._id
@@ -324,9 +346,6 @@ const deleteOrder = async () => {
     isDeleteShown.value = false
 }
 
-const singleOrder = computed(() => {
-    return orderStore?.single_order
-})
 
 const removerId = () => {
     orderStore.order_id = null
@@ -385,13 +404,45 @@ const updateStatus = async () => {
         order_status: order_status.value,
         payment_status: payment_status.value
     }
-    console.log(data)
     const res = await orderStore.updateOrderStatus(data)
     if (res.status == 200) {
         isStatus.value = false
     }
 }
 
+const focusInput = () => {
+    if (orderStore.order.length > 0) {
+        showResults.value = true;
+        isLoading.value = false;
+    } else {
+        onInputChange();
+        showResults.value = true;
+    }
+}
+
+const onInputChange = () => {
+    clearTimeout(debounceTimer.value);
+    debounceTimer.value = setTimeout(() => {
+        search();
+    }, 400);
+}
+
+const search = async () => {
+    showResults.value = true;
+    isLoading.value = true
+    try {
+        await orderStore.getOrderData(searchQuery.value)
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    } finally {
+        isLoading.value = false;
+        active_status.value = "All"
+    }
+}
+
+const setActiveStatus = (status)=>{
+    active_status.value = status
+}
 </script>
 
 <style lang="scss" scoped>

@@ -4,9 +4,9 @@ import axios from "../utility/axios";
 export const useProductStore = defineStore("product", {
   state: () => ({
     uuid:null,
-    product:null,
     product_id:null,
-    single_product:null
+    single_product:null,
+    search_product:{} || null
   }),
   actions: {
 
@@ -83,18 +83,18 @@ export const useProductStore = defineStore("product", {
     //   }
     // },
 
-    async getProduct() {
+    async getSearchResult(searchQuery){
       try {
-        const res = await axios.get("product",{
+        const res = await axios.get(`/product?search=${searchQuery}`,{
           headers:{
             user_id:this.uuid
           }
-        });
-       if(res.status == 200){
-        this.product = res.data.products
-       }
+        })
+        if(res.status == 200){
+          this.search_product = res.data.products
+        }
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     },
 

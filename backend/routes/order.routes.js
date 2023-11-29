@@ -14,7 +14,7 @@ const {
 
 router.route("/order/create").post(protect,addOrderItems);
 
-router.route("/order").get(protect,getAllOrderItems)
+router.route("/order").get(getAllOrderItems)
 
 router
   .route("/order/:id")

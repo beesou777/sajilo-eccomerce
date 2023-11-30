@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+const sub_domain = window.location.pathname.trim().split('/')[1]
 
 // dashboard
 import {
@@ -22,12 +23,8 @@ import {
 } from "@utility/index"
 
 
-import Homepage from "../views/theme1/Homepage.vue"
-let sub_domain;
-const path = window.location.pathname.startsWith("/dashboard") || window.location.pathname.startsWith("/register") || window.location.pathname.startsWith("/login")
-if(!path){
-    sub_domain = window.location.pathname
-}
+import Home from "@views/theme1/Homepage.vue"
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -66,7 +63,7 @@ const router = createRouter({
         {
             path: `/${sub_domain}`,
             name: "homepage",
-            component: Homepage,
+            component: Home,
             children: [
             // { path: `/${sub_domain}`, name: "home-page", component: Homepage, }, 
         ]}

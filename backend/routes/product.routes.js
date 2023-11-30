@@ -8,7 +8,6 @@ const {
   deleteProduct,
   updateProductById,
   getSubDomainProduct,
-  searchProduct,
 } = require("../controller/product.controller");
 
 const { protect } = require("../middlewares/auth.middleware");

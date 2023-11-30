@@ -1,4 +1,5 @@
 const User = require("../model/user.model");
+const Customer = require("../model/customer.model");
 const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -16,7 +17,7 @@ const accessToken = (user_id) => {
   });
 };
 
-const Register = async (req, res) => {
+const Register = async (req, res, next) => {
   try {
     const {
       store_name,
@@ -27,40 +28,57 @@ const Register = async (req, res) => {
       phone_number,
       username,
     } = req.body;
-    if (
-      !email ||
-      !store_name ||
-      !first_name ||
-      !last_name ||
-      !phone_number ||
-      !password ||
-      !username
-    ) {
-      return next({
-        message: "please fill all field all are required",
-      });
-    }
 
-    const salt = await bcrypt.genSalt(10);
-    const hash_password = await bcrypt.hash(password, salt);
+    const sub_domain = req.headers?.url?.trim().split("/")[1];
 
-    const exiting_user = await User.findOne({ email });
-    const exiting_user_username = await User.findOne({ username });
-
-    if (exiting_user) {
-      return next({
-        message: "User already exist on this email please provide another one",
-      });
-    }
-
+    // setting roles
     let roles;
     if (req.route.path == "/customer/register") {
       roles = "customer";
+      if (!email || !first_name || !last_name || !password || !phone_number) {
+        return next({
+          message: "customer details are required",
+        });
+      }
     } else if (req.route.path == "/admin/register") {
       roles = "admin";
+      if (
+        !email ||
+        !store_name ||
+        !first_name ||
+        !last_name ||
+        !phone_number ||
+        !password ||
+        !username
+      ) {
+        return next({
+          message: "please fill all field all are required",
+        });
+      }
     } else {
       roles = "user";
+      if (
+        !email ||
+        !store_name ||
+        !first_name ||
+        !last_name ||
+        !phone_number ||
+        !password ||
+        !username
+      ) {
+        return next({
+          message: "please fill all field all are required",
+        });
+      }
     }
+
+    // generate salt and has password
+    const salt = await bcrypt.genSalt(10);
+    const hash_password = await bcrypt.hash(password, salt);
+
+    // check user exist or not
+    const exiting_user = await User.findOne({ email });
+    const exiting_user_username = await User.findOne({ username });
     if (exiting_user_username) {
       return next({
         message:
@@ -68,32 +86,53 @@ const Register = async (req, res) => {
       });
     }
 
-    const register_user = new User({
-      store_name,
-      email,
-      first_name,
-      last_name,
-      profile_picture:
-        "https://res.cloudinary.com/dasuhyei1/image/upload/v1700654628/ueser_profile.png",
-      phone_number,
-      sub_domain: username,
-      role: roles,
-      password: hash_password,
-      username,
-    });
-
-    await register_user.save();
-    res
-      .status(200)
-      .json({ success: true, message: "User created successfully" });
+    if (exiting_user) {
+      return next({
+        message: "User already exist on this email please provide another one",
+      });
+    }
+    if (sub_domain) {
+      const user = await User.findOne({ sub_domain });
+      if (user) {
+        const user_id = user.id.valueOf();
+        const register_user = new Customer({
+          user: user_id,
+          email,
+          first_name,
+          last_name,
+          phone_number,
+          role: roles,
+          password: hash_password,
+        });
+        await register_user.save();
+        res.status(200).json({ success: true, message: "User created successfully" });
+      }
+    } else {
+      const register_user = new User({
+        store_name,
+        email,
+        first_name,
+        last_name,
+        profile_picture:
+          "https://res.cloudinary.com/dasuhyei1/image/upload/v1700654628/ueser_profile.png",
+        phone_number,
+        sub_domain: username,
+        role: roles,
+        password: hash_password,
+        username,
+      });
+      await register_user.save();
+      res.status(200).json({ success: true, message: "User created successfully" });
+    }
   } catch (error) {
+    console.log(error)
     next({
       message: "Internal server Error",
     });
   }
 };
 
-const Login = async (req, res,next) => {
+const Login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -102,8 +141,13 @@ const Login = async (req, res,next) => {
         message: "Please provide correct email and password",
       });
     }
+    let user;
 
-    const user = await User.findOne({ email });
+    if(await User.findOne({ email })){
+      user = await User.findOne({ email })
+    }else{
+      user = await Customer.findOne({email})
+    }
 
     const match_password = await bcrypt.compare(password, user.password);
 
@@ -150,7 +194,7 @@ const getUser = async (req, res, next) => {
   }
 };
 
-const updateUserDetails = async (req, res,next) => {
+const updateUserDetails = async (req, res, next) => {
   try {
     const id = req.headers.user_id;
     const { store_name, first_name, last_name } = req.body;
@@ -162,7 +206,7 @@ const updateUserDetails = async (req, res,next) => {
         last_name,
       },
       { new: true }
-    ).select("-password")
+    ).select("-password");
     if (!user_details) {
       res.status(404);
       return next({
@@ -177,7 +221,7 @@ const updateUserDetails = async (req, res,next) => {
   }
 };
 
-const updatePassword = async (req, res,next) => {
+const updatePassword = async (req, res, next) => {
   try {
     const id = req.headers.user_id;
     const { current_password, new_password, confirm_password } = req.body;
@@ -188,17 +232,17 @@ const updatePassword = async (req, res,next) => {
     );
 
     if (!match_password) {
-      res.status(404)
+      res.status(404);
       return next({
-        message:"unable to change password please try again"
-      })
+        message: "unable to change password please try again",
+      });
     }
 
-    if(new_password !== confirm_password){
-      res.status(400)
+    if (new_password !== confirm_password) {
+      res.status(400);
       return next({
-        message:"password does not matched "
-      })
+        message: "password does not matched ",
+      });
     }
     const salt = await bcrypt.genSalt(10);
     const hash_password = await bcrypt.hash(new_password, salt);
@@ -206,8 +250,10 @@ const updatePassword = async (req, res,next) => {
       { _id: id },
       { password: hash_password },
       { new: true }
-    )
-    res.status(200).json({success:true,message:"password successfully updated!!!!!"})
+    );
+    res
+      .status(200)
+      .json({ success: true, message: "password successfully updated!!!!!" });
   } catch (error) {
     return next({
       message: "Internal server error",

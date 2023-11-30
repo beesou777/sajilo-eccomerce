@@ -139,13 +139,13 @@
             <label for="password" class="small fw-medium"
               >Password: <span class="text-danger fs-5">*</span></label
             >
-            <input type="password" id="password" v-model="password" required />
+            <input type="password" id="password" v-model="password1" required />
           </div>
           <div class="input_form w-100">
             <label for="comfirm_password" class="small fw-medium"
               >Confirm Password: <span class="text-danger fs-5">*</span></label
             >
-            <input type="password" id="confirm_password" v-model="password" required />
+            <input type="password" id="confirm_password" v-model="password2" required />
           </div>
         </div>
         <div class="d-flex gap-3 my-2">
@@ -172,37 +172,33 @@
 </template>
   
 <script setup>
-import { useAuthStore } from "../../store/authentication";
+import { useAuthStore,router } from "@utility/index";
 const authStore = useAuthStore();
 import { ref, watch } from "vue";
-import router from "../../router/router";
-const storeName = ref("");
 
-const redir = async () => {
-  const userData = await authStore.getUserData();
-  if (userData) {
-    const user_id = userData.id;
-    const email = userData.email;
-    const store_name = storeName.value;
-    const full_name = userData.full_name;
-    const profile_picture = userData.profile_picture;
-    await authStore.registerUser({
-      user_id,
-      store_name,
-      email,
-      full_name,
-      profile_picture,
-    });
+const store_name = ref("");
+const first_name = ref("")
+const last_name = ref("")
+const phone_number = ref()
+const username = ref("")
+const password1 = ref("")
+const password2 = ref("")
+const email = ref("")
+
+const register = async () => {
+  if(password1.value == password2.value){
+    const data = {
+      first_name:first_name.value,
+      last_name:last_name.value,
+      email:email.value,
+      phone_number:phone_number.value,
+      password:password1.value,
+      username:username.value,
+      store_name:store_name.value
+    }
+    await authStore.Register(data)
   }
-  await authStore.getUserInfomation();
-  router.push("/dashboard");
 };
-
-watch(() => {
-  if (authStore.currentId || authStore.currentUser) {
-    router.push("/dashboard");
-  }
-});
 </script>
 
 

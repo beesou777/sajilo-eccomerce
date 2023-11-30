@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { protect,isAdmin } = require("../middlewares/auth.middleware");
+const { protect,isAdmin, protectCustomer } = require("../middlewares/auth.middleware");
 
 const {
   getAllOrderItems,
@@ -12,7 +12,8 @@ const {
   orderStatus
 } = require("../controller/order.controller");
 
-router.route("/order/create").post(protect,addOrderItems);
+router.route("/order/create").post((protect),addOrderItems);
+router.route("/order/customer/create").post((protectCustomer),addOrderItems);
 
 router.route("/order").get(getAllOrderItems)
 

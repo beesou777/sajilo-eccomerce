@@ -13,6 +13,7 @@ export default defineConfig({
       '@component':path.resolve(__dirname,'./src/components'),
       '@dashboard':path.resolve(__dirname,'./src/components/dashboard'),
       '@utility':path.resolve(__dirname,'./src/utility'),
+      '@views':path.resolve(__dirname,'./src/views'),
     },
   },
   server:{

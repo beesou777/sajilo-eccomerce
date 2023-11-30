@@ -49,28 +49,45 @@ const postProduct = async (req, res) => {
   }
 };
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res,next) => {
   try {
-    const currentUser = req.headers.user_id;
+    let currentUser;
+
+    if (req.headers.user_id) {
+      currentUser = req.headers.user_id;
+    } else if (req.headers.url) {
+      let domain = req.headers.url.trim().split('/')[1]
+      const user = await User.findOne({ sub_domain: domain });
+      if (user) {
+        currentUser = user._id.valueOf();
+      } else {
+        res.status(404);
+        return next({ message: "User not found for the provided sub_domain" });
+      }
+    } else {
+      res.status(400);
+      return next({ message: "Missing user identifier in headers" });
+    }
+    // product searching
     const keyword = req.query.search
-    ?{
-      $or:[
-        {
-          product_name:{
-            $regex:req.query.search.trim(),
-            $options:"i"
-          }
-        },
-        {
-          product_sku:{
-            $regex:req.query.search.trim(),
-            $options:"i"
-          }
+      ? {
+          $or: [
+            {
+              product_name: {
+                $regex: req.query.search.trim(),
+                $options: "i",
+              },
+            },
+            {
+              product_sku: {
+                $regex: req.query.search.trim(),
+                $options: "i",
+              },
+            },
+          ],
         }
-      ]
-    } 
-    : {};
-    const products = await Product.find({ user: currentUser,...keyword })
+      : {};
+    const products = await Product.find({ user:currentUser, ...keyword })
       .select("-user")
       .populate({
         path: "product_category",
@@ -171,13 +188,11 @@ const getSubDomainProduct = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   postProduct,
   getAllProducts,
   getProductById,
   updateProductById,
   deleteProduct,
-  getSubDomainProduct
+  getSubDomainProduct,
 };

@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  store_name: {
-    type: String,
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref:"User",
     required: true,
   },
   first_name: {
@@ -22,11 +23,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'user','customer'],
-    default: 'user',
-  },
-  sub_domain: {
-    type: String
+    default: 'customer',
   },
   password:{
     type:String,
@@ -36,14 +33,9 @@ const userSchema = new mongoose.Schema({
   phone_number:{
     type:Number,
     required:[true,"phone number is required"]
-  },
-  username:{
-    type:String,
-    required:[true,"username is required nad must be unique"]
   }
-
 });
 
-const User = mongoose.model('User', userSchema);
+const Customer = mongoose.model('Customer', userSchema);
 
-module.exports = User;
+module.exports = Customer;

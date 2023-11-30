@@ -40,7 +40,7 @@ export const useAuthStore = defineStore("auth", {
             },
           });
           if (res.status == 200) {
-            this.user_details = res.data.user_details
+            this.user_details = res.data.user_details;
             localStorage.setItem(
               "user_details",
               JSON.stringify(res.data.user_details)
@@ -79,12 +79,12 @@ export const useAuthStore = defineStore("auth", {
           }
         );
         if (res.status == 200) {
-          this.user_details = res.data.user_details
+          this.user_details = res.data.user_details;
           localStorage.setItem(
             "user_details",
             JSON.stringify(res.data.user_details)
           );
-          router.push("/dashboard/profile")
+          router.push("/dashboard/profile");
         }
       } catch (error) {
         console.log(error);
@@ -105,39 +105,33 @@ export const useAuthStore = defineStore("auth", {
               user_id: this.uuid || null,
             },
           }
-        )
-        if(res.status == 200){
-          router.push("/dashboard/profile")
+        );
+        if (res.status == 200) {
+          router.push("/dashboard/profile");
         }
       } catch (error) {
         console.log(error?.response?.data?.message);
       }
     },
-    
-    // async registerUser({
-    //   store_name,
-    //   email,
-    //   full_name,
-    //   profile_picture,
-    // }) {
-    //   try {
-    //     const response = await axios.post("/createUser", {
-    //       store_name,
-    //       email,
-    //       full_name,
-    //       profile_picture,
-    //     },{
-    //       headers:{
-    //         user_id:this.current_user_id
-    //       }
-    //     });
-    //     if (response.status == 200) {
-    //       router.push("/dashboard");
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //     console.log("an error occur");
-    //   }
-    // },
+
+    async Register(data) {
+      try {
+        const response = await axios.post("/users/register", {
+          first_name: data.first_name,
+          last_name: data.last_name,
+          store_name: data.store_name,
+          email: data.email,
+          password: data.password,
+          username:data.username,
+          phone_number:data.phone_number
+        });
+        if (response.status == 200) {
+          router.push("/login");
+        }
+      } catch (error) {
+        console.log(error);
+        console.log("an error occur");
+      }
+    },
   },
 });

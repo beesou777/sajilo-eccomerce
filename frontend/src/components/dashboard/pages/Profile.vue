@@ -120,5 +120,6 @@ const profileActive = (route) => {
 </script>
 
 <style lang="scss" scoped>
+@import "@utility_style";
 @import "@style/components/dashboard/_user-profile.scss";
 </style>

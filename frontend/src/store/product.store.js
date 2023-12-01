@@ -88,7 +88,7 @@ export const useProductStore = defineStore("product", {
         const res = await axios.get(`/product?search=${searchQuery}`,{
           headers:{
             user_id:this.uuid || null,
-            url:window.location.pathname
+            // url:window.location.pathname
           }
         })
         if(res.status == 200){

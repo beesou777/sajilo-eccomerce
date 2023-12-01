@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <p class="h4">Products</p>
                 <div class="button-wrapper">
-                    <button @click="focusInput">Select Product</button>
+                    <button class="btn-pri" @click="focusInput">Select Product</button>
                 </div>
             </div>
             <div class="products d-flex align-items-center justify-content-between" v-for="(data, index) in displayProduct"
@@ -46,7 +46,7 @@
                         @input="onInputChange($event.target.value)" @click="focusInput" />
                 </div>
                 <div class="button-wrapper">
-                    <button @click="addProduct">add product</button>
+                    <button class="btn-pri" @click="addProduct">add product</button>
                 </div>
             </div>
             <div class="products d-flex align-items-center " :class="{ 'active': index == activeSelectedProduct }"
@@ -119,7 +119,7 @@
                     </form>
                 </div>
                 <div class="button-wrapper mt-3 text-end">
-                    <button class="fw-semibold" @click="createOrder">Create Order</button>
+                    <button class="fw-semibold btn-pri" @click="createOrder">Create Order</button>
                 </div>
             </div>
 
@@ -250,7 +250,6 @@ const search = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import "@style/base/variable.scss";
-@import "@style/base/utility.scss";
+@import "@utility_style";
 @import "@style/components/dashboard/create-order";
 </style>

@@ -1,3 +1,4 @@
+@import "../../base/variable";
 .create-order-container {
   .product-overlay {
     position: fixed;
@@ -36,12 +37,6 @@
         border-radius: 4px;
         outline: none;
         width: 100%;
-      }
-      .button-wrapper{
-        button{
-          background: $success;
-          border: 1px solid $success-200;
-        }
       }
     }
 
@@ -86,12 +81,6 @@
       padding: 2rem;
       z-index: 12;
       border-radius: 4px;
-    }
-    .button-wrapper {
-      button {
-        background: $success;
-        border: 1px solid $success;
-      }
     }
   }
 }

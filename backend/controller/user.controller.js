@@ -77,20 +77,14 @@ const Register = async (req, res, next) => {
     const hash_password = await bcrypt.hash(password, salt);
 
     // check user exist or not
-    const exiting_user = await User.findOne({ email });
-    const exiting_user_username = await User.findOne({ username });
-    if (exiting_user_username) {
-      return next({
-        message:
-          "User already exist with this username please provide another username",
-      });
-    }
+    const exiting_user = await User.findOne({ email,username })
 
     if (exiting_user) {
       return next({
         message: "User already exist on this email please provide another one",
       });
     }
+
     if (sub_domain) {
       const user = await User.findOne({ sub_domain });
       if (user) {
@@ -260,6 +254,7 @@ const updatePassword = async (req, res, next) => {
     });
   }
 };
+
 
 module.exports = {
   Register,

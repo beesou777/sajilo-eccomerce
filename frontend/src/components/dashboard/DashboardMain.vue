@@ -1,7 +1,7 @@
 
 <template>
-  <div class="dashboard-container">
-    <SideNavbar class="side-navbar" />
+  <div class="dashboard-container" data-theme="custom" data-color="primary">
+    <SideNavbar class="side-navbar"/>
     <main class="w-100">
       <Navbar/>
       <router-view></router-view>
@@ -20,9 +20,8 @@ const authStore = useAuthStore();
 
 
 onMounted(async () => {
-  await authStore.getUserDetails()
+  await authStore.getUserDetails();
 });
-
 
 const Logout = () => {
   localStorage.clear()

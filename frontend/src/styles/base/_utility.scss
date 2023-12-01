@@ -1,0 +1,183 @@
+@import "./variable";
+.image_form{
+  background: $text-200;
+  padding:10px;
+  input[type="file"]::file-selector-button {
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: $text-100;
+    border: 1px solid $text-400;
+    margin-right: 16px;
+  }
+}
+
+.overlay{
+  position:fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background: rgb($text-900,.4);
+  z-index: 1;
+}
+
+ul{
+  margin: 0;
+  li{
+    list-style: none;
+    a{
+      text-decoration: none;
+    }
+  }
+}
+
+.input_form{
+  input,textarea{
+    border: 2px solid $text-300;
+    border-radius: 4px;
+    outline: none;
+    padding:0.3rem 0.6rem;
+    width: 100%;
+    transition: .3s ease-in-out;
+    &:focus{
+      border: 2px solid $text-400;
+    }
+    &:hover{
+      border: 2px solid $text-400;
+    }
+  }
+  label{
+    top: 8px;
+    left: 10px;
+    margin-bottom: .5rem;
+  }
+  textarea{
+    min-height: 135px;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.button-wrapper{
+  .btn-del{
+    background: $danger;
+    color: $white;
+    border: 1px solid $danger;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($danger,.9);
+    }
+  }
+  .btn-ter{
+    background: $trinary-color;
+    color: $white;
+    border: 1px solid $trinary-color;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($trinary-color,.9);
+    }
+  }
+  .btn-pri{
+    background: $primary-color;
+    color: $white;
+    border: 1px solid $primary-color;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($primary-color,.9);
+    }
+  }
+  .btn-100{
+    background: $text-100;
+    color: $white;
+    border: 1px solid $text-200;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-100,.9);
+    }
+  }
+  .btn-200{
+    background: $text-200;
+    color: $white;
+    border: 1px solid $text-300;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-200,.9);
+    }
+  }
+  .btn-300{
+    background: $text-300;
+    color: $white;
+    border: 1px solid $text-400;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-300,.9);
+    }
+  }
+  .btn-400{
+    background: $text-400;
+    color: $white;
+    border: 1px solid $text-500;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-400,.9);
+    }
+  }
+  .btn-500{
+    background: $text-600;
+    color: $white;
+    border: 1px solid $text-500;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-500,.9);
+    }
+  }
+  .btn-600{
+    background: $text-600;
+    color: $white;
+    border: 1px solid $text-700;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-600,.9);
+    }
+  }
+  .btn-700{
+    background: $text-700;
+    color: $white;
+    border: 1px solid $text-800;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-700,.9);
+    }
+  }
+  .btn-800{
+    background: $text-800;
+    color: $white;
+    border: 1px solid $text-900;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-800,.9);
+    }
+  }
+  .btn-900{
+    background: $text-900;
+    color: $white;
+    border: 1px solid $text-900;
+    padding: .3rem 1rem;
+    border-radius: 4px;
+    &:hover{
+      background-color: rgba($text-900,.9);
+    }
+  }
+}

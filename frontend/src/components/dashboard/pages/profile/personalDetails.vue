@@ -30,32 +30,33 @@
   </div>
 </template>
 <script setup>
-  import { ref,onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useAuthStore } from '@store/authentication';
-  const authStore = useAuthStore()
-  const store_name = ref("")
-  const first_name = ref("")
-  const last_name = ref("")
-  const email = ref("")
+const authStore = useAuthStore()
+const store_name = ref("")
+const first_name = ref("")
+const last_name = ref("")
+const email = ref("")
 
-  onMounted(()=>{
-    store_name.value = authStore.user_details.store_name
-    first_name.value = authStore.user_details.first_name
-    last_name.value = authStore.user_details.last_name
-    email.value = authStore.user_details.email
-  })
+onMounted(() => {
+  store_name.value = authStore.user_details.store_name
+  first_name.value = authStore.user_details.first_name
+  last_name.value = authStore.user_details.last_name
+  email.value = authStore.user_details.email
+})
 
-  const updateDetails = async()=>{
-    const data = {
-        store_name:store_name.value,
-        first_name:first_name.value,
-        last_name:last_name.value
-    }
-    await authStore.updateUserDetails(data)
-
+const updateDetails = async () => {
+  const data = {
+    store_name: store_name.value,
+    first_name: first_name.value,
+    last_name: last_name.value
   }
+  await authStore.updateUserDetails(data)
+
+}
 
 </script>
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
+@import "@utility_style";
 @import "@style/components/dashboard/_user-profile.scss";
 </style>

@@ -1,90 +1,82 @@
 <template>
-    <div class="dashboard-product-page position-relative bg-white p-3">
-      <div class="py-3">
-        <p class="head-4 text-primary fw-semibold">Store Products</p>
-      </div>
-      <div class="product-section">
-        <div class="product-data-heads row">
-          <div class="col-1">
-            <p class="head-5 mb-0">S.N</p>
-          </div>
-          <div class="col-2">
-            <p class="head-5 mb-0">Name</p>
-          </div>
-          <div class="col-2">
-            <p class="head-5 mb-0">price</p>
-          </div>
-          <div class="col-2">
-            <p class="head-5 mb-0">Inventory</p>
-          </div>
-          <div class="col-2">
-            <p class="head-5 mb-0">status</p>
-          </div>
-          <div class="col-2">
-            <p class="head-5 mb-0">created</p>
-          </div>
-          <div class="col-1">
-            <p class="head-5 mb-0">Action</p>
-          </div>
+  <div class="dashboard-product-page position-relative px-3">
+    <p class="h3 fw-normal text-pri">Product</p>
+    <div class="order-options py-4 text-end">
+      <div class="search-container position-relative d-flex gap-3 align-items-center">
+        <div class="input_form">
+          <input type="search" class="search-input flex-grow-1 pl-3" v-model="searchQuery"
+            @input="onInputChange($event.target.value)" @click="focusInput" placeholder="search by name or email" />
         </div>
-        <div
-          v-for="(data, index) in product"
-          :key="index"
-        >
-        <div class="row product-data" v-if="data.status == 'active'">
-            <div class="col-1 d-flex gap-3 align-items-center">
-            <p class="head-5 mb-0" @click="showEditCategory(index)">
-              {{count += 1}}
-            </p>
-          </div>
-          <div class="col-2 d-flex gap-3 align-items-center">
-            <div class="image-wrapper">
-              <img :src="data.product_images" :alt="data.product_name" />
-            </div>
-            <p class="head-5 mb-0" @click="showEditCategory(index)">
-              {{ data.product_name }}
-            </p>
-          </div>
-          <div class="col-2 d-flex gap-3 align-items-center">
-            <p class="head-5 mb-0" @click="showEditCategory(index)">
-              {{ data.actual_price }}
-            </p>
-          </div>
-          <div class="col-2 d-flex gap-3 align-items-center">
-            <p class="head-5 mb-0" >
-              {{ data.selling_price  }}
-            </p>
-          </div>
-          <div class="col-2 d-flex gap-3 align-items-center">
-            <p class="head-5 mb-0">
-              {{ data.status }}
-            </p>
-          </div>
-          <div class="col-2 d-flex gap-3 align-items-center">
-            <p class="head-5 mb-0">
-              {{ data.createdAt }}
-            </p>
-          </div>
-        </div>
+        <div class="button-wrapper">
+          <button class="btn-pri" @click="router.push('/dashboard/order/add')">Add Orders</button>
         </div>
       </div>
     </div>
+
+    <table class="product-table text-center w-100">
+      <thead>
+        <tr>
+          <th class="p-3">Product Name</th>
+          <th class="p-3">Product SKU</th>
+          <th class="p-3">Category Name</th>
+          <th class="p-3">Actual Price</th>
+          <th class="p-3">Selling Price</th>
+          <th class="p-3">Payment Status</th>
+          <th class="p-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(data, index) in fetchProduct" :key="index">
+          <td class="p-2">{{ data?.product_name }}</td>
+          <td class="p-2">{{ data?.product_sku }}</td>
+          <td class="p-2 fw-medium">
+            {{ data?.product_category.name }}
+          </td>
+          <td class="p-2">{{ data?.actual_price }}</td>
+          <td class="p-2">{{ data?.selling_price }}</td>
+          <td class="p-2">
+            <div class="form-check form-switch d-flex justify-content-center">
+              <input class="form-check-input" type="checkbox" role="switch" :checked="data?.status == true ?  '' : checked">
+            </div>
+          </td>
+          <td class="p-2 d-flex align-items-center justify-content-center button-wrapper">
+            <button class="btn-del" @click="deleteId(index)">Delete</button>
+            <button class="btn-200 text-dark" @click="showDetails(index)">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
-// <script setup>
-// import { computed, onMounted } from "vue";
-// import { useProductStore } from "../../../store/Order.store";
-// import { ref } from "vue";
+<script setup>
+import { computed, onMounted } from "vue";
+import { useProductStore, useAuthStore } from "@utility/index";
+import { ref } from "vue";
 
-// // let count = ref(1)
-// // const productStore = useProductStore();
-
-// // onMounted(async () => {
-// //   await productStore.getProduct();
-// // });
+// store
+const productStore = useProductStore();
+const authStore = useAuthStore()
 
 
+// mounted
+onMounted(async () => {
+  productStore.uuid = authStore.uuid
+  await productStore.getSearchResult('');
+});
 
-// // const product = computed(() => {
-// //   return productStore.products ? productStore.products : "";
-// // });
-// </script>
+// computed
+const fetchProduct = computed(() => {
+  return productStore?.search_product
+})
+
+
+
+const product = computed(() => {
+  return productStore.products ? productStore.products : "";
+});
+</script>
+<style lang="scss" scoped>
+@import '@style/base/variable';
+@import "@utility_style";
+@import "@style/components/dashboard/products"
+</style>

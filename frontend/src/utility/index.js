@@ -7,7 +7,7 @@ import router from '@router/router';
 import DashboardMain from "@dashboard/DashboardMain.vue"
 import DashboardHome from "@dashboard/pages/Home.vue"
 import DashboardCategory from "@dashboard/pages/Category.vue"
-import DashboardAddProduct from "@dashboard/pages/AddProduct.vue"
+import DashboardAddProduct from "@dashboard/pages/products/AddProduct.vue"
 import DashboardProduct from "@dashboard/pages/DisplayProduct.vue"
 import DashboardAppearance from "@dashboard/pages/Appearance.vue"
 import DashboardHomepageBanner from "@dashboard/pages/HomepageBannerSection.vue"

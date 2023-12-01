@@ -2,6 +2,9 @@ const Order = require("../model/order.models");
 const Product = require("../model/product.model");
 const User = require("../model/user.model");
 const Customer = require("../model/customer.model");
+
+// @desc protected
+// method post
 const addOrderItems = async (req, res, next) => {
   try {
     const {
@@ -31,6 +34,7 @@ const addOrderItems = async (req, res, next) => {
     let new_final_price;
     let new_discount_amount;
 
+
     if (discount_percent) {
       new_discount_amount = (discount_percent / 100) * total_price;
       new_final_price =
@@ -57,10 +61,10 @@ const addOrderItems = async (req, res, next) => {
           address,
           city,
           tole,
-          name:findCustomer.first_name+ " " +findCustomer.last_name,
+          name: findCustomer.first_name + " " + findCustomer.last_name,
           country,
-          email:findCustomer.email,
-          phone:findCustomer.phone_number,
+          email: findCustomer.email,
+          phone: findCustomer.phone_number,
         },
         payment_method: "COD",
         total_price: total_price,
@@ -96,7 +100,6 @@ const addOrderItems = async (req, res, next) => {
       await order.save();
       return res.status(200).json({ success: true, order });
     }
-
   } catch (error) {
     console.error(error);
     next({ message: "Internal server error" });
@@ -267,6 +270,7 @@ const orderStatus = async (req, res, next) => {
     });
   }
 };
+
 module.exports = {
   addOrderItems,
   getAllOrderItems,

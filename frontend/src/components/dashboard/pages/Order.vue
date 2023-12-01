@@ -1,7 +1,7 @@
 <template>
     <div class="order-container px-3">
         <p class="h3 fw-normal">Orders</p>
-        <div class="order-options p-4 d-flex justify-content-between align-items-center">
+        <div class="order-options py-4 d-flex justify-content-between align-items-center">
             <ul class="d-flex gap-3 p-0">
                 <li :class="{'active_status':active_status === 'All'}" @click="setActiveStatus('All')">All</li>
                 <li :class="{'active_status':active_status === 'Draft'}" @click="setActiveStatus('Draft')">Draft</li>
@@ -16,7 +16,7 @@
                         @input="onInputChange($event.target.value)" @click="focusInput" placeholder="search by name or email" />
                 </div>
                 <div class="button-wrapper">
-                    <button @click="router.push('/dashboard/order/add')">Add Orders</button>
+                    <button class="btn-pri" @click="router.push('/dashboard/order/add')">Add Orders</button>
                 </div>
             </div>
         </div>
@@ -48,9 +48,9 @@
                         {{ data?.order_status }}</td>
                     <td class="p-2">{{ data?.payment_method }}</td>
                     <td class="p-2">{{ data?.createdAt.slice(0, 10) }}</td>
-                    <td class="p-2 d-flex align-items-center justify-content-center">
-                        <button class="btn" @click="deleteId(index)">Delete</button>
-                        <button class="btn" @click="showDetails(index)">Details</button>
+                    <td class="p-2 d-flex align-items-center justify-content-center button-wrapper">
+                        <button class="btn-del" @click="deleteId(index)">Delete</button>
+                        <button class="btn-200 text-dark" @click="showDetails(index)">Details</button>
                     </td>
                 </tr>
             </tbody>
@@ -181,8 +181,8 @@
             <p class="h4">Are you sure you want to delete this order?</p>
             <p class="small pt-3">Once you delete this it cannot be undone</p>
             <div class="button-wrapper d-flex gap-2 py-3 w-100">
-                <button class="w-100" @click="deleteOrder">Delete</button>
-                <button class="w-100" @click="removerId">Cancel</button>
+                <button class="w-100 btn-del" @click="deleteOrder">Delete</button>
+                <button class="w-100 btn-200 text-dark " @click="removerId">Cancel</button>
             </div>
         </div>
 
@@ -225,8 +225,8 @@
                     <input type="text" id="country" v-model="country" />
                 </div>
                 <div class="button-wrapper mt-3 d-flex gap-3">
-                    <button class="w-100 fw-semibold" @click="updateShippingAddress">Update</button>
-                    <button class="w-100 fw-semibold text-300" @click="isEditShippingAddress = false">Cancel</button>
+                    <button class="w-100 fw-semibold btn-pri" @click="updateShippingAddress">Update</button>
+                    <button class="w-100 fw-semibold text-dark btn-200 " @click="isEditShippingAddress = false">Cancel</button>
                 </div>
             </form>
         </div>
@@ -255,8 +255,8 @@
                 </div>
 
                 <div class="button-wrapper mt-3 d-flex gap-3">
-                    <button class="w-100 fw-semibold" @click="updateStatus">Update</button>
-                    <button class="w-100 fw-semibold text-300" @click="isStatus = false">Cancel</button>
+                    <button class="w-100 fw-semibold btn-pri" @click="updateStatus">Update</button>
+                    <button class="w-100 fw-semibold btn-200 text-dark" @click="isStatus = false">Cancel</button>
                 </div>
             </form>
         </div>
@@ -446,7 +446,6 @@ const setActiveStatus = (status)=>{
 </script>
 
 <style lang="scss" scoped>
-@import "@style/base/variable.scss";
-@import "@style/base/utility.scss";
+@import "@utility_style";
 @import "@style/components/dashboard/order";
 </style>

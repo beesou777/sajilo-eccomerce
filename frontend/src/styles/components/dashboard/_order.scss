@@ -8,8 +8,8 @@
     }
     .search-container{
       input{
-        max-width: 500px;
-        width: 400px;
+        max-width: 250px;
+        width: 250px;
       }
     }
     .active_status{
@@ -18,7 +18,7 @@
   }
   .order-table {
     thead {
-      background-color: $white;
+      background-color: $text-200;
       padding: 1.5rem 20px;
       margin: 1rem;
       border-radius: 4px;
@@ -30,28 +30,19 @@
       padding: 0.8rem 20px;
       margin: 0 1rem;
       tr {
+        background: $white;
+        border-bottom: 1px solid $text-200;
         td {
+          transition: .3s ease;
           gap: 10px;
-          button {
-            padding: 0.2rem 0.9rem;
-            border-radius: 4px;
-            outline: none !important;
-          }
-          button:first-child {
-            color: $white;
-            background: $primary-color;
-          }
-          button:last-child {
-            background: $text-300;
+        }
+        &:hover{
+          td{
+            background: $text-200;
           }
         }
       }
-      tr:nth-child(even) {
-        background: $white;
-      }
-      tr:nth-child(odd) {
-        background: $text-200;
-      }
+
     }
   }
   .order-details {

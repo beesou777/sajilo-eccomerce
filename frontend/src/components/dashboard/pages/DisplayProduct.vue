@@ -46,12 +46,21 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="overlay" v-if="isDeleteShown" @click="removerId"></div>
+    <!-- delete button -->
+    <deleteButton :isDeleteShown=isDeleteShown :removerId="removerId" :delete=deleteOrder :msg='order'/>
   </div>
 </template>
 <script setup>
 import { computed, onMounted } from "vue";
 import { useProductStore, useAuthStore } from "@utility/index";
 import { ref } from "vue";
+
+const isDeleteShown = ref(false)
+
+
+
 
 // store
 const productStore = useProductStore();
@@ -69,11 +78,22 @@ const fetchProduct = computed(() => {
   return productStore?.search_product
 })
 
-
-
 const product = computed(() => {
   return productStore.products ? productStore.products : "";
 });
+
+
+// methods
+const removerId = () => {
+    orderStore.order_id = null
+    isDeleteShown.value = false
+    isDetailsShown.value = false
+}
+
+const deleteOrder = async () => {
+    await orderStore.deleteOrder()
+    isDeleteShown.value = false
+}
 </script>
 <style lang="scss" scoped>
 @import '@style/base/variable';

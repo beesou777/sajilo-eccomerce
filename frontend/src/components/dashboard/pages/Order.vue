@@ -177,14 +177,7 @@
         </div>
         <!-- single order end -->
 
-        <div class="delete-section" v-if="isDeleteShown">
-            <p class="h4">Are you sure you want to delete this order?</p>
-            <p class="small pt-3">Once you delete this it cannot be undone</p>
-            <div class="button-wrapper d-flex gap-2 py-3 w-100">
-                <button class="w-100 btn-del" @click="deleteOrder">Delete</button>
-                <button class="w-100 btn-200 text-dark " @click="removerId">Cancel</button>
-            </div>
-        </div>
+       <deleteButton :isDeleteShown=isDeleteShown :removerId="removerId" :delete=deleteOrder :msg='order'/>
 
         <!-- update shipping address -->
         <div class="update-shipping_address bg-white" v-if="isEditShippingAddress">
@@ -269,7 +262,7 @@
 // imports
 import { computed, onMounted, ref } from 'vue';
 import { useAuthStore, useOrderStore, router } from '@utility'
-
+import deleteButton from "./helper/deleteButton.vue";
 // stores
 const authStore = useAuthStore()
 const orderStore = useOrderStore()

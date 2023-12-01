@@ -1,6 +1,6 @@
 
 <template>
-  <div class="dashboard-container" data-theme="custom" data-color="primary">
+  <div class="dashboard-container" data-theme="custom" >
     <SideNavbar class="side-navbar"/>
     <main class="w-100">
       <Navbar/>

@@ -20,17 +20,35 @@
                     object-fit: contain;
                 }
             }
-            .button-wrapper{
-                button{
-                    background-color: $white;
-                    border: none;
-                    color: red;
-                    border-radius: 4px;
-                    &:hover{
-                        background-color: $text-300;
-                    }
-                }
-            }
         }
     }
+    .product-table {
+        thead {
+          background-color: $text-200;
+          padding: 1.5rem 20px;
+          margin: 1rem;
+          border-radius: 4px;
+          span {
+            font-weight: 600;
+          }
+        }
+        tbody {
+          padding: 0.8rem 20px;
+          margin: 0 1rem;
+          tr {
+            background: $white;
+            border-bottom: 1px solid $text-200;
+            td {
+             transition: .3s ease;
+              gap: 10px;
+            }
+            &:hover{
+              td{
+                background: $text-200;
+              }
+            }
+          }
+    
+        }
+      }
 }

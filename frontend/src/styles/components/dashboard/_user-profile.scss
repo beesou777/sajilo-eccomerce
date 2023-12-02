@@ -46,7 +46,7 @@
     max-width: 340px;
     .button-wrapper{
         button{
-            background-color: $primary-color;
+            background-color: var(--primary);
             color: $white;
             border: 0;
             padding: 10px;

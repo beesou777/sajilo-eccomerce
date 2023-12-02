@@ -83,7 +83,7 @@
             </g>
           </svg>
         </span>
-        <span>Home</span>
+        <span data-color="primary">Home</span>
       </li>
 
       <li @click="router.push('/dashboard/order')">
@@ -108,7 +108,7 @@
             </g>
           </svg>
         </span>
-        <span>Order</span>
+        <span data-color="primary">Order</span>
       </li>
 
       <li @click="router.push('/dashboard/product')">
@@ -119,7 +119,7 @@
               fill="black" />
           </svg>
         </span>
-        <span>Products</span>
+        <span data-color="primary">Products</span>
       </li>
 
       <li @click="router.push('/dashboard/category')">
@@ -135,7 +135,7 @@
             </g>
           </svg>
         </span>
-        <span>Category</span>
+        <span data-color="primary">Category</span>
       </li>
 
       <li @click="router.push('/dashboard/appearance')">
@@ -151,7 +151,7 @@
             </g>
           </svg>
         </span>
-        <span>Appearance</span>
+        <span data-color="primary">Appearance</span>
       </li>
 
       <li @click="router.push('/dashboard/discount')">
@@ -167,7 +167,7 @@
             </g>
           </svg>
         </span>
-        <span>Discount</span>
+        <span data-color="primary">Discount</span>
       </li>
 
       <li @click="router.push('/dashboard/blogs')">
@@ -178,12 +178,12 @@
             fill="black" />
         </svg>
       </span>
-      <span>Blogs</span>
+      <span data-color="primary">Blogs</span>
     </li>
 
     <li @click="router.push('/dashboard/profile')">
-      <span>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <span >
+        <svg  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_5_607" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
             <rect width="20" height="20" fill="#D9D9D9" />
           </mask>
@@ -194,7 +194,7 @@
           </g>
         </svg>
       </span>
-      <span>Profile</span>
+      <span data-color="primary">Profile</span>
     </li>
   </ul>
 </div></template>
@@ -215,9 +215,9 @@ const isCurrentRoute = (route) => {
 <style lang="scss" scoped>
 @import "../../../styles/components/dashboard/_sidenavbar.scss";
 
-svg.logo{
+svg{
   path{
-    fill:$primary-color;
+    fill: var(--primary);
   }
 }
 </style>

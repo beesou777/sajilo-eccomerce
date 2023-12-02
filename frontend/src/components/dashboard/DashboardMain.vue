@@ -1,6 +1,6 @@
 
 <template>
-  <div class="dashboard-container" data-theme="custom" >
+  <div class="dashboard-container" data-theme="light" data-bkg-500="ternary">
     <SideNavbar class="side-navbar"/>
     <main class="w-100">
       <Navbar/>
@@ -10,11 +10,9 @@
 </template>
 <script setup>
 import SideNavbar from "./navbars/SideNavbar.vue";
-import Navbar from "./navbars/Navbar.vue"
+import Navbar from "./navbars/Navbar.vue";
 import { onMounted } from "vue";
 import {router,useAuthStore} from "@utility/index";
-import NavbarVue from "./navbars/Navbar.vue";
-
 
 const authStore = useAuthStore();
 

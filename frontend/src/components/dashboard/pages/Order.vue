@@ -1,19 +1,23 @@
 <template>
     <div class="order-container px-3">
-        <p class="h3 fw-normal">Orders</p>
+        <p class="h3 fw-normal" data-color="primary">Orders</p>
         <div class="order-options py-4 d-flex justify-content-between align-items-center">
             <ul class="d-flex gap-3 p-0">
-                <li :class="{'active_status':active_status === 'All'}" @click="setActiveStatus('All')">All</li>
-                <li :class="{'active_status':active_status === 'Draft'}" @click="setActiveStatus('Draft')">Draft</li>
-                <li :class="{'active_status':active_status === 'Pending'}" @click="setActiveStatus('Pending')">Pending</li>
-                <li :class="{'active_status':active_status === 'Delivered'}" @click="setActiveStatus('Delivered')">Delivered</li>
-                <li :class="{'active_status':active_status === 'Cancelled'}" @click="setActiveStatus('Cancelled')">Cancelled</li>
-                <li :class="{'active_status':active_status === 'Returned'}" @click="setActiveStatus('Returned')">Returned</li>
+                <li data-color="primary" :class="{ 'active_status': active_status === 'All' }" @click="setActiveStatus('All')">All</li>
+                <li data-color="primary" :class="{ 'active_status': active_status === 'Draft' }" @click="setActiveStatus('Draft')">Draft</li>
+                <li data-color="primary" :class="{ 'active_status': active_status === 'Pending' }" @click="setActiveStatus('Pending')">Pending</li>
+                <li data-color="primary" :class="{ 'active_status': active_status === 'Delivered' }" @click="setActiveStatus('Delivered')">Delivered
+                </li>
+                <li data-color="primary" :class="{ 'active_status': active_status === 'Cancelled' }" @click="setActiveStatus('Cancelled')">Cancelled
+                </li>
+                <li data-color="primary" :class="{ 'active_status': active_status === 'Returned' }" @click="setActiveStatus('Returned')">Returned
+                </li>
             </ul>
             <div class="search-container position-relative d-flex gap-3 align-items-center">
                 <div class="input_form">
                     <input type="search" class="search-input flex-grow-1 pl-3" v-model="searchQuery"
-                        @input="onInputChange($event.target.value)" @click="focusInput" placeholder="search by name or email" />
+                        @input="onInputChange($event.target.value)" @click="focusInput"
+                        placeholder="search by name or email" />
                 </div>
                 <div class="button-wrapper">
                     <button class="btn-pri" @click="router.push('/dashboard/order/add')">Add Orders</button>
@@ -23,32 +27,32 @@
 
         <table class="order-table text-center w-100">
             <thead>
-                <tr>
-                    <th class="p-3">Customer Name</th>
-                    <th class="p-3">Total Price</th>
-                    <th class="p-3">Payment Status</th>
-                    <th class="p-3">Order Status </th>
-                    <th class="p-3">Payment Method</th>
-                    <th class="p-3">Created At</th>
-                    <th class="p-3">Action</th>
+                <tr data-bkg-500="ternary">
+                    <th class="p-3" data-color="primary">Customer Name</th>
+                    <th class="p-3" data-color="primary">Total Price</th>
+                    <th class="p-3" data-color="primary">Payment Status</th>
+                    <th class="p-3" data-color="primary">Order Status </th>
+                    <th class="p-3" data-color="primary">Payment Method</th>
+                    <th class="p-3" data-color="primary">Created At</th>
+                    <th class="p-3" data-color="primary">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-bkg-500="ternary">
                 <tr v-for="(data, index) in fetchAllOrder" :key="index">
-                    <td class="p-2">{{ data?.customer_details?.name }}</td>
-                    <td class="p-2">{{ data?.final_price }}</td>
-                    <td class="p-2 fw-medium" :class="{
+                    <td class="p-2" data-color="primary">{{ data?.customer_details?.name }}</td>
+                    <td class="p-2" data-color="primary">{{ data?.final_price }}</td>
+                    <td class="p-2 fw-medium" data-color="primary" :class="{
                         'text-danger': data?.payment_status == 'Unpaid',
                         'text-success': data.payment_status !== 'Unpaid'
                     }">
                         {{ data?.payment_status }}
                     </td>
-                    <td class="p-2 fw-medium"
+                    <td class="p-2 fw-medium" data-color="primary"
                         :class="{ 'text-danger': data?.order_status == 'Cancell', 'text-warning': data.order_status == 'Pending', 'text-warning': data.order_status == 'Pending', 'text-success': data.order_status == 'Delivered' }">
                         {{ data?.order_status }}</td>
-                    <td class="p-2">{{ data?.payment_method }}</td>
-                    <td class="p-2">{{ data?.createdAt.slice(0, 10) }}</td>
-                    <td class="p-2 d-flex align-items-center justify-content-center button-wrapper">
+                    <td class="p-2" data-color="primary">{{ data?.payment_method }}</td>
+                    <td class="p-2" data-color="primary">{{ data?.createdAt.slice(0, 10) }}</td>
+                    <td class="p-2 d-flex align-items-center justify-content-center button-wrapper" data-color="primary">
                         <button class="btn-del" @click="deleteId(index)">Delete</button>
                         <button class="btn-200 text-dark" @click="showDetails(index)">Details</button>
                     </td>
@@ -64,81 +68,81 @@
                 <svg @click="isDetailsShown = false" width="14" height="14" viewBox="0 0 14 14" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M13 1L7 7L1 13M1 1L13 13" stroke="black" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
+                stroke-linejoin="round" />
                 </svg>
             </div>
 
-            <div class="order-info bg-white p-3 mx-5">
+            <div class="order-info p-3 px-5" data-bkg-500="ternary">
                 <table class="d-flex gap-5">
-                    <thead>
+                    <thead data-bkg-500="ternary">
                         <tr class="d-flex flex-column">
-                            <th>Order Id</th>
-                            <th>Created By</th>
-                            <th>Order Status</th>
-                            <th>Payment status</th>
-                            <th>Payment Method</th>
+                            <th data-color="primary">Order Id</th>
+                            <th data-color="primary">Created By</th>
+                            <th data-color="primary">Order Status</th>
+                            <th data-color="primary">Payment status</th>
+                            <th data-color="primary">Payment Method</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody data-bkg-500="ternary">
                         <tr class="d-flex flex-column">
-                            <th class="fw-normal">{{ singleOrder?._id }}</th>
-                            <th class="fw-normal">{{ singleOrder?.customer_details?.name }}
+                            <th class="fw-normal" data-color="primary">{{ singleOrder?._id }}</th>
+                            <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.name }}
                             </th>
-                            <th class="fw-normal">{{ singleOrder?.order_status }} <span>
+                            <th class="fw-normal" data-color="primary">{{ singleOrder?.order_status }} <span>
                                     <svg @click="showStatus" width="26" height="24" viewBox="0 0 26 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M17.6589 15.7181L19.0635 14.2676C19.283 14.0409 19.6649 14.1996 19.6649 14.526V21.1169C19.6649 22.3181 18.7211 23.2927 17.5579 23.2927H2.10695C0.943738 23.2927 0 22.3181 0 21.1169V5.16087C0 3.95964 0.943738 2.98506 2.10695 2.98506H14.1122C14.4238 2.98506 14.5819 3.37489 14.3624 3.60607L12.9577 5.05662C12.8919 5.12461 12.8041 5.16087 12.7075 5.16087H2.10695V21.1169H17.5579V15.972C17.5579 15.8768 17.593 15.7861 17.6589 15.7181ZM24.5328 6.57062L13.006 18.4742L9.03794 18.9275C7.88789 19.0589 6.90904 18.0571 7.03634 16.8604L7.47528 12.7626L19.0021 0.859101C20.0072 -0.178945 21.6314 -0.178945 22.6322 0.859101L24.5284 2.81734C25.5336 3.85538 25.5336 5.53711 24.5328 6.57062ZM20.196 7.9713L17.6457 5.33766L9.49006 13.7644L9.16962 16.7244L12.036 16.3935L20.196 7.9713ZM23.0404 4.35854L21.1441 2.40031C20.9642 2.21445 20.6701 2.21445 20.4945 2.40031L19.1381 3.80099L21.6884 6.43463L23.0448 5.03395C23.2203 4.84357 23.2203 4.54439 23.0404 4.35854Z"
                                             fill="black" />
                                     </svg></span></th>
-                            <th class="fw-normal">{{ singleOrder?.payment_status }} <span>
+                            <th class="fw-normal" data-color="primary">{{ singleOrder?.payment_status }} <span>
                                     <svg @click="showStatus" width="26" height="24" viewBox="0 0 26 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M17.6589 15.7181L19.0635 14.2676C19.283 14.0409 19.6649 14.1996 19.6649 14.526V21.1169C19.6649 22.3181 18.7211 23.2927 17.5579 23.2927H2.10695C0.943738 23.2927 0 22.3181 0 21.1169V5.16087C0 3.95964 0.943738 2.98506 2.10695 2.98506H14.1122C14.4238 2.98506 14.5819 3.37489 14.3624 3.60607L12.9577 5.05662C12.8919 5.12461 12.8041 5.16087 12.7075 5.16087H2.10695V21.1169H17.5579V15.972C17.5579 15.8768 17.593 15.7861 17.6589 15.7181ZM24.5328 6.57062L13.006 18.4742L9.03794 18.9275C7.88789 19.0589 6.90904 18.0571 7.03634 16.8604L7.47528 12.7626L19.0021 0.859101C20.0072 -0.178945 21.6314 -0.178945 22.6322 0.859101L24.5284 2.81734C25.5336 3.85538 25.5336 5.53711 24.5328 6.57062ZM20.196 7.9713L17.6457 5.33766L9.49006 13.7644L9.16962 16.7244L12.036 16.3935L20.196 7.9713ZM23.0404 4.35854L21.1441 2.40031C20.9642 2.21445 20.6701 2.21445 20.4945 2.40031L19.1381 3.80099L21.6884 6.43463L23.0448 5.03395C23.2203 4.84357 23.2203 4.54439 23.0404 4.35854Z"
                                             fill="black" />
                                     </svg></span> </th>
-                            <th class="fw-normal">{{ singleOrder?.payment_method }}</th>
+                            <th class="fw-normal" data-color="primary">{{ singleOrder?.payment_method }}</th>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div class="d-flex mx-5">
-                <div class="orders bg-white p-3 mt-4 me-3 w-100">
+            <div class="d-flex px-5" data-bkg-500="ternary">
+                <div class="orders p-3 mt-4 me-3 w-100" data-bkg-500="ternary">
                     <div class="border-bottom mb-3">
-                        <p class="head-4 fw-bold">Order Summary</p>
+                        <p class="head-4 fw-bold" data-color="primary">Order Summary</p>
                     </div>
                     <div class="order-data">
                         <div class="ordered-product" v-for="(data, index) in singleOrder?.orderItems" :key="index">
-                            <div class="img-wrapper">
+                            <div class="img-wrapper" data-bkg-500="ternary">
                                 <img :src="data.product.product_images" :alt="data.product.product_name">
                             </div>
-                            <span class="ms-4">{{ data?.product.product_name }}</span>
-                            <span class="ms-4">{{ data?.product.selling_price }} x {{ data.quantity }}</span>
-                            <span class="ms-4">{{ data?.product.selling_price * data?.quantity }}</span>
+                            <span class="ms-4" data-color="primary">{{ data?.product.product_name }}</span>
+                            <span class="ms-4" data-color="primary">{{ data?.product.selling_price }} x {{ data.quantity }}</span>
+                            <span class="ms-4" data-color="primary">{{ data?.product.selling_price * data?.quantity }}</span>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center pt-3">
-                        <p class="head-5 fw-medium">Sub Total</p>
-                        <p class="body-1">{{ singleOrder?.total_price }}</p>
+                        <p class="head-5 fw-medium" data-color="primary">Sub Total</p>
+                        <p class="body-1" data-color="primary">{{ singleOrder?.total_price }}</p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <p class="head-5 fw-medium">Discount Amount</p>
-                        <p class="body-1">{{ singleOrder?.discount_amount }}</p>
+                        <p class="head-5 fw-medium" data-color="primary">Discount Amount</p>
+                        <p class="body-1" data-color="primary">{{ singleOrder?.discount_amount }}</p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <p class="head-5 fw-medium">Tax</p>
-                        <p class="body-1">-{{ singleOrder?.tax_price }}</p>
+                        <p class="head-5 fw-medium" data-color="primary">Tax</p>
+                        <p class="body-1" data-color="primary">-{{ singleOrder?.tax_price }}</p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <p class="head-5 fw-bold">Total</p>
-                        <p class="body-1 fw-bold">{{ singleOrder?.final_price }}</p>
+                        <p class="head-5 fw-bold" data-color="primary">Total</p>
+                        <p class="body-1 fw-bold" data-color="primary">{{ singleOrder?.final_price }}</p>
                     </div>
                 </div>
-                <div class="customer-details bg-white w-100 mt-4 ms-3 p-3">
+                <div class="customer-details w-100 mt-4 ms-3 p-3">
                     <div class="d-flex justify-content-between">
-                        <p class="head-4 fw-medium">Shipping and Customer Details</p>
+                        <p class="head-4 fw-medium" data-color="primary">Shipping and Customer Details</p>
                         <svg @click="showShippingDetails" width="26" height="24" viewBox="0 0 26 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -147,28 +151,28 @@
                         </svg>
                     </div>
                     <table class="d-flex gap-5 mt-3">
-                        <thead>
+                        <thead data-bkg-500="ternary">
                             <tr class="d-flex flex-column">
-                                <th>Name</th>
-                                <th>E-mail</th>
-                                <th>Contact Number</th>
-                                <th>City</th>
-                                <th>Tole</th>
-                                <th>name</th>
-                                <th>Country</th>
-                                <th>Address</th>
+                                <th data-color="primary">Name</th>
+                                <th data-color="primary">E-mail</th>
+                                <th data-color="primary">Contact Number</th>
+                                <th data-color="primary">City</th>
+                                <th data-color="primary">Tole</th>
+                                <th data-color="primary">name</th>
+                                <th data-color="primary">Country</th>
+                                <th data-color="primary">Address</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-bkg-500="ternary">
                             <tr class="d-flex flex-column">
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.name }}</th>
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.email }}</th>
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.phone }}</th>
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.city }}</th>
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.tole }}</th>
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.name }}</th>
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.country }}</th>
-                                <th class="fw-normal">{{ singleOrder?.customer_details?.address }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.name }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.email }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.phone }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.city }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.tole }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.name }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.country }}</th>
+                                <th class="fw-normal" data-color="primary">{{ singleOrder?.customer_details?.address }}</th>
                             </tr>
                         </tbody>
                     </table>
@@ -177,29 +181,29 @@
         </div>
         <!-- single order end -->
 
-       <deleteButton :isDeleteShown=isDeleteShown :removerId="removerId" :delete=deleteOrder :msg='order'/>
+        <deleteButton :isDeleteShown=isDeleteShown :removerId="removerId" :delete=deleteOrder :msg='order' />
 
         <!-- update shipping address -->
-        <div class="update-shipping_address bg-white" v-if="isEditShippingAddress">
-            <p class="h3 fw-semibold pb-2">Update shipping Address</p>
+        <div class="update-shipping_address" data-bkg-500="ternary" v-if="isEditShippingAddress">
+            <p class="h3 fw-semibold pb-2" data-color="primary">Update shipping Address</p>
             <form @submit.prevent>
                 <div class="d-flex gap-3 my-2">
                     <div class="input_form w-100">
-                        <label for="name" class="small fw-medium">Full Name</label>
+                        <label for="name" class="small fw-medium" data-color="primary">Full Name</label>
                         <input type="text" id="name" v-model="name" />
                     </div>
                     <div class="input_form w-100">
-                        <label for="email" class="small fw-medium">E-mail</label>
+                        <label for="email" class="small fw-medium" data-color="primary">E-mail</label>
                         <input type="email" id="email" v-model="email" />
                     </div>
                 </div>
                 <div class="d-flex gap-3 my-2">
                     <div class="input_form w-100">
-                        <label for="address" class="small fw-medium">Address</label>
+                        <label for="address" class="small fw-medium" data-color="primary">Address</label>
                         <input type="text" id="address" v-model="address" />
                     </div>
                     <div class="input_form w-100">
-                        <label for="city" class="small fw-medium">City</label>
+                        <label for="city" class="small fw-medium" data-color="primary">City</label>
                         <input type="text" id="city" v-model="city" />
                     </div>
                 </div>
@@ -219,18 +223,19 @@
                 </div>
                 <div class="button-wrapper mt-3 d-flex gap-3">
                     <button class="w-100 fw-semibold btn-pri" @click="updateShippingAddress">Update</button>
-                    <button class="w-100 fw-semibold text-dark btn-200 " @click="isEditShippingAddress = false">Cancel</button>
+                    <button class="w-100 fw-semibold text-dark btn-200 "
+                        @click="isEditShippingAddress = false">Cancel</button>
                 </div>
             </form>
         </div>
         <div class="update-overlay" v-if="isEditShippingAddress || isStatus" @click="removeOverlay"></div>
         <!-- end of update shipping -->
         <!-- update order status -->
-        <div class="update-order-status bg-white" v-if="isStatus">
-            <p class="h3 fw-semibold pb-2">Update Status</p>
+        <div class="update-order-status" data-bkg-500="ternary" v-if="isStatus">
+            <p class="h3 fw-semibold pb-2" data-color="primary">Update Status</p>
             <form @submit.prevent>
                 <div class="input_form w-100">
-                    <label for="address" class="small fw-medium">Order Status</label>
+                    <label for="address" class="small fw-medium" data-color="primary">Order Status</label>
                     <select class="w-100" v-model="order_status">
                         <option>Pending</option>
                         <option>Delivered</option>
@@ -240,7 +245,7 @@
                     </select>
                 </div>
                 <div class="input_form w-100">
-                    <label for="address" class="small fw-medium">Payment Status</label>
+                    <label for="address" class="small fw-medium" data-color="primary">Payment Status</label>
                     <select class="w-100" v-model="payment_status">
                         <option>Unpaid</option>
                         <option>Paid</option>
@@ -298,12 +303,12 @@ onMounted(async () => {
 
 // computed
 const fetchAllOrder = computed(() => {
-    if(active_status.value == "All"){
+    if (active_status.value == "All") {
         return orderStore?.order
     }
-    else{
-        return orderStore?.order?.filter((data)=>{
-            if(data?.order_status == active_status.value){
+    else {
+        return orderStore?.order?.filter((data) => {
+            if (data?.order_status == active_status.value) {
                 return data
             }
         })
@@ -433,7 +438,7 @@ const search = async () => {
     }
 }
 
-const setActiveStatus = (status)=>{
+const setActiveStatus = (status) => {
     active_status.value = status
 }
 </script>
@@ -441,4 +446,12 @@ const setActiveStatus = (status)=>{
 <style lang="scss" scoped>
 @import "@utility_style";
 @import "@style/components/dashboard/order";
-</style>
+
+svg {
+    path {
+
+        fill {
+            color: var(--primary);
+        }
+    }
+}</style>

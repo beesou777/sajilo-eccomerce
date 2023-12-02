@@ -22,9 +22,10 @@
         width: 100%;
         font-family: $font-primary;
         margin-left: 10px;
+        color: var(--text);
       }
       .currentRoute {
-        color: $primary-color !important;
+        color: var(--primary) !important;
         font-weight: 600;
       }
     }

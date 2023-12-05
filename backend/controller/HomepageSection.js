@@ -9,7 +9,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
-
 const sectionData = async (req, res) => {
     try {
         const {section_1,section_2,section_3} = req.body
@@ -29,6 +28,8 @@ const sectionData = async (req, res) => {
 
 const homepageData = async (req, res) => {
     try {
+      const url = req.headers.url
+      console.log(url)
         let sections = await Homepage.findOne({ author: req.headers.user_id })
         .populate({
             path: 'products',

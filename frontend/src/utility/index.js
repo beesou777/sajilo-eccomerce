@@ -1,6 +1,7 @@
 import  {useAuthStore} from "@store/authentication";
 import {useOrderStore } from "@store/Order.store.js"
 import { useProductStore } from '@store/product.store';
+import { useHomepageStore } from '@store/homepage.store';
 import router from '@router/router';
 
 // for dashboards
@@ -29,6 +30,7 @@ export{
     useAuthStore,
     useOrderStore,
     useProductStore,
+    useHomepageStore,
     router,
     DashboardAddProduct,
     DashboardAppearance,

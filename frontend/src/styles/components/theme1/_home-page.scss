@@ -1,5 +1,6 @@
-.home-page {
-  .header-page{
+@import "@style/base/variable.scss";
+.homepage-section {
+  .homepage-banner{
     min-height: 85vh;
     img{
       max-height: 85vh;
@@ -9,11 +10,11 @@
       object-fit: cover;
       z-index: -1;
     }
-    .banner-content{
-      // text-align: end;
-      max-width: 700px;
-      margin: auto;
-      transform: translate(50%,70%);
+    .homepage-banner-content{
+      top: 50%;
+      transform: translateY(-50%);
+      left: 80px;
+      color: $white;
     }
   }   
   .top-category{

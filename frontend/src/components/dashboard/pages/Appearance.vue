@@ -7,7 +7,7 @@
                     <ul>
                         <li><a href="/dashboard/appearance" class="body-1">Banner</a></li>
                         <li><a href="/dashboard/appearance/section" class="body-1">Sections</a></li>
-                        <li><a href="#" class="body-1">Fonts And Colors</a></li>
+                        <li><a href="/dashboard/appearance/navbar" class="body-1">Nav and Navbar</a></li>
                         <li><a href="#" class="body-1">Homepage</a></li>
                         <li><a href="#" class="body-1">Headers & Favicon</a></li>
                     </ul>
@@ -19,15 +19,7 @@
         </div>
     </div>
 </template>
-// <script setup>
-// import { onMounted } from 'vue';
-// import { useProductStore } from '../../../store/Order.store';
-
-// // const productStore = useProductStore()
-
-
-// // onMounted(async()=>{
-// //     await productStore.getHomepageBanner()
-// // })
-
-// </script>
+<style lang="scss" scoped>
+@import "@style/base/utility.scss";
+@import "@style/components/dashboard/_appearance";
+</style>

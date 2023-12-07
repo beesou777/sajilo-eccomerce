@@ -1,37 +1,77 @@
-.home-page {
-  .header-page{
+@import "@style/base/variable.scss";
+.homepage-section {
+  .homepage-banner{
     min-height: 85vh;
     img{
-      max-height: 85vh;
+      max-height: 90vh;
       width: 100vw;
       width: 100%;
       height: 100%;
+      background-position: center;
       object-fit: cover;
       z-index: -1;
     }
-    .banner-content{
-      // text-align: end;
-      max-width: 700px;
-      margin: auto;
-      transform: translate(50%,70%);
-    }
-  }   
-  .top-category{
-    .products-container{
-      .products{
-        img{
-          width: 100%;
-        }
-      }
+    .homepage-banner-content{
+      top: 50%;
+      transform: translateY(-50%);
+      left: 80px;
+      color: $white;
     }
   }
-  .explore-other-style{
-    .category{
-      text-align: center;
-      .image-wrapper{
-        img{
-          height: 100%;
-          width: 100%;
+  .homepage-sections{
+    user-select: none;
+    .section-one,.section-two,.section-three{
+      .header{
+        p.h3{
+          text-transform: capitalize;
+          font-weight: 600;
+        }
+        a>button{
+          background: transparent;
+          border: 0;
+          font-weight: 600;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+      .section-product{
+        .products{
+          .position-absolute{
+            right: 10px;
+            top: 10px;
+            z-index: 3;
+          }
+          .img-wrapper{
+            overflow: hidden;
+            img{
+              transition: .3s ease-in-out;
+              &:hover{
+                transform: scale(1.1);
+              }
+            }
+          }
+          .product-price{
+            p:first-child{
+              color: $primary-color;
+            }
+            p:last-child{
+              text-decoration: line-through;
+            }
+          }
+          p.save{
+            background-color: $primary-color;
+            color: $white;
+            width: fit-content;
+            height: 24px;
+            padding:4px 8px;
+            border-radius: 4px;
+          }
+          &:hover{
+           p.product-title{
+            text-decoration: underline;
+           }
+          }
         }
       }
     }

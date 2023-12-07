@@ -14,6 +14,7 @@ import {
     DashboardHomepageProfileAccount,
     DashboardHomepageSection,
     DashboardHomepageUpdatePassword,
+    DashboardNavbarSection,
     DashboardMain,
     DashboardOrder,
     DashboardOrderAdd,
@@ -55,6 +56,7 @@ const router = createRouter({
             { path: "/dashboard/appearance", name: "dashboard-appearance", component: DashboardAppearance, children:[
                 { path: "", name: "appearance-banner", component: DashboardHomepageBanner, },
                 { path: "section", name: "appearance-section", component: DashboardHomepageSection, },
+                { path: "navbar", name: "appearance-navbar", component: DashboardNavbarSection, },
             ] },
             { path: "/dashboard/order", name: "dashboard-order", component: DashboardOrder},
              {path:"/dashboard/order/add", name:"add-order" , component:DashboardOrderAdd}

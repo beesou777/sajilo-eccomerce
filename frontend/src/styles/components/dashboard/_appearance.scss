@@ -1,5 +1,4 @@
-@import "../../base/variable.scss";
-
+@import "@style/base/variable.scss";
 .appearance-container {
   padding-top: 30px;
   padding-left: 30px;
@@ -26,6 +25,24 @@
     max-width: 770px;
     .section-container{
       background: $white;
+    }
+  }
+  .dashboard-navbar-section{
+    table{
+      thead{
+        background: $white;
+      }
+    }
+    .navbar-link-update{
+      position: fixed;
+      background-color: $white;
+      max-width: 500px;
+      width: 100%;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 4px;
     }
   }
 }

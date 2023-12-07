@@ -9,9 +9,13 @@ const sectionDetailsSchema = new mongoose.Schema({
     products: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "products",
+        ref: "Product",
       },
     ],
+    status:{
+      type:Boolean,
+      required:[true,"required"]
+    }
   },
   section_2: {
     name: {
@@ -21,21 +25,29 @@ const sectionDetailsSchema = new mongoose.Schema({
     products: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "products",
+        ref: "Product",
       },
     ],
+    status:{
+      type:Boolean,
+      required:[true,"required"]
+    }
   },
   section_3: {
     name: {
       type: String,
-      default: "secton 3"
+      default: "section 3"
     },
     products: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "products",
+        ref: "Product",
       },
     ],
+    status:{
+      type:Boolean,
+      required:[true,"required"]
+    }
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

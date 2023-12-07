@@ -448,5 +448,5 @@ const setActiveStatus = (status)=>{
 <style lang="scss" scoped>
 @import "@style/base/variable.scss";
 @import "@style/base/utility.scss";
-@import "@style/components/dashboard/order";
+@import "@style/components/dashboard/_appearance.scss";
 </style>

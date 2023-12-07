@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const sub_domain = window.location.pathname.trim().split('/')[1]
 
-<<<<<<< HEAD
-=======
 // dashboard
 import {
     DashboardAddProduct,
@@ -26,17 +24,12 @@ import {
 } from "@utility/index"
 
 
->>>>>>> 3c715076e44385a55c9e857108e8145870d7e26d
 import Home from "@views/theme1/Homepage.vue"
 import dashboardRoutes from "./dashboard.router"
 import userRouter from './user.router'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-<<<<<<< HEAD
-        ...userRouter,
-        ...dashboardRoutes,
-=======
         {
             path: "/login",
             name: "login",
@@ -70,7 +63,6 @@ const router = createRouter({
              {path:"/dashboard/order/add", name:"add-order" , component:DashboardOrderAdd}
               
         ]},
->>>>>>> 3c715076e44385a55c9e857108e8145870d7e26d
         {
             path: `/${sub_domain}`,
             name: "homepage",

@@ -444,21 +444,7 @@ const setActiveStatus = (status) => {
 </script>
 
 <style lang="scss" scoped>
-<<<<<<< HEAD
-@import "@utility_style";
-@import "@style/components/dashboard/order";
-
-svg {
-    path {
-
-        fill {
-            color: var(--primary);
-        }
-    }
-}</style>
-=======
 @import "@style/base/variable.scss";
 @import "@style/base/utility.scss";
 @import "@style/components/dashboard/_appearance.scss";
 </style>
->>>>>>> 3c715076e44385a55c9e857108e8145870d7e26d

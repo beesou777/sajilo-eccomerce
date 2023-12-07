@@ -13,7 +13,7 @@ cloudinary.config({
 
 const accessToken = (user_id) => {
   return jwt.sign({ sub: user_id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: "7d",
+    expiresIn: "7d",  
   });
 };
 

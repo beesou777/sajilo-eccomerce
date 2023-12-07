@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const {sectionData, homepageData} =require("../controller/HomepageSection")
+const {sectionData, homepageData, updateSectionData} =require("../controller/HomepageSection")
 const {createBanner,editBanner, getBanner } =require("../controller/HomepageBanner")
 // const {checkUserIdCookie}  = require("../middlewares/verifyToken")
 
@@ -11,6 +11,7 @@ router.route("/homepage-banner/:id").patch(editBanner)
 
 // section
 router.route("/homepage-section").get(homepageData)
+router.route("/homepage-section/:id").patch(updateSectionData)
 
 
 module.exports = router

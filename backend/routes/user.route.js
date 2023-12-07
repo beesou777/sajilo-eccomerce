@@ -13,4 +13,5 @@ router.route("/users/login").post(Login);
 router.route("/users").get(protect,isAdmin,getUser).patch(protect,isAdmin,updateUserDetails)
 
 router.route("/users/update/password").patch(protect,isAdmin,updatePassword)
+
 module.exports = router; 

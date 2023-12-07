@@ -4,14 +4,14 @@ const bannerSchema = new mongoose.Schema({
     image: {
       type: String,
       required: [true, "image is required"],
-      default:"https://www.pexels.com/photo/content-male-gardener-looking-at-ripening-coffee-berries-in-plantation-7125411/"
+      default:"https://images.pexels.com/photos/7125411/pexels-photo-7125411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     heading: {
       type: String,
       required: [true, "heading text is required"],
       default:"your title"
     },
-    sub_title: {
+    sub_title: { 
       type: String,
       default:"your sub title"
     },
@@ -26,6 +26,7 @@ const bannerSchema = new mongoose.Schema({
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user_details",
+      required:[true,"user is required"]
     }
   });
   

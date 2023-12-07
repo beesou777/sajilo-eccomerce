@@ -66,9 +66,7 @@ const router = createRouter({
             path: `/${sub_domain}`,
             name: "homepage",
             component: Home,
-            children: [
-            // { path: `/${sub_domain}`, name: "home-page", component: Homepage, }, 
-        ]}
+           }
           ,]
 })
 

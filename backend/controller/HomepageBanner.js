@@ -48,14 +48,7 @@ const getBanner = async (req, res,next) => {
         })
       }
       user_id =  user.id.valueOf();
-
       banner = await Banner.findOne({createdBy:user_id})
-      if(!banner){
-        const defaultBanner = new Banner({
-          createdBy: user_id,
-        });
-        banner = await defaultBanner.save();
-      }
     }else if(req.headers.user_id){
       user_id = req.headers.user_id
       banner = await Banner.findOne({createdBy:user_id})

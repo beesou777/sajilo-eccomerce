@@ -2,6 +2,7 @@ const Order = require("../model/order.models");
 const Product = require("../model/product.model");
 const User = require("../model/user.model");
 const Customer = require("../model/customer.model");
+
 const addOrderItems = async (req, res, next) => {
   try {
     const {

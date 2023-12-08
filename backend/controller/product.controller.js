@@ -137,6 +137,7 @@ const updateProductById = async (req, res) => {
     status,
   } = req.body;
   try {
+
     const updatedProduct = await Product.findByIdAndUpdate(
       id,
       {

@@ -17,6 +17,15 @@
       left: 80px;
       color: $white;
     }
+  }   
+  .top-category{
+    .products-container{
+      .products{
+        img{
+          width: 100%;
+        }
+      }
+    }
   }
   .homepage-sections{
     user-select: none;

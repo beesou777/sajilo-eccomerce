@@ -1,6 +1,6 @@
 const Homepage = require("../model/HomepageSection");
-const Banner = require("../model/HomepageBanner");
-const User = require("../model/user.model");
+// const Banner = require("../model/HomepageBanner");
+// const User = require("../model/user.model");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -27,11 +27,40 @@ const sectionData = async (req, res) => {
   }
 };
 
-const updateSectionData = async (req, res) => {
+async function homepageData(req, res, next) {
   try {
-    let id = req.params.id;
+    const userId = req.headers.user_id;
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    let sections = await Homepage.findOne({ author: userId })
+      .populate({
+        path: 'products',
+        select: "-user -product_category"
+      });
+
+    if (!sections) {
+      // Create a default homepage sections if none exists
+      const defaultSections = new Homepage({ createdBy: userId });
+      sections = await defaultSections.save();
+    }
+
+    res.status(200).json({ success: true, sections });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+
+
+async function updateSectionData(req, res) {
+  try {
+    const { id } = req.params;
     const { section_1, section_2, section_3 } = req.body;
-    const section = await Homepage.findByIdAndUpdate(
+    const data = await Homepage.findByIdAndUpdate(
       id,
       {
         section_1,
@@ -40,55 +69,12 @@ const updateSectionData = async (req, res) => {
       },
       { new: true }
     );
-    res.status(200).json({ success: true, section });
+    res.status(200).json({ success: true, data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-};
-
-const homepageData = async (req, res, next) => {
-  try {
-    const url = req.headers.url.trim().split("/")[1];
-    let user_id;
-    let sections;
-    if (url) {
-      let user = await User.findOne({ sub_domain: url });
-      if (!user) {
-        res.status(404);
-        return next({
-          message: "data not found",
-        });
-      }
-      user_id = user.id.valueOf();
-      sections = await Homepage.findOne({ createdBy: user_id })
-       .populate({
-        path:"section_1.products section_2.products section_3.products"
-       })
-      if (!sections) {
-        res.status(404);
-        return next({
-          message: "data not found",
-        });
-      }
-      res.status(200).json({ success: true, sections });
-    } else if (req.headers.user_id) {
-      sections = await Homepage.findOne({ author: req.headers.user_id }).select(
-        "-createdBy"
-      );
-      if (!sections) {
-        const defaultSections = new Homepage({
-          createdBy: req.headers.user_id,
-        });
-        sections = await defaultSections.save();
-      }
-      res.status(200).json({ success: true, sections });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
+}
 
 module.exports = {
   sectionData,
